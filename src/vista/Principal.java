@@ -6,6 +6,18 @@ import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
+import javax.swing.border.TitledBorder;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.UIManager;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.FlowLayout;
 
 public class Principal {
 
@@ -41,19 +53,46 @@ public class Principal {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
-		frame.getContentPane().setLayout(gridBagLayout);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_1 = new JPanel();
+		frame.getContentPane().add(panel_1, BorderLayout.SOUTH);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		btnSalir.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(btnSalir);
+		
+		JLabel lblElChipProdigioso = new JLabel("El chip prodigioso");
+		lblElChipProdigioso.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		frame.getContentPane().add(lblElChipProdigioso, BorderLayout.NORTH);
 		
 		JPanel panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		frame.getContentPane().add(panel, gbc_panel);
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Opciones de mantenimiento", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		frame.getContentPane().add(panel);
+		panel.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JButton btnProductos = new JButton("Productos");
+		btnProductos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+			}
+		});
+		panel.add(btnProductos);
+		
+		JButton btnClientes = new JButton("Clientes");
+		panel.add(btnClientes);
+		
+		JButton btnFacturacion = new JButton("Facturaci\u00F3n");
+		panel.add(btnFacturacion);
+		
+		JButton btnPedidos = new JButton("Pedidos");
+		panel.add(btnPedidos);
 	}
 
 }
