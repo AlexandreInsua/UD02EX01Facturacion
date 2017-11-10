@@ -1,5 +1,7 @@
 package vista;
-
+/** Nuria Hervella *
+ * 
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
