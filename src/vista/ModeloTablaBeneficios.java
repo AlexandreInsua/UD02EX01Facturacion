@@ -37,7 +37,7 @@ public class ModeloTablaBeneficios extends AbstractTableModel {
 		datosProd = new ArrayList<Productos>();
 		datosLin = new ArrayList<LineasPedido>();
 
-		// cargarStock();
+		// cargarBeneficio();
 	}
 
 	public void cargarBeneficio() {
