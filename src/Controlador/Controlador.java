@@ -2,7 +2,10 @@ package Controlador;
 
 import java.util.ArrayList;
 
+import Modelo.vo.LineasPedido;
 import Modelo.vo.Productos;
+import Modelo.vo.Proveedor;
+import Modelo.vo.Clientes;
 
 
 public class Controlador {
@@ -12,5 +15,29 @@ public class Controlador {
 		ArrayList<Productos> list = null;
 		return list;
 	}
+
+
+	public ArrayList<LineasPedido> cargarLineasPedido() {
+		// TODO Auto-generated method stub
+		ArrayList<LineasPedido> list = null;
+		return list;
+	
+	}
+
+	public ArrayList<Proveedor> cargarProveedores() {
+		// TODO Auto-generated method stub
+		ArrayList<Proveedor> list = null;
+		return list;
+	
+	}
+
+
+	public ArrayList<Clientes> cargarClientes() {
+		// TODO Auto-generated method stub
+		ArrayList<Clientes> list = null;
+		return list;
+	}
+
+	
 
 }
