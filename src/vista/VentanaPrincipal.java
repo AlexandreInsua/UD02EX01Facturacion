@@ -1,5 +1,7 @@
 package vista;
-
+/**
+ * Alexandre Insua
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -19,7 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-public class Principal {
+public class VentanaPrincipal extends JFrame{
 
 	private JFrame frame;
 
@@ -30,7 +32,7 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal window = new Principal();
+					VentanaPrincipal window = new VentanaPrincipal();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +44,7 @@ public class Principal {
 	/**
 	 * Create the application.
 	 */
-	public Principal() {
+	public VentanaPrincipal() {
 		initialize();
 	}
 
