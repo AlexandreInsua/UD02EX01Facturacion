@@ -1,8 +1,6 @@
-package Modelo.vo;
+package modelo.vo;
 
-import java.util.ArrayList;
-
-public class Clientes {
+public class Proveedor {
 
 	// Atributos
 	private String nif;
@@ -10,25 +8,23 @@ public class Clientes {
 	private String calle;
 	private int codPostal;
 	private String ciudad;
-	private String contacto;
-	private double descuento;
-	ArrayList <String> telefono;
+	private String telefono;
+	private String web;
 
-	// Contructores
-	public Clientes(String nif, String nombre, String calle, int codPostal, String ciudad, String contacto,
-			double descuento, ArrayList<String> telefono) {
+	// Cosntructores
+	public Proveedor(String nif, String nombre, String calle, int codPostal, String ciudad, String telefono,
+			String web) {
 		super();
 		this.nif = nif;
 		this.nombre = nombre;
 		this.calle = calle;
 		this.codPostal = codPostal;
 		this.ciudad = ciudad;
-		this.contacto = contacto;
-		this.descuento = descuento;
 		this.telefono = telefono;
+		this.web = web;
 	}
 
-	public Clientes() {
+	public Proveedor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -74,35 +70,27 @@ public class Clientes {
 		this.ciudad = ciudad;
 	}
 
-	public String getContacto() {
-		return contacto;
-	}
-
-	public void setContacto(String contacto) {
-		this.contacto = contacto;
-	}
-
-	public double getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(double descuento) {
-		this.descuento = descuento;
-	}
-
-	public ArrayList<String> getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(ArrayList<String> telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public String getWeb() {
+		return web;
+	}
+
+	public void setWeb(String web) {
+		this.web = web;
 	}
 
 	@Override
 	public String toString() {
-		return "Clientes [nif=" + nif + "]";
+		return "Proveedor [nif=" + nif + "]";
 	}
+	
+	
 
-	
-	
 }

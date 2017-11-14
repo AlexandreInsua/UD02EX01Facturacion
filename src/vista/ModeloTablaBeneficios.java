@@ -4,11 +4,20 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+<<<<<<< HEAD
 import controlador.Controlador;
 import Modelo.vo.Clientes;
 import Modelo.vo.LineasPedido;
 import Modelo.vo.Productos;
 import Modelo.vo.Proveedor;
+=======
+
+import controlador.Controlador;
+import modelo.vo.Clientes;
+import modelo.vo.LineasPedido;
+import modelo.vo.Productos;
+import modelo.vo.Proveedor;
+>>>>>>> bcb2891cca8a5a4aa3f85f3d37d874895c4f45cd
 
 public class ModeloTablaBeneficios extends AbstractTableModel {
 	private static final Object String = null;

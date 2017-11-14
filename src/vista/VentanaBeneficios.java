@@ -2,18 +2,23 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
 
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.border.EmptyBorder;
+
+import controlador.Controlador;
 
 public class VentanaBeneficios extends JDialog {
 
