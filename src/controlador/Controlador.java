@@ -2,10 +2,10 @@ package controlador;
 
 import java.util.ArrayList;
 
+import Modelo.vo.Clientes;
 import Modelo.vo.LineasPedido;
 import Modelo.vo.Productos;
 import Modelo.vo.Proveedor;
-import Modelo.vo.Clientes;
 
 
 public class Controlador {
