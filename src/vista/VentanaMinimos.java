@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controlador.Controlador;
+import controlador.Controlador;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;

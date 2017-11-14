@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import Controlador.Controlador;
 import Modelo.vo.Productos;
+import controlador.Controlador;
 
 
 
