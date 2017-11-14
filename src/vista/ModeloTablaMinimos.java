@@ -4,16 +4,12 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-<<<<<<< HEAD
-=======
 
 import controlador.Controlador;
 import modelo.vo.Productos;
 
 import modelo.vo.Productos;
->>>>>>> bcb2891cca8a5a4aa3f85f3d37d874895c4f45cd
-import controlador.Controlador;
-import Modelo.vo.Productos;
+
 
 
 
@@ -30,7 +26,7 @@ public class ModeloTablaMinimos extends AbstractTableModel {
 		nombresColumnas.add("Precio Venta");
 		nombresColumnas.add("Stock");
 		nombresColumnas.add("Proveedor");
-		nombresColumnas.add("Teléfono");
+		nombresColumnas.add("TelÃ©fono");
 
 		datos = new ArrayList<Productos>();
 
