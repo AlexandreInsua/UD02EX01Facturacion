@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-<<<<<<< HEAD
+
 import controlador.Controlador;
 import modelo.vo.Productos;
-=======
-import Modelo.vo.Productos;
+
+import modelo.vo.Productos;
 import controlador.Controlador;
->>>>>>> 0ee6bca2bc72e5295f54667e718fb5d07a0991e6
 
 
 

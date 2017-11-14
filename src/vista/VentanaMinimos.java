@@ -10,13 +10,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-<<<<<<< HEAD
-=======
+
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
 
->>>>>>> 0ee6bca2bc72e5295f54667e718fb5d07a0991e6
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
