@@ -1,4 +1,4 @@
-package Modelo.vo;
+package modelo.vo;
 
 import javax.xml.crypto.Data;
 

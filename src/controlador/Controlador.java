@@ -1,11 +1,11 @@
-package Controlador;
+package controlador;
 
 import java.util.ArrayList;
 
-import Modelo.vo.LineasPedido;
-import Modelo.vo.Productos;
-import Modelo.vo.Proveedor;
-import Modelo.vo.Clientes;
+import modelo.vo.Clientes;
+import modelo.vo.LineasPedido;
+import modelo.vo.Productos;
+import modelo.vo.Proveedor;
 
 
 public class Controlador {

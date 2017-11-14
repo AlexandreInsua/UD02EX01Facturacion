@@ -1,4 +1,4 @@
-package Modelo.vo;
+package modelo.vo;
 
 public class Productos {
 
