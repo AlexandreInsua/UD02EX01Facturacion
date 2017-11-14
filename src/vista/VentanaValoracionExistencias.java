@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import controlador.Controlador;
+
 import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
@@ -25,7 +28,13 @@ import java.awt.event.ActionEvent;
 public class VentanaValoracionExistencias extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	private JTable tableValoracionExistencias;
+	ModeloValoracionExistencias miModeloTablaValoracionExistencias;
+	Controlador controlador;
+	
+	public void setControlador(Controlador controlador){
+		this.controlador = controlador;
+	}
 
 	/**
 	 * Launch the application.
@@ -66,19 +75,10 @@ public class VentanaValoracionExistencias extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column"
-			}
-		));
-		scrollPane.setViewportView(table);
+		miModeloTablaValoracionExistencias = new ModeloValoracionExistencias();
+		tableValoracionExistencias = new JTable(miModeloTablaValoracionExistencias);
+		
+		scrollPane.setViewportView(tableValoracionExistencias);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Total almac\u00E9n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
