@@ -1,30 +1,33 @@
 package vista;
-/**
- * Alexandre Insua
- */
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import java.awt.GridBagLayout;
-import javax.swing.JPanel;
-import java.awt.GridBagConstraints;
-import javax.swing.border.TitledBorder;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.UIManager;
 import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+
+import controlador.Controlador;
 
 public class VentanaPrincipal extends JFrame{
 
 	private JFrame frame;
-
+	
+	Controlador controlador = new Controlador();
+	
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -82,6 +85,7 @@ public class VentanaPrincipal extends JFrame{
 		JButton btnProductos = new JButton("Productos");
 		btnProductos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controlador.mostrarVentanaProductos();
 			
 			}
 		});
@@ -91,6 +95,11 @@ public class VentanaPrincipal extends JFrame{
 		panel.add(btnClientes);
 		
 		JButton btnFacturacion = new JButton("Facturaci\u00F3n");
+		btnFacturacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controlador.mostrarVentanaPedidosFacturas();
+			}
+		});
 		panel.add(btnFacturacion);
 		
 		JButton btnPedidos = new JButton("Pedidos");
