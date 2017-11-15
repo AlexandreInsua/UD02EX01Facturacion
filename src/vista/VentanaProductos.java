@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 public class VentanaProductos extends JDialog {
 
@@ -57,6 +58,7 @@ public class VentanaProductos extends JDialog {
 		}
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Mantenimiento Pedidos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(20, 11, 391, 91);
 		getContentPane().add(panel);
 		
