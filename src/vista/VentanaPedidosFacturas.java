@@ -10,7 +10,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 
-public class VentanaPedidosFacturas {
+public class VentanaPedidosFacturas extends JFrame {
 
 	private JFrame frame;
 

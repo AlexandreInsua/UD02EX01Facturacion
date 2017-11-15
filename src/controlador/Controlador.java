@@ -7,10 +7,16 @@ import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
+import vista.VentanaClientes;
+import vista.VentanaPedidosFacturas;
+import vista.VentanaProductos;
 
 
 
 public class Controlador {
+	VentanaProductos ventanaProductos = new VentanaProductos();
+	VentanaPedidosFacturas ventanaPedidosFacturas = new VentanaPedidosFacturas();
+	VentanaClientes ventanaClientes = new VentanaClientes();
 
 	public ArrayList<Productos> cargarProductos() {
 		// TODO Auto-generated method stub
@@ -38,6 +44,24 @@ public class Controlador {
 		// TODO Auto-generated method stub
 		ArrayList<Clientes> list = null;
 		return list;
+	}
+
+
+	public void mostrarVentanaPedidosFacturas() {
+			ventanaPedidosFacturas.setVisible(true);
+		
+	}
+
+
+	public void mostrarVentanaProductos() {
+		ventanaProductos.setVisible(true);
+		
+	}
+
+
+	public void mostrarVentanaClientes() {
+		ventanaClientes.setVisible(true);
+		
 	}
 
 	
