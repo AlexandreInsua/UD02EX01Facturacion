@@ -83,7 +83,11 @@ public class VentanaValoracionExistencias extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Total almac\u00E9n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panel_1, BorderLayout.SOUTH);
-		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
+
+
+		
+		
+		
 		
 		JLabel lblNewLabel = new JLabel("---");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);

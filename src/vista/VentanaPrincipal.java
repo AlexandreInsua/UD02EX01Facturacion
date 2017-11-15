@@ -92,6 +92,7 @@ public class VentanaPrincipal extends JFrame{
 		panel.add(btnProductos);
 		
 		JButton btnClientes = new JButton("Clientes");
+		btnClientes.setEnabled(false);
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlador.mostrarVentanaClientes();
@@ -108,6 +109,7 @@ public class VentanaPrincipal extends JFrame{
 		panel.add(btnFacturacion);
 		
 		JButton btnPedidos = new JButton("Pedidos");
+		btnPedidos.setEnabled(false);
 		panel.add(btnPedidos);
 	}
 
