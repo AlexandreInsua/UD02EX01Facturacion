@@ -59,12 +59,33 @@ public class VentanaPedidosFacturas extends JDialog {
 			panel.setBorder(new TitledBorder(null, "Mantenimiento Pedidos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel.setBounds(20, 40, 393, 71);
 			getContentPane().add(panel);
+			
+			JButton btnNuevo = new JButton("Nuevo");
+			panel.add(btnNuevo);
+			
+			JButton btnModificar = new JButton("Modificar");
+			panel.add(btnModificar);
+			
+			JButton btnEliminar = new JButton("Eliminar");
+			panel.add(btnEliminar);
+			
+			JButton btnConsultar = new JButton("Consultar");
+			panel.add(btnConsultar);
 		}
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "Consultas Facturas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel.setBounds(20, 122, 393, 87);
 			getContentPane().add(panel);
+			
+			JButton btnCrearFactura = new JButton("Crear Factura");
+			panel.add(btnCrearFactura);
+			
+			JButton btnFacturaMes = new JButton("Factura Mes");
+			panel.add(btnFacturaMes);
+			
+			JButton btnFacturasCliente = new JButton("FacturasCliente");
+			panel.add(btnFacturasCliente);
 		}
 		
 		JLabel lblNewLabel = new JLabel("PEDIDOS-FACTURAS");
