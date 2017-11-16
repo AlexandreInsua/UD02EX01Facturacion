@@ -10,11 +10,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
+
+import controlador.Controlador;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
 public class VentanaProductos extends JDialog {
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -65,6 +69,10 @@ public class VentanaProductos extends JDialog {
 		getContentPane().add(panel);
 		
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		panel.add(btnNuevo);
 		
 		JButton btnModificar = new JButton("Modificar");
@@ -85,15 +93,39 @@ public class VentanaProductos extends JDialog {
 		panel_1.add(btnListado);
 		
 		JButton btnMinimos = new JButton("Minimos");
+		btnMinimos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controlador controlador = new Controlador();
+				controlador.mostrarVentanaMinimos();
+			}
+		});
 		panel_1.add(btnMinimos);
 		
 		JButton btnBeneficio = new JButton("Beneficio");
+		btnBeneficio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controlador controlador = new Controlador();
+				controlador.mostrarVentanaBeneficios();
+			}
+		});
 		panel_1.add(btnBeneficio);
 		
 		JButton btnIncrementarPrecio = new JButton("Incrementar Precio");
+		btnIncrementarPrecio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Controlador controlador = new Controlador();
+				controlador.mostrarVentanaIncrementarPrecio();
+			}
+		});
 		panel_1.add(btnIncrementarPrecio);
 		
 		JButton btnValoracionExistencias = new JButton("Valoracion Existencias");
+		btnValoracionExistencias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Controlador controlador = new Controlador();
+			controlador.mostrarVentanaValoracionExistencias();
+			}
+		});
 		panel_1.add(btnValoracionExistencias);
 		
 		JLabel lblNewLabel = new JLabel("PRODUCTOS");

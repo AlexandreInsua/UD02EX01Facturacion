@@ -9,6 +9,10 @@ Valoración existencias  - Alex feito!!!
 =======
 Incrementar precio - Nona // Feito!!!
 Mostrar beneficios  - Alex // Feito 
-Facturación  - Alex
+Facturación  - Alex // Feito !!!
 Pedidos - facturas - Nona // Feito!!!!
 >>>>>>> branch 'master' of https://github.com/AlexandreInsua/UD02EX01Facturacion.git
+
+
+16/11/2017
+	- Facer que VentanaIncrementarPrecio estenda de JDialog 

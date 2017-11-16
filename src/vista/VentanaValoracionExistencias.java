@@ -31,8 +31,8 @@ public class VentanaValoracionExistencias extends JFrame {
 	private JTable tableValoracionExistencias;
 	ModeloValoracionExistencias miModeloTablaValoracionExistencias;
 	Controlador controlador;
-	
-	public void setControlador(Controlador controlador){
+
+	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
 
@@ -63,49 +63,47 @@ public class VentanaValoracionExistencias extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JLabel lblValoracinDeExistencias = new JLabel("Valoraci\u00F3n de existencias");
 		lblValoracinDeExistencias.setFont(new Font("Tahoma", Font.BOLD, 11));
 		contentPane.add(lblValoracinDeExistencias, BorderLayout.NORTH);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
-		
+
 		miModeloTablaValoracionExistencias = new ModeloValoracionExistencias();
 		tableValoracionExistencias = new JTable(miModeloTablaValoracionExistencias);
-		
+
 		scrollPane.setViewportView(tableValoracionExistencias);
-		
+
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(null, "Total almac\u00E9n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBorder(
+				new TitledBorder(null, "Total almac\u00E9n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panel_1, BorderLayout.SOUTH);
 
-
-		
-		
-		
-		
 		JLabel lblNewLabel = new JLabel("---");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblNewLabel);
-		
+
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_2.rowHeights = new int[] {30};
-		gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0};
+		gbl_panel_2.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel_2.rowHeights = new int[] { 30 };
+		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
+		gbl_panel_2.rowWeights = new double[] { 0.0 };
 		panel_2.setLayout(gbl_panel_2);
-		
+
 		JButton btnNewButton = new JButton("OK");
 		btnNewButton.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				dispose();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -114,8 +112,13 @@ public class VentanaValoracionExistencias extends JFrame {
 		gbc_btnNewButton.gridx = 10;
 		gbc_btnNewButton.gridy = 0;
 		panel_2.add(btnNewButton, gbc_btnNewButton);
-		
+
 		JButton btnNewButton_1 = new JButton("Cancel");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnNewButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.anchor = GridBagConstraints.EAST;

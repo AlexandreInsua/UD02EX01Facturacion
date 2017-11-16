@@ -7,9 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JTextField;
 
-public class VentanaIncrementarPrecio {
+public class VentanaIncrementarPrecio extends JDialog {
 
 	private JFrame frame;
 	private JTextField textField;
