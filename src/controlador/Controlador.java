@@ -8,8 +8,15 @@ import modelo.vo.Productos;
 import modelo.vo.Proveedor;
 import vista.VentanaBeneficios;
 import vista.VentanaClientes;
+import vista.VentanaConsultarPedidos;
+import vista.VentanaCrearFactura;
+import vista.VentanaEliminarPedido;
+import vista.VentanaFacturasCliente;
+import vista.VentanaFacturasMes;
 import vista.VentanaIncrementarPrecio;
 import vista.VentanaMinimos;
+import vista.VentanaModificarPedido;
+import vista.VentanaNuevoPedido;
 import vista.VentanaPedidosFacturas;
 import vista.VentanaProductos;
 import vista.VentanaValoracionExistencias;
@@ -22,6 +29,13 @@ public class Controlador {
 	VentanaIncrementarPrecio ventanaIncrementarPrecio = new VentanaIncrementarPrecio();
 	VentanaBeneficios ventanaBeneficios = new VentanaBeneficios();
 	VentanaValoracionExistencias ventanaValoracionExistencias = new VentanaValoracionExistencias();
+	VentanaNuevoPedido ventanaNuevoPedido = new VentanaNuevoPedido();
+	VentanaConsultarPedidos ventanaConsultarPedidos = new VentanaConsultarPedidos();
+	VentanaModificarPedido ventanaModificarPedido = new VentanaModificarPedido();
+	VentanaEliminarPedido ventanaEliminarPedido = new VentanaEliminarPedido();
+	VentanaFacturasCliente ventanaFacturasCliente = new VentanaFacturasCliente();
+	VentanaFacturasMes ventanaFacturasMes = new VentanaFacturasMes();
+	VentanaCrearFactura ventanaCrearFactura = new VentanaCrearFactura();
 
 	public ArrayList<Productos> cargarProductos() {
 		// TODO Auto-generated method stub
@@ -81,4 +95,39 @@ public class Controlador {
 	public void mostrarVentanaValoracionExistencias() {
 		ventanaValoracionExistencias.setVisible(true);
 	}
+
+	public void mostrarVentanaNuevoPedido() {
+		ventanaNuevoPedido.setVisible(true);
+		
+	}
+
+	public void mostrarVentanaModificarPedido() {
+		ventanaModificarPedido.setVisible(true);
+		
+	}
+
+	public void mostrarVentanaEliminarPedidos() {
+ventanaEliminarPedido.setVisible(true);
+		
+	}
+
+	public void mostrarVentanaConsultarPedidos() {
+	ventanaConsultarPedidos.setVisible(true);
+		
+	}
+
+	public void mostrarVentanaCrearFactura() {
+		ventanaCrearFactura.setVisible(true);
+		
+	}
+
+	public void mostrarVentanaFacturaMes() {
+		ventanaFacturasMes.setVisible(true);
+	}
+	
+	public void mostrarVentanaFacturaCliente(){
+		ventanaFacturasCliente.setVisible(true);
+	}
+
+	
 }

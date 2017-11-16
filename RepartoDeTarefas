@@ -15,4 +15,13 @@ Pedidos - facturas - Nona // Feito!!!!
 
 
 16/11/2017
-	- Facer que VentanaIncrementarPrecio estenda de JDialog 
+- Facer que VentanaIncrementarPrecio estenda de JDialog
+- Novas vistas:
+	· VentanaConsultarPedido
+	· VentanaCrearFactura
+	· VentanaEliminarPedido
+	· VentanaFacturasCliente
+	· VentanaFacturasMes
+	· VentanaModificarPedido
+	· VentanaNuevoPedido 
+	
