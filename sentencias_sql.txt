@@ -1,0 +1,11 @@
+Produtos por debaixo do mínimos
+	SELECT pdId, pdNifProveedor FROM ud02bdfacturacion.productos WHERE pdStock <= pdStockMinimo;
+
+Valoracion produtos
+	SELECT pdId, pdNombre, pdPrecioCompra, pdStock, pdNifProveedor, pdPrecioVenta, pdIva, (pdPrecioVenta* (pdId/100+1)) * pdStock as 'Valoración' FROM ud02bdfacturacion.productos;
+
+Incrementar prezo (procedemento) 
+	pendente
+
+
+Obter Beneficios

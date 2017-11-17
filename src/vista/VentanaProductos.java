@@ -69,6 +69,7 @@ public class VentanaProductos extends JDialog {
 		getContentPane().add(panel);
 		
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.setEnabled(false);
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -76,12 +77,15 @@ public class VentanaProductos extends JDialog {
 		panel.add(btnNuevo);
 		
 		JButton btnModificar = new JButton("Modificar");
+		btnModificar.setEnabled(false);
 		panel.add(btnModificar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setEnabled(false);
 		panel.add(btnEliminar);
 		
 		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.setEnabled(false);
 		panel.add(btnConsultar);
 		
 		JPanel panel_1 = new JPanel();

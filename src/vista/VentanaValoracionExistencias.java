@@ -31,6 +31,7 @@ public class VentanaValoracionExistencias extends JFrame {
 	private JTable tableValoracionExistencias;
 	ModeloValoracionExistencias miModeloTablaValoracionExistencias;
 	Controlador controlador;
+	private JTextField textTotal;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -84,10 +85,13 @@ public class VentanaValoracionExistencias extends JFrame {
 		panel_1.setBorder(
 				new TitledBorder(null, "Total almac\u00E9n", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.add(panel_1, BorderLayout.SOUTH);
-
-		JLabel lblNewLabel = new JLabel("---");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblNewLabel);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		textTotal = new JTextField();
+		textTotal.setHorizontalAlignment(SwingConstants.RIGHT);
+		textTotal.setEditable(false);
+		panel_1.add(textTotal);
+		textTotal.setColumns(10);
 
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
@@ -128,4 +132,7 @@ public class VentanaValoracionExistencias extends JFrame {
 		panel_2.add(btnNewButton_1, gbc_btnNewButton_1);
 	}
 
+	public JTextField getTextTotal() {
+		return textTotal;
+	}
 }
