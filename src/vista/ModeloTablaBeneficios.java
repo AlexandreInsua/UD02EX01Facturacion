@@ -32,7 +32,7 @@ public class ModeloTablaBeneficios extends AbstractTableModel {
 		nombresColumnas.add("Cantidad");
 		nombresColumnas.add("Beneficio");
 		nombresColumnas.add("Proveedor");
-		nombresColumnas.add("TelÃ©fono");
+		nombresColumnas.add("Teléfono");
 		nombresColumnas.add("Web");
 
 		datos = new ArrayList<Clientes>();

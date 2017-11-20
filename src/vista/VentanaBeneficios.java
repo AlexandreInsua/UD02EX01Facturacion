@@ -52,14 +52,14 @@ public class VentanaBeneficios extends JDialog {
 	 */
 	public VentanaBeneficios() {
 		setTitle("El clip prodigioso");
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 748, 340);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
 			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(12, 48, 408, 135);
+			scrollPane.setBounds(12, 48, 649, 147);
 			contentPanel.add(scrollPane);
 			
 			miModeloTablaBeneficios = new ModeloTablaBeneficios();
