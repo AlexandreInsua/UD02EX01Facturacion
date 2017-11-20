@@ -21,11 +21,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
+import javax.swing.table.DefaultTableModel;
 
 public class VentanaNuevoPedido extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	private JTable table;
+	private JTextField textNumproducto;
+	private JTextField textCliente;
+	private JTextField textFecha;
+	private JTextField textCantidad;
 
 	/**
 	 * Launch the application.
@@ -44,105 +48,93 @@ public class VentanaNuevoPedido extends JDialog {
 	 * Create the dialog.
 	 */
 	public VentanaNuevoPedido() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 587, 497);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.NORTH);
-		contentPanel.setLayout(new BorderLayout(0, 0));
-		{
-			JLabel lblNuevoPedido = new JLabel("Nuevo Pedido");
-			contentPanel.add(lblNuevoPedido, BorderLayout.NORTH);
-		}
 		{
 			JPanel panel = new JPanel();
-			contentPanel.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			getContentPane().add(panel, BorderLayout.NORTH);
+			panel.setLayout(new BorderLayout(0, 0));
 			{
-				JScrollPane scrollPane = new JScrollPane();
-				panel.add(scrollPane);
+				JLabel lblNuevoproducto = new JLabel("Nuevo Producto");
+				panel.add(lblNuevoproducto, BorderLayout.NORTH);
+			}
+			{
+				JPanel panel_1 = new JPanel();
+				panel.add(panel_1, BorderLayout.SOUTH);
+				{
+					JLabel lblNProducto = new JLabel("N\u00BA producto");
+					panel_1.add(lblNProducto);
+				}
+				{
+					textNumproducto = new JTextField();
+					panel_1.add(textNumproducto);
+					textNumproducto.setEditable(false);
+					textNumproducto.setColumns(10);
+				}
+				{
+					JLabel lblFecha = new JLabel("Fecha");
+					panel_1.add(lblFecha);
+				}
+				{
+					textFecha = new JTextField();
+					panel_1.add(textFecha);
+					textFecha.setColumns(10);
+				}
+				{
+					JLabel lblCliente = new JLabel("Cliente");
+					panel_1.add(lblCliente);
+				}
+				{
+					textCliente = new JTextField();
+					panel_1.add(textCliente);
+					textCliente.setColumns(10);
+				}
+			}
+		}
+		{
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setPreferredSize(new Dimension(20, 20));
+			getContentPane().add(scrollPane, BorderLayout.CENTER);
+			{
+				table = new JTable();
+				table.setModel(new DefaultTableModel(
+					new Object[][] {
+						{null, null, null, null, null},
+						{null, null, null, null, null},
+						{null, null, null, null, null},
+					},
+					new String[] {
+						"New column", "New column", "New column", "New column", "New column"
+					}
+				));
+				scrollPane.setViewportView(table);
 			}
 		}
 		{
 			JPanel panel = new JPanel();
 			panel.setBorder(new TitledBorder(null, "Ventas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			contentPanel.add(panel, BorderLayout.SOUTH);
-			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0};
-			gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-			panel.setLayout(gbl_panel);
+			getContentPane().add(panel, BorderLayout.SOUTH);
 			{
-				JLabel lblNewLabel = new JLabel("New label");
-				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-				gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-				gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-				gbc_lblNewLabel.gridx = 0;
-				gbc_lblNewLabel.gridy = 0;
-				panel.add(lblNewLabel, gbc_lblNewLabel);
+				JLabel lblVentas = new JLabel("Ventas");
+				panel.add(lblVentas);
 			}
 			{
 				JComboBox comboBox = new JComboBox();
-				GridBagConstraints gbc_comboBox = new GridBagConstraints();
-				gbc_comboBox.insets = new Insets(0, 0, 0, 5);
-				gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-				gbc_comboBox.gridx = 1;
-				gbc_comboBox.gridy = 0;
-				panel.add(comboBox, gbc_comboBox);
+				panel.add(comboBox);
 			}
 			{
-				JLabel lblCantidad = new JLabel("Cantidad: ");
-				GridBagConstraints gbc_lblCantidad = new GridBagConstraints();
-				gbc_lblCantidad.insets = new Insets(0, 0, 0, 5);
-				gbc_lblCantidad.anchor = GridBagConstraints.EAST;
-				gbc_lblCantidad.gridx = 2;
-				gbc_lblCantidad.gridy = 0;
-				panel.add(lblCantidad, gbc_lblCantidad);
+				JLabel lblCantidad = new JLabel("Cantidad");
+				panel.add(lblCantidad);
 			}
 			{
-				textField = new JTextField();
-				GridBagConstraints gbc_textField = new GridBagConstraints();
-				gbc_textField.insets = new Insets(0, 0, 0, 5);
-				gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField.gridx = 3;
-				gbc_textField.gridy = 0;
-				panel.add(textField, gbc_textField);
-				textField.setColumns(10);
+				textCantidad = new JTextField();
+				panel.add(textCantidad);
+				textCantidad.setColumns(10);
 			}
 			{
-				JButton btnAnadirProducto = new JButton("A\u00F1adir");
-				btnAnadirProducto.setEnabled(false);
-				GridBagConstraints gbc_btnAnadirProducto = new GridBagConstraints();
-				gbc_btnAnadirProducto.anchor = GridBagConstraints.ABOVE_BASELINE;
-				gbc_btnAnadirProducto.gridx = 4;
-				gbc_btnAnadirProducto.gridy = 0;
-				panel.add(btnAnadirProducto, gbc_btnAnadirProducto);
-			}
-		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						dispose();
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnAnadir = new JButton("A\u00F1adir");
+				btnAnadir.setEnabled(false);
+				panel.add(btnAnadir);
 			}
 		}
 	}
