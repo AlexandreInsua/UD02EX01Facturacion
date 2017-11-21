@@ -52,4 +52,30 @@ FROM
     productos ON liIdProducto = pdid
 WHERE
     peNumPedido = 1; # número de pedido do combo
+    
+ /* Consultar Factura mes*/
+SELECT 
+    peNumPedido, peFecha, peDescuento, clNombre, clCalle, clCodPostal, clCiudad, liNumPedido,
+    pdNombre,  pdPrecioVenta, liCantidad,  (pdPrecioVenta * liCantidad) AS 'Importe'
+FROM
+    ((pedidos
+    JOIN clientes ON peNifCliente = clNif)
+    JOIN lineaspedido ON peNumPedido = liNumPedido)
+        JOIN
+    productos ON liIdProducto = pdid
+WHERE
+    month(peFecha)= 10; # fecha en combo
+    
+/* Consultar Factura cliente*/
+SELECT 
+    peNumPedido, peFecha, peDescuento, clNombre, clCalle, clCodPostal, clCiudad, liNumPedido,
+    pdNombre,  pdPrecioVenta, liCantidad,  (pdPrecioVenta * liCantidad) AS 'Importe'
+FROM
+    ((pedidos
+    JOIN clientes ON peNifCliente = clNif)
+    JOIN lineaspedido ON peNumPedido = liNumPedido)
+        JOIN
+    productos ON liIdProducto = pdid
+WHERE
+    clNombre = 'Andrés García'; # cliente do combo
 
