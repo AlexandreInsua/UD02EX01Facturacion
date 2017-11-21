@@ -1,4 +1,4 @@
-package vista;
+package vista.productos;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
+import vista.ModeloValoracionExistencias;
 
 import javax.swing.border.TitledBorder;
 import java.awt.GridLayout;

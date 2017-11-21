@@ -93,11 +93,6 @@ public class VentanaPrincipal extends JFrame{
 		
 		JButton btnClientes = new JButton("Clientes");
 		btnClientes.setEnabled(false);
-		btnClientes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controlador.mostrarVentanaClientes();
-			}
-		});
 		panel.add(btnClientes);
 		
 		JButton btnFacturacion = new JButton("Facturaci\u00F3n");

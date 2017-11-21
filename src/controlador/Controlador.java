@@ -6,25 +6,23 @@ import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
-import vista.VentanaBeneficios;
-import vista.VentanaClientes;
-import vista.VentanaConsultarPedidos;
-import vista.VentanaCrearFactura;
-import vista.VentanaEliminarPedido;
-import vista.VentanaFacturasCliente;
-import vista.VentanaFacturasMes;
-import vista.VentanaIncrementarPrecio;
-import vista.VentanaMinimos;
-import vista.VentanaModificarPedido;
-import vista.VentanaNuevoPedido;
-import vista.VentanaPedidosFacturas;
-import vista.VentanaProductos;
-import vista.VentanaValoracionExistencias;
+import vista.facturas.VentanaCrearFactura;
+import vista.facturas.VentanaFacturasCliente;
+import vista.facturas.VentanaFacturasMes;
+import vista.facturas.VentanaPedidosFacturas;
+import vista.pedido.VentanaConsultarPedidos;
+import vista.pedido.VentanaEliminarPedido;
+import vista.pedido.VentanaModificarPedido;
+import vista.pedido.VentanaNuevoPedido;
+import vista.productos.VentanaBeneficios;
+import vista.productos.VentanaIncrementarPrecio;
+import vista.productos.VentanaMinimos;
+import vista.productos.VentanaProductos;
+import vista.productos.VentanaValoracionExistencias;
 
 public class Controlador {
 	VentanaProductos ventanaProductos = new VentanaProductos();
 	VentanaPedidosFacturas ventanaPedidosFacturas = new VentanaPedidosFacturas();
-	VentanaClientes ventanaClientes = new VentanaClientes();
 	VentanaMinimos ventanaMinimos = new VentanaMinimos();
 	VentanaIncrementarPrecio ventanaIncrementarPrecio = new VentanaIncrementarPrecio();
 	VentanaBeneficios ventanaBeneficios = new VentanaBeneficios();
@@ -70,11 +68,6 @@ public class Controlador {
 
 	public void mostrarVentanaProductos() {
 		ventanaProductos.setVisible(true);
-
-	}
-
-	public void mostrarVentanaClientes() {
-		ventanaClientes.setVisible(true);
 
 	}
 

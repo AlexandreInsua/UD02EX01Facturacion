@@ -1,4 +1,4 @@
-package vista;
+package vista.facturas;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
