@@ -1,11 +1,55 @@
-Produtos por debaixo do mínimos
-	SELECT pdId, pdNifProveedor FROM ud02bdfacturacion.productos WHERE pdStock <= pdStockMinimo;
 
-Valoracion produtos
-	SELECT pdId, pdNombre, pdPrecioCompra, pdStock, pdNifProveedor, pdPrecioVenta, pdIva, (pdPrecioVenta* (pdId/100+1)) * pdStock as 'Valoración' FROM ud02bdfacturacion.productos;
-
-Incrementar prezo (procedemento) 
+/* Incrementar prezo (procedemento) */ 
 	pendente
 
 
-Obter Beneficios
+/* Listado productos */ 
+SELECT * FROM productos;
+
+/* Listado produtos mínimo */
+SELECT * FROM productos WHERE pdStock < pdStockMinimo;
+
+/* Listado beneficios */
+SELECT 
+    productos.pdNombre, pdPrecioCompra, pdPrecioVenta, liCantidad, (pdPrecioVenta - pdPrecioCompra) * liCantidad AS 'Beneficio',
+    prNombre, prTelefono, prWeb
+FROM
+    ((productos
+    JOIN proveedores ON pdNifProveedor = prNif)
+    JOIN lineaspedido ON pdId = liIdProducto)
+        JOIN
+    pedidos ON liNumPedido = peNumPedido
+GROUP BY liIdProducto;
+
+/* Valoración Existencias */ 
+	# lista
+SELECT pdNombre, pdStock, pdPrecioCompra, (pdStock*pdPrecioCompra) as 'Valoración' FROM productos;
+	# total
+SELECT pdNombre, pdStock, pdPrecioCompra, sum(pdStock*pdPrecioCompra) as 'Total' FROM productos;
+
+/* Consultar pedido */
+SELECT 
+    peNumPedido, peFecha, clNombre, peDescuento, liNumPedido, pdNombre, pdPrecioVenta, liCantidad,
+    (pdPrecioVenta * liCantidad) AS 'Importe'
+FROM
+    ((pedidos
+    JOIN clientes ON peNifCliente = clNif)
+    JOIN lineaspedido ON peNumPedido = liNumPedido)
+        JOIN
+    productos ON liIdProducto = pdid
+WHERE
+    peNumPedido = 1; # número de pedido do combo
+    
+/* Consultar Factura */
+SELECT 
+    peNumPedido, peFecha, peDescuento, clNombre, clCalle, clCodPostal, clCiudad, liNumPedido,
+    pdNombre,  pdPrecioVenta, liCantidad,  (pdPrecioVenta * liCantidad) AS 'Importe'
+FROM
+    ((pedidos
+    JOIN clientes ON peNifCliente = clNif)
+    JOIN lineaspedido ON peNumPedido = liNumPedido)
+        JOIN
+    productos ON liIdProducto = pdid
+WHERE
+    peNumPedido = 1; # número de pedido do combo
+
