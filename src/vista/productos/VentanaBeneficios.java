@@ -1,4 +1,4 @@
-package vista;
+package vista.productos;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
-
+import vista.ModeloTablaBeneficios;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
