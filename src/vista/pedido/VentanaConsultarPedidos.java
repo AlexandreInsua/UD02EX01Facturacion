@@ -28,6 +28,7 @@ public class VentanaConsultarPedidos extends JDialog {
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
+	//Prueba
 
 	/**
 	 * Launch the application.
