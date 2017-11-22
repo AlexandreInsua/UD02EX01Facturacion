@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 
 import controlador.Controlador;
+import modelo.vo.AuxTablaBeneficios;
 import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
 import modelo.vo.Productos;
@@ -16,11 +17,8 @@ import modelo.vo.Proveedor;
 public class ModeloTablaBeneficios extends AbstractTableModel {
 	private static final Object String = null;
 	ArrayList<String> nombresColumnas;
-	ArrayList<Clientes> datos;
-	ArrayList<Proveedor> datosProv;
-	ArrayList<Productos> datosProd;
-	ArrayList<LineasPedido> datosLin;
-
+	ArrayList<AuxTablaBeneficios> datos;
+	
 	String beneficios = "beneficios";
 
 	public ModeloTablaBeneficios() {
@@ -35,20 +33,16 @@ public class ModeloTablaBeneficios extends AbstractTableModel {
 		nombresColumnas.add("Teléfono");
 		nombresColumnas.add("Web");
 
-		datos = new ArrayList<Clientes>();
-		datosProv = new ArrayList<Proveedor>();
-		datosProd = new ArrayList<Productos>();
-		datosLin = new ArrayList<LineasPedido>();
+		datos = new ArrayList<AuxTablaBeneficios>();
+	
 
 		// cargarBeneficio();
 	}
 
 	public void cargarBeneficio() {
 		Controlador controlador = new Controlador();
-		datos = controlador.cargarClientes();
-		datosProd = controlador.cargarProductos();
-		datosProv = controlador.cargarProveedores();
-		datosLin = controlador.cargarLineasPedido();
+		datos = controlador.cargarBeneficio();
+	
 	}
 
 	@Override
@@ -64,31 +58,29 @@ public class ModeloTablaBeneficios extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int fila, int columna) {
 
-		Productos productos = datosProd.get(fila);
-		Proveedor proveedor = datosProv.get(fila);
-		LineasPedido lineas = datosLin.get(fila);
-		Clientes cliente = datos.get(fila);
+		
+		AuxTablaBeneficios miAuxTablaBeneficios = datos.get(fila);
 
 		switch (columna) {
 		case 0:
-			return productos.getProducto();
+			return miAuxTablaBeneficios.getProducto();
 		case 1:
-			return productos.getPrecioCompra();
+			return miAuxTablaBeneficios.getPrecioCompra();
 		case 2:
-			return productos.getPrecioVenta();
+			return miAuxTablaBeneficios.getPrecioVenta();
 		case 3:
-			return lineas.getCantidad();
+			return miAuxTablaBeneficios.getCantidad();
 		case 4:
 			return beneficios;
 		case 5:
-			return proveedor.getNombre();
+			return miAuxTablaBeneficios.getProveedor();
 		case 6:
-			return proveedor.getTelefono();
+			return miAuxTablaBeneficios.getTelefono();
 		case 7:
-			return proveedor.getWeb();
+			return miAuxTablaBeneficios.getWeb();
 
 		}
-		return productos;
+		return miAuxTablaBeneficios;
 	}
 
 	@Override

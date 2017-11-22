@@ -3,7 +3,9 @@ package controlador;
 import java.util.ArrayList;
 
 import modelo.vo.AuxFacturasMes;
+import modelo.vo.AuxMinimos;
 import modelo.vo.AuxNuevoPedido;
+import modelo.vo.AuxTablaBeneficios;
 import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
 import modelo.vo.Productos;
@@ -131,6 +133,18 @@ ventanaEliminarPedido.setVisible(true);
 	}
 
 	public ArrayList<AuxFacturasMes> cargarFacturasMes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<AuxMinimos> cargarStock() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+
+	public ArrayList<AuxTablaBeneficios> cargarBeneficio() {
 		// TODO Auto-generated method stub
 		return null;
 	}

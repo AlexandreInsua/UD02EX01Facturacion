@@ -1,19 +1,16 @@
 package modelo.vo;
 
-public class Productos {
-
-	// Atributos
+public class AuxMinimos {
+	
 	private short codigo;
 	private String producto;
 	private float precioCompra;
 	private float precioVenta;
 	private int stock;
 	private String proveedor;
-	
+	private String telefono;
 
-	// Contructores
-
-	public Productos(short codigo, String producto, float precioCompra, float precioVenta, int stock, String proveedor,
+	public AuxMinimos(short codigo, String producto, float precioCompra, float precioVenta, int stock, String proveedor,
 			String telefono) {
 		super();
 		this.codigo = codigo;
@@ -22,16 +19,14 @@ public class Productos {
 		this.precioVenta = precioVenta;
 		this.stock = stock;
 		this.proveedor = proveedor;
-	
+		this.telefono = telefono;
 	}
 
-	public Productos() {
+	public AuxMinimos() {
 		super();
 		// TODO Auto-generated constructor stub
-
 	}
 
-	// Getters and Setters
 	public short getCodigo() {
 		return codigo;
 	}
@@ -80,12 +75,19 @@ public class Productos {
 		this.proveedor = proveedor;
 	}
 
+	public String getTelefono() {
+		return telefono;
+	}
 
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 
 	@Override
 	public String toString() {
-		return producto;
-
+		return "AuxMinimos [codigo=" + codigo + ", producto=" + producto + ", precioCompra=" + precioCompra
+				+ ", precioVenta=" + precioVenta + ", stock=" + stock + ", proveedor=" + proveedor + ", telefono="
+				+ telefono + "]";
 	}
 
 }

@@ -6,6 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 
 import controlador.Controlador;
+import modelo.vo.AuxMinimos;
 import modelo.vo.Productos;
 
 import modelo.vo.Productos;
@@ -15,7 +16,7 @@ import modelo.vo.Productos;
 
 public class ModeloTablaMinimos extends AbstractTableModel {
 	ArrayList <String> nombresColumnas;
-	ArrayList <Productos> datos;
+	ArrayList <AuxMinimos> datos;
 
 	public  ModeloTablaMinimos() {
 		nombresColumnas = new ArrayList<>();
@@ -26,16 +27,16 @@ public class ModeloTablaMinimos extends AbstractTableModel {
 		nombresColumnas.add("Precio Venta");
 		nombresColumnas.add("Stock");
 		nombresColumnas.add("Proveedor");
-		nombresColumnas.add("Teléfono");
+		nombresColumnas.add("Telefono");
 
-		datos = new ArrayList<Productos>();
+		datos = new ArrayList<AuxMinimos>();
 
 		//cargarStock();
 	}
 
 	public void cargarStock(){
 		Controlador controlador = new Controlador();
-		datos = controlador.cargarProductos();
+		datos = controlador.cargarStock();
 	}
 
 	@Override
@@ -51,26 +52,26 @@ public class ModeloTablaMinimos extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int fila, int columna) {
 
-		Productos productos = datos.get(fila);
+		AuxMinimos miMinimos = datos.get(fila);
 
 		switch(columna){
 		case 0:
-			return productos.getCodigo();
+			return miMinimos.getCodigo();
 		case 1:
-			return productos.getProducto();
+			return miMinimos.getProducto();
 		case 2:
-			return productos.getPrecioCompra();
+			return miMinimos.getPrecioCompra();
 		case 3:
-			return productos.getPrecioVenta();
+			return miMinimos.getPrecioVenta();
 		case 4:
-			return productos.getStock();
+			return miMinimos.getStock();
 		case 5:
-			return productos.getProveedor();
+			return miMinimos.getProveedor();
 		case 6:
-			return productos.getTelefono();
+			return miMinimos.getTelefono();
 		
 		}
-		return productos;
+		return miMinimos;
 	}
 
 	@Override
