@@ -18,12 +18,14 @@ import vista.ModeloNuevosPedidos;
 import javax.swing.JToggleButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import java.awt.Font;
 
 public class VentanaEliminarPedido extends JDialog {
 	private JTable table;
 	private JTextField textField;
 	ModeloNuevosPedidos miModeloNuevosPedidos;
 	Controlador controlador;
+	private JTextField txtDescuento;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -54,7 +56,8 @@ public class VentanaEliminarPedido extends JDialog {
 			panel.setLayout(new BorderLayout(0, 0));
 			{
 				JLabel lblEliminarPedido = new JLabel("Eliminar pedido");
-				panel.add(lblEliminarPedido, BorderLayout.NORTH);
+				lblEliminarPedido.setFont(new Font("Tahoma", Font.PLAIN, 16));
+				panel.add(lblEliminarPedido, BorderLayout.CENTER);
 			}
 			{
 				JPanel panel_1 = new JPanel();
@@ -83,6 +86,15 @@ public class VentanaEliminarPedido extends JDialog {
 				{
 					JComboBox comboBox = new JComboBox();
 					panel_1.add(comboBox);
+				}
+				{
+					JLabel lblNewLabel = new JLabel("Descuento");
+					panel_1.add(lblNewLabel);
+				}
+				{
+					txtDescuento = new JTextField();
+					panel_1.add(txtDescuento);
+					txtDescuento.setColumns(10);
 				}
 			}
 		}

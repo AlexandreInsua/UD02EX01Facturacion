@@ -32,7 +32,7 @@ public class VentanaFacturasCliente extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			VentanaFacturasCliente dialog = new VentanaFacturasCliente();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -42,7 +42,7 @@ public class VentanaFacturasCliente extends JDialog {
 		}
 	}
 
-	/**
+	*//**
 	 * Create the dialog.
 	 */
 	public VentanaFacturasCliente() {

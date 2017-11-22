@@ -27,6 +27,7 @@ public class VentanaModificarPedido extends JDialog {
 	private JTextField textField_1;
 	ModeloNuevosPedidos miModeloNuevosPedidos;
 	Controlador controlador;
+	private JTextField txtDescuento;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -87,6 +88,15 @@ public class VentanaModificarPedido extends JDialog {
 					JComboBox comboBox = new JComboBox();
 					panel_1.add(comboBox);
 				}
+				{
+					JLabel lblNewLabel_1 = new JLabel("Descuento");
+					panel_1.add(lblNewLabel_1);
+				}
+				{
+					txtDescuento = new JTextField();
+					panel_1.add(txtDescuento);
+					txtDescuento.setColumns(10);
+				}
 			}
 		}
 		{
@@ -115,9 +125,8 @@ public class VentanaModificarPedido extends JDialog {
 					textField_1.setColumns(10);
 				}
 				{
-					JButton btnAadir = new JButton("A\u00F1adir");
-					btnAadir.setEnabled(false);
-					panel_1.add(btnAadir);
+					JButton btnModificar = new JButton("Modificar");
+					panel_1.add(btnModificar);
 				}
 			}
 			{

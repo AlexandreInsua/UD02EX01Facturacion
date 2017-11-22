@@ -16,6 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import controlador.Controlador;
+import vista.ModeloCrearFactura;
+import vista.ModeloFacturasMes;
+
 import java.awt.Insets;
 
 public class VentanaCrearFactura extends JDialog {
@@ -30,10 +35,16 @@ public class VentanaCrearFactura extends JDialog {
 	private JTextField textBaseImponible;
 	private JTextField textIva;
 	private JTextField textTotal;
+	ModeloCrearFactura miModeloCrearFactura;
+	Controlador controlador;
 
-	/**
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+	}
+/*
+	*//**
 	 * Launch the application.
-	 */
+	 *//*
 	public static void main(String[] args) {
 		try {
 			VentanaCrearFactura dialog = new VentanaCrearFactura();
@@ -44,7 +55,7 @@ public class VentanaCrearFactura extends JDialog {
 		}
 	}
 
-	/**
+	*//**
 	 * Create the dialog.
 	 */
 	public VentanaCrearFactura() {
@@ -123,19 +134,8 @@ public class VentanaCrearFactura extends JDialog {
 				JScrollPane scrollPane = new JScrollPane();
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
-					table = new JTable();
-					table.setModel(new DefaultTableModel(
-						new Object[][] {
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-						},
-						new String[] {
-							"New column", "New column", "New column", "New column", "New column"
-						}
-					));
+					miModeloCrearFactura = new ModeloCrearFactura();
+					table = new JTable(miModeloCrearFactura);
 					scrollPane.setViewportView(table);
 				}
 			}

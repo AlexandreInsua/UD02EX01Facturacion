@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.ArrayList;
 
+import modelo.vo.AuxCrearFactura;
 import modelo.vo.AuxFacturasMes;
 import modelo.vo.AuxMinimos;
 import modelo.vo.AuxNuevoPedido;
@@ -145,6 +146,11 @@ ventanaEliminarPedido.setVisible(true);
 	
 
 	public ArrayList<AuxTablaBeneficios> cargarBeneficio() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<AuxCrearFactura> cargarNuevaFactura() {
 		// TODO Auto-generated method stub
 		return null;
 	}
