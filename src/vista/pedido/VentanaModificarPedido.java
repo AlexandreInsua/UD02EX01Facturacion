@@ -13,6 +13,10 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import controlador.Controlador;
+import vista.ModeloNuevosPedidos;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.UIManager;
 import java.awt.Color;
@@ -21,10 +25,16 @@ public class VentanaModificarPedido extends JDialog {
 	private JTextField textField;
 	private JTable table;
 	private JTextField textField_1;
+	ModeloNuevosPedidos miModeloNuevosPedidos;
+	Controlador controlador;
+
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+	}
 
 	/**
 	 * Launch the application.
-	 */
+	 *//*
 	public static void main(String[] args) {
 		try {
 			VentanaModificarPedido dialog = new VentanaModificarPedido();
@@ -35,7 +45,7 @@ public class VentanaModificarPedido extends JDialog {
 		}
 	}
 
-	/**
+	*//**
 	 * Create the dialog.
 	 */
 	public VentanaModificarPedido() {
@@ -114,11 +124,8 @@ public class VentanaModificarPedido extends JDialog {
 				JScrollPane scrollPane = new JScrollPane();
 				panel.add(scrollPane, BorderLayout.NORTH);
 				{
-					table = new JTable();
-					table.setModel(new DefaultTableModel(new Object[][] { { null, null, null, null, null },
-							{ null, null, null, null, null }, { null, null, null, null, null },
-							{ null, null, null, null, null }, { null, null, null, null, null }, },
-							new String[] { "New column", "New column", "New column", "New column", "New column" }));
+					miModeloNuevosPedidos = new ModeloNuevosPedidos();
+					table = new JTable(miModeloNuevosPedidos);
 					scrollPane.setViewportView(table);
 				}
 			}

@@ -24,25 +24,35 @@ import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 
+import controlador.Controlador;
+import vista.ModeloNuevosPedidos;
+import vista.ModeloTablaBeneficios;
+
 public class VentanaNuevoPedido extends JDialog {
 	private JTable table;
 	private JTextField textNumproducto;
 	private JTextField textCliente;
 	private JTextField textFecha;
 	private JTextField textCantidad;
+	ModeloNuevosPedidos miModeloNuevosPedidos;
+	Controlador controlador;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			VentanaNuevoPedido dialog = new VentanaNuevoPedido();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
 	}
+
+	// /**
+	// * Launch the application.
+	// */
+	// public static void main(String[] args) {
+	// try {
+	// VentanaNuevoPedido dialog = new VentanaNuevoPedido();
+	// dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	// dialog.setVisible(true);
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
 
 	/**
 	 * Create the dialog.
@@ -96,17 +106,8 @@ public class VentanaNuevoPedido extends JDialog {
 			scrollPane.setPreferredSize(new Dimension(20, 20));
 			getContentPane().add(scrollPane, BorderLayout.CENTER);
 			{
-				table = new JTable();
-				table.setModel(new DefaultTableModel(
-					new Object[][] {
-						{null, null, null, null, null},
-						{null, null, null, null, null},
-						{null, null, null, null, null},
-					},
-					new String[] {
-						"New column", "New column", "New column", "New column", "New column"
-					}
-				));
+				miModeloNuevosPedidos = new ModeloNuevosPedidos();
+				table = new JTable(miModeloNuevosPedidos);
 				scrollPane.setViewportView(table);
 			}
 		}

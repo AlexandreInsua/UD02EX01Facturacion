@@ -13,15 +13,25 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import controlador.Controlador;
+import vista.ModeloNuevosPedidos;
+
 import javax.swing.border.TitledBorder;
 
 public class VentanaConsultarPedidos extends JDialog {
 	private JTextField textField;
 	private JTable table;
+	ModeloNuevosPedidos miModeloNuevosPedidos;
+	Controlador controlador;
+
+	public void setControlador(Controlador controlador) {
+		this.controlador = controlador;
+	}
 
 	/**
 	 * Launch the application.
-	 */
+	 *//*
 	public static void main(String[] args) {
 		try {
 			VentanaConsultarPedidos dialog = new VentanaConsultarPedidos();
@@ -32,7 +42,7 @@ public class VentanaConsultarPedidos extends JDialog {
 		}
 	}
 
-	/**
+	*//**
 	 * Create the dialog.
 	 */
 	public VentanaConsultarPedidos() {
@@ -85,20 +95,8 @@ public class VentanaConsultarPedidos extends JDialog {
 				JScrollPane scrollPane = new JScrollPane();
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
-					table = new JTable();
-					table.setModel(new DefaultTableModel(
-						new Object[][] {
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-							{null, null, null, null, null},
-						},
-						new String[] {
-							"New column", "New column", "New column", "New column", "New column"
-						}
-					));
+					miModeloNuevosPedidos = new ModeloNuevosPedidos();
+					table = new JTable(miModeloNuevosPedidos);
 					scrollPane.setViewportView(table);
 				}
 			}

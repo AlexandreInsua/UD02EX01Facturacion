@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.ArrayList;
 
+import modelo.vo.AuxNuevoPedido;
 import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
 import modelo.vo.Productos;
@@ -60,6 +61,12 @@ public class Controlador {
 		ArrayList<Clientes> list = null;
 		return list;
 	}
+	
+	public ArrayList<AuxNuevoPedido> cargarPedido() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	public void mostrarVentanaPedidosFacturas() {
 		ventanaPedidosFacturas.setVisible(true);
@@ -122,5 +129,8 @@ ventanaEliminarPedido.setVisible(true);
 		ventanaFacturasCliente.setVisible(true);
 	}
 
+	
+
+	
 	
 }
