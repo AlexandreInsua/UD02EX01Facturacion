@@ -1,7 +1,5 @@
 package modelo.vo;
 
-import java.util.ArrayList;
-
 public class LineasPedido {
 
 	// Atributos

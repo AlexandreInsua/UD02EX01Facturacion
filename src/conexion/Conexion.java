@@ -32,7 +32,7 @@ public class Conexion {
 		// Configurar parametros de conexion
 	
 		 String user = "SegundoDam";
-		 String password = "abc123.."; // la contraseña para ejecutar MySQL
+		 String password = "SegundoDam"; // la contraseña para ejecutar MySQL
 		 String url = "jdbc:mysql://localhost:3306/ud02bdfacturacion?serverTimezone=Europe/Madrid";
 
 		try{
@@ -60,11 +60,11 @@ public class Conexion {
 	public void desconectar(){
 		conexion = null;
 	}
-	//public static void main(String[] args) {
-		//Conexion conexion=new Conexion();
-		//conexion.getConexion();
+	public static void main(String[] args) {
+	Conexion conexion=new Conexion();
+	conexion.getConexion();
 	
-//	}
+}
 	}
 
 		
