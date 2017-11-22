@@ -41,6 +41,7 @@ WHERE
     peNumPedido = 1; # número de pedido do combo
     
 /* Consultar Factura */
+# datos
 SELECT 
     peNumPedido, peFecha, peDescuento, clNombre, clCalle, clCodPostal, clCiudad, liNumPedido,
     pdNombre,  pdPrecioVenta, liCantidad,  (pdPrecioVenta * liCantidad) AS 'Importe'
@@ -52,6 +53,31 @@ FROM
     productos ON liIdProducto = pdid
 WHERE
     peNumPedido = 1; # número de pedido do combo
+    
+# cálculos
+SELECT 
+    SUM(pdPrecioVenta * liCantidad) AS 'Subtotal',
+    FORMAT(SUM(pdPrecioVenta * liCantidad) * IFNULL(peDescuento, 0) / 100,
+        2) AS 'Descuento',
+    FORMAT(SUM(pdPrecioVenta * liCantidad) - SUM(pdPrecioVenta * liCantidad) * IFNULL(peDescuento, 0) / 100,
+        2) AS 'Base Imponible',
+    pdIva,
+    FORMAT((SUM(pdPrecioVenta * liCantidad) - SUM(pdPrecioVenta * liCantidad) * IFNULL(peDescuento, 0) / 100) * (21 / 100),
+        2) AS 'IVA',
+    FORMAT((SUM(pdPrecioVenta * liCantidad) - SUM(pdPrecioVenta * liCantidad) * IFNULL(peDescuento, 0) / 100) 
+    + (SUM(pdPrecioVenta * liCantidad) - SUM(pdPrecioVenta * liCantidad) * IFNULL(peDescuento, 0) / 100) * (21 / 100),
+        2) AS 'Total'
+FROM
+    ((pedidos
+    JOIN clientes ON peNifCliente = clNif)
+    JOIN lineaspedido ON peNumPedido = liNumPedido)
+        JOIN
+    productos ON liIdProducto = pdid
+WHERE
+    peNumPedido = 2 ; # número de pedido do combo
+     
+
+
     
  /* Consultar Factura mes*/
 SELECT 
