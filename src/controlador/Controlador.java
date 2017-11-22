@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.ArrayList;
 
+import modelo.vo.AuxFacturasMes;
 import modelo.vo.AuxNuevoPedido;
 import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
@@ -127,6 +128,11 @@ ventanaEliminarPedido.setVisible(true);
 	
 	public void mostrarVentanaFacturaCliente(){
 		ventanaFacturasCliente.setVisible(true);
+	}
+
+	public ArrayList<AuxFacturasMes> cargarFacturasMes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
