@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
+import modelo.dao.ProductoDao;
 import vista.ModeloTablaMinimos;
 
 import javax.swing.JScrollPane;
@@ -42,6 +43,7 @@ public class VentanaMinimos extends JDialog {
 			VentanaMinimos dialog = new VentanaMinimos();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

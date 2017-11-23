@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.ArrayList;
 
+import modelo.dao.ProductoDao;
 import modelo.vo.AuxCrearFactura;
 import modelo.vo.AuxFacturasMes;
 import modelo.vo.AuxMinimos;
@@ -26,7 +27,7 @@ import vista.productos.VentanaProductos;
 import vista.productos.VentanaValoracionExistencias;
 
 public class Controlador {
-	VentanaProductos ventanaProductos = new VentanaProductos();
+ VentanaProductos ventanaProductos = new VentanaProductos();
 	VentanaPedidosFacturas ventanaPedidosFacturas = new VentanaPedidosFacturas();
 	VentanaMinimos ventanaMinimos = new VentanaMinimos();
 	VentanaIncrementarPrecio ventanaIncrementarPrecio = new VentanaIncrementarPrecio();
@@ -40,6 +41,11 @@ public class Controlador {
 	VentanaFacturasMes ventanaFacturasMes = new VentanaFacturasMes();
 	VentanaCrearFactura ventanaCrearFactura = new VentanaCrearFactura();
 
+	
+	ProductoDao productoDao = new ProductoDao();
+	
+	
+	
 	public ArrayList<Productos> cargarProductos() {
 		// TODO Auto-generated method stub
 		ArrayList<Productos> list = null;
@@ -77,7 +83,7 @@ public class Controlador {
 
 	}
 
-	public void mostrarVentanaProductos() {
+public void mostrarVentanaProductos() {
 		ventanaProductos.setVisible(true);
 
 	}
@@ -138,9 +144,9 @@ ventanaEliminarPedido.setVisible(true);
 		return null;
 	}
 
-	public ArrayList<AuxMinimos> cargarStock() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<AuxMinimos> cargarMinimos() {
+		// TODO
+		return productoDao.cargarMinimos();
 	}
 
 	

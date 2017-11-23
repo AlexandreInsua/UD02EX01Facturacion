@@ -20,6 +20,7 @@ public class AuxMinimos {
 		this.stock = stock;
 		this.proveedor = proveedor;
 		this.telefono = telefono;
+		
 	}
 
 	public AuxMinimos() {

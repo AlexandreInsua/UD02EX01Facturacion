@@ -1,8 +1,5 @@
 package conexion;
 
-/**
- * Nuria Hervella
- */
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -31,8 +28,8 @@ public class Conexion {
 
 		// Configurar parametros de conexion
 	
-		 String user = "SegundoDam";
-		 String password = "SegundoDam"; // la contraseña para ejecutar MySQL
+		 String user = "SegundoDAM";
+		 String password = "randulfolupe"; // la contraseña para ejecutar MySQL
 		 String url = "jdbc:mysql://localhost:3306/ud02bdfacturacion?serverTimezone=Europe/Madrid";
 
 		try{

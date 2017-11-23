@@ -31,12 +31,13 @@ public class ModeloTablaMinimos extends AbstractTableModel {
 
 		datos = new ArrayList<AuxMinimos>();
 
-		//cargarStock();
+		cargarStock();
 	}
 
 	public void cargarStock(){
 		Controlador controlador = new Controlador();
-		datos = controlador.cargarStock();
+		
+		datos = controlador.cargarMinimos();
 	}
 
 	@Override
