@@ -38,6 +38,11 @@ public class ModeloTablaMinimos extends AbstractTableModel {
 		
 		datos = controlador.cargarMinimos();
 	}
+	
+	/*public static void main(String[] args) {
+		ModeloTablaMinimos x = new ModeloTablaMinimos();
+		x.cargarStock();
+	}*/
 
 	@Override
 	public int getColumnCount() {

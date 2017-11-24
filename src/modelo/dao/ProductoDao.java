@@ -55,8 +55,14 @@ public class ProductoDao {
 			JOptionPane.showMessageDialog(null, "Error, non se conectó");
 			System.out.println(e);
 		}
-	
+	//System.out.println(lista);
 		return lista;
+		
 	} // fin cargaMinimos
+	public static void main(String[] args) {
+		ProductoDao productodao= new ProductoDao();
+		
+		System.out.println(productodao.cargarMinimos());
+	}
 
 }

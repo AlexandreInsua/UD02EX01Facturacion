@@ -45,7 +45,7 @@ public class Controlador {
 	Logica logica;
 
 
-	ProductoDao productoDao;
+	ProductoDao productoDao = new ProductoDao();
 
 	//Setters ventanas e lóxica
 
@@ -210,6 +210,12 @@ public class Controlador {
 	public ArrayList<AuxMinimos> cargarMinimos() {
 		// TODO
 		return productoDao.cargarMinimos();
+	}
+	
+	public static void main(String[] args) {
+		Controlador x = new Controlador();
+		System.out.println(x.cargarMinimos());
+		
 	}
 
 
