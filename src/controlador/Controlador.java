@@ -123,10 +123,8 @@ public class Controlador {
 	}
 
 
-	public ArrayList<Productos> cargarProductos() {
-		// TODO Auto-generated method stub
-		ArrayList<Productos> list = null;
-		return list;
+	public ArrayList<Productos> cargarValoracion() {
+		return productoDao.cargarValoracion();
 	}
 
 	public ArrayList<Clientes> cargarClientes() {

@@ -8,8 +8,6 @@ SELECT * FROM productos
 
 
 /* Valoración Existencias */ 
-	# lista
-SELECT pdNombre, pdStock, pdPrecioCompra, (pdStock*pdPrecioCompra) as 'Valoración' FROM productos
 	# total
 SELECT pdNombre, pdStock, pdPrecioCompra, sum(pdStock*pdPrecioCompra) as 'Total' FROM productos
 

@@ -9,6 +9,7 @@ public class Productos {
 	private float precioVenta;
 	private int stock;
 	private String proveedor;
+	private float total;
 	
 
 	// Contructores
@@ -79,8 +80,18 @@ public class Productos {
 	public void setProveedor(String proveedor) {
 		this.proveedor = proveedor;
 	}
+	
+	
 
 
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float f) {
+		this.total = f;
+	}
 
 	@Override
 	public String toString() {

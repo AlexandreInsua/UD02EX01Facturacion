@@ -20,7 +20,6 @@ public class ModeloValoracionExistencias extends AbstractTableModel {
 	ArrayList<String> nombresColumnas;
 	ArrayList<Productos> datos;
 	
-	private String total="total";
 
 
 	public ModeloValoracionExistencias() {
@@ -34,12 +33,12 @@ public class ModeloValoracionExistencias extends AbstractTableModel {
 
 		datos = new ArrayList<Productos>();
 		
-		// cargarExistencias();
+		cargarExistecias();
 	}
 
 	public void cargarExistecias() {
 		Controlador controlador = new Controlador();
-		datos = controlador.cargarProductos();
+		datos = controlador.cargarValoracion();
 		
 	}
 
@@ -67,7 +66,7 @@ public class ModeloValoracionExistencias extends AbstractTableModel {
 		case 2:
 			return productos.getPrecioCompra();
 		case 3:
-			return total;
+			return productos.getTotal();
 		
 		}
 		return productos;
