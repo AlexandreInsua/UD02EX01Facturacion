@@ -111,6 +111,7 @@ Controlador controlador;
 		getContentPane().add(panel_1);
 
 		JButton btnListado = new JButton("Listado");
+		btnListado.setEnabled(false);
 		panel_1.add(btnListado);
 
 		JButton btnMinimos = new JButton("Minimos");
