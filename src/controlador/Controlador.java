@@ -142,63 +142,76 @@ public class Controlador {
 
 
 	public void mostrarVentanaPedidosFacturas() {
+		ventanaPedidosFacturas = new VentanaPedidosFacturas();
 		ventanaPedidosFacturas.setVisible(true);
 
 	}
 
 	public void mostrarVentanaProductos() {
+		ventanaProductos = new VentanaProductos();
 		ventanaProductos.setVisible(true);
 
 	}
 
 	public void mostrarVentanaMinimos() {
+		ventanaMinimos = new VentanaMinimos();
 		ventanaMinimos.setVisible(true);
 
 	}
 
 	public void mostrarVentanaIncrementarPrecio() {
+		ventanaIncrementarPrecio = new VentanaIncrementarPrecio();
 		ventanaIncrementarPrecio.setVisible(true);
 
 	}
 
 	public void mostrarVentanaBeneficios() {
+		ventanaBeneficios = new VentanaBeneficios();
 		ventanaBeneficios.setVisible(true);
 	}
 
 	public void mostrarVentanaValoracionExistencias() {
+		ventanaValoracionExistencias = new VentanaValoracionExistencias();
 		ventanaValoracionExistencias.setVisible(true);
 	}
 
 	public void mostrarVentanaNuevoPedido() {
+		ventanaNuevoPedido = new VentanaNuevoPedido();
 		ventanaNuevoPedido.setVisible(true);
 
 	}
 
 	public void mostrarVentanaModificarPedido() {
+		ventanaModificarPedido = new VentanaModificarPedido();
 		ventanaModificarPedido.setVisible(true);
 
 	}
 
 	public void mostrarVentanaEliminarPedidos() {
+		ventanaEliminarPedido = new VentanaEliminarPedido();
 		ventanaEliminarPedido.setVisible(true);
 
 	}
 
 	public void mostrarVentanaConsultarPedidos() {
+		ventanaConsultarPedidos = new VentanaConsultarPedidos();
 		ventanaConsultarPedidos.setVisible(true);
 
 	}
 
 	public void mostrarVentanaCrearFactura() {
+		ventanaCrearFactura = new VentanaCrearFactura();
 		ventanaCrearFactura.setVisible(true);
 
 	}
 
 	public void mostrarVentanaFacturaMes() {
+		ventanaFacturasMes = new VentanaFacturasMes();
 		ventanaFacturasMes.setVisible(true);
 	}
 
 	public void mostrarVentanaFacturaCliente(){
+		ventanaFacturasCliente = new VentanaFacturasCliente();
 		ventanaFacturasCliente.setVisible(true);
 	}
 
