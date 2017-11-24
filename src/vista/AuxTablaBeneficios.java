@@ -9,6 +9,7 @@ public class AuxTablaBeneficios {
 	private String web;
 	private String proveedor;
 	private int cantidad;
+	private float beneficio;
 	
 	
 	
@@ -74,6 +75,13 @@ public class AuxTablaBeneficios {
 		return "AuxTablaBeneficios [producto=" + producto + ", precioCompra=" + precioCompra + ", precioVenta="
 				+ precioVenta + ", telefono=" + telefono + ", web=" + web + ", proveedor=" + proveedor + ", cantidad="
 				+ cantidad + "]";
+	}
+	public float getBeneficios() {
+		return beneficio;
+	}
+	
+	public void setBeneficio(float beneficio) {
+		this.beneficio = beneficio;
 	}
 	
 	

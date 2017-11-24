@@ -14,11 +14,9 @@ import modelo.vo.Proveedor;
 
 
 public class ModeloTablaBeneficios extends AbstractTableModel {
-	private static final Object String = null;
 	ArrayList<String> nombresColumnas;
 	ArrayList<AuxTablaBeneficios> datos;
-	
-	String beneficios = "beneficios";
+
 
 	public ModeloTablaBeneficios() {
 		nombresColumnas = new ArrayList<>();
@@ -35,7 +33,7 @@ public class ModeloTablaBeneficios extends AbstractTableModel {
 		datos = new ArrayList<AuxTablaBeneficios>();
 	
 
-		// cargarBeneficio();
+		cargarBeneficio();
 	}
 
 	public void cargarBeneficio() {
@@ -70,7 +68,7 @@ public class ModeloTablaBeneficios extends AbstractTableModel {
 		case 3:
 			return miAuxTablaBeneficios.getCantidad();
 		case 4:
-			return beneficios;
+			return miAuxTablaBeneficios.getBeneficios();
 		case 5:
 			return miAuxTablaBeneficios.getProveedor();
 		case 6:

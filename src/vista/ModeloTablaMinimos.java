@@ -4,20 +4,16 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-
 import controlador.Controlador;
 import modelo.vo.Productos;
 
 import modelo.vo.Productos;
 
-
-
-
 public class ModeloTablaMinimos extends AbstractTableModel {
-	ArrayList <String> nombresColumnas;
-	ArrayList <AuxMinimos> datos;
+	ArrayList<String> nombresColumnas;
+	ArrayList<AuxMinimos> datos;
 
-	public  ModeloTablaMinimos() {
+	public ModeloTablaMinimos() {
 		nombresColumnas = new ArrayList<>();
 
 		nombresColumnas.add("Cod Producto");
@@ -33,16 +29,16 @@ public class ModeloTablaMinimos extends AbstractTableModel {
 		cargarStock();
 	}
 
-	public void cargarStock(){
+	public void cargarStock() {
 		Controlador controlador = new Controlador();
-		
+
 		datos = controlador.cargarMinimos();
 	}
-	
-	/*public static void main(String[] args) {
-		ModeloTablaMinimos x = new ModeloTablaMinimos();
-		x.cargarStock();
-	}*/
+
+	/*
+	 * public static void main(String[] args) { ModeloTablaMinimos x = new
+	 * ModeloTablaMinimos(); x.cargarStock(); }
+	 */
 
 	@Override
 	public int getColumnCount() {
@@ -59,7 +55,7 @@ public class ModeloTablaMinimos extends AbstractTableModel {
 
 		AuxMinimos miMinimos = datos.get(fila);
 
-		switch(columna){
+		switch (columna) {
 		case 0:
 			return miMinimos.getCodigo();
 		case 1:
@@ -74,15 +70,13 @@ public class ModeloTablaMinimos extends AbstractTableModel {
 			return miMinimos.getProveedor();
 		case 6:
 			return miMinimos.getTelefono();
-		
+
 		}
 		return miMinimos;
 	}
 
 	@Override
-	public String getColumnName(int columna){
+	public String getColumnName(int columna) {
 		return nombresColumnas.get(columna);
 	}
 }
-
-

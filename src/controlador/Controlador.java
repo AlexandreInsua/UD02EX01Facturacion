@@ -234,8 +234,7 @@ public class Controlador {
 
 
 	public ArrayList<AuxTablaBeneficios> cargarBeneficio() {
-		// TODO Auto-generated method stub
-		return null;
+		return productoDao.cargarBeneficios();
 	}
 
 	public ArrayList<AuxCrearFactura> cargarNuevaFactura() {

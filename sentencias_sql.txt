@@ -6,9 +6,6 @@
 /* Listado productos */ 
 SELECT * FROM productos
 
-/* Listado produtos mínimo */
-SELECT pdId, pdNombre, pdPrecioCompra, pdPrecioVenta, pdStock, prNombre, prTelefono FROM productos JOIN proveedores ON pdNifProveedor = prNif WHERE pdStock < pdStockMinimo;
-
 /* Listado beneficios */
 SELECT 
     productos.pdNombre, pdPrecioCompra, pdPrecioVenta, liCantidad, (pdPrecioVenta - pdPrecioCompra) * liCantidad AS 'Beneficio',
