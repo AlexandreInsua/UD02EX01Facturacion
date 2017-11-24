@@ -3,15 +3,16 @@ package controlador;
 import java.util.ArrayList;
 
 import modelo.dao.ProductoDao;
-import modelo.vo.AuxCrearFactura;
-import modelo.vo.AuxFacturasMes;
-import modelo.vo.AuxMinimos;
-import modelo.vo.AuxNuevoPedido;
-import modelo.vo.AuxTablaBeneficios;
 import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
+import modeloLogica.Logica;
+import vista.AuxCrearFactura;	
+import vista.AuxFacturasMes;
+import vista.AuxMinimos;
+import vista.AuxNuevoPedido;
+import vista.AuxTablaBeneficios;
 import vista.facturas.VentanaCrearFactura;
 import vista.facturas.VentanaFacturasCliente;
 import vista.facturas.VentanaFacturasMes;
@@ -27,30 +28,85 @@ import vista.productos.VentanaProductos;
 import vista.productos.VentanaValoracionExistencias;
 
 public class Controlador {
- VentanaProductos ventanaProductos = new VentanaProductos();
-	VentanaPedidosFacturas ventanaPedidosFacturas = new VentanaPedidosFacturas();
-	VentanaMinimos ventanaMinimos = new VentanaMinimos();
-	VentanaIncrementarPrecio ventanaIncrementarPrecio = new VentanaIncrementarPrecio();
-	VentanaBeneficios ventanaBeneficios = new VentanaBeneficios();
-	VentanaValoracionExistencias ventanaValoracionExistencias = new VentanaValoracionExistencias();
-	VentanaNuevoPedido ventanaNuevoPedido = new VentanaNuevoPedido();
-	VentanaConsultarPedidos ventanaConsultarPedidos = new VentanaConsultarPedidos();
-	VentanaModificarPedido ventanaModificarPedido = new VentanaModificarPedido();
-	VentanaEliminarPedido ventanaEliminarPedido = new VentanaEliminarPedido();
-	VentanaFacturasCliente ventanaFacturasCliente = new VentanaFacturasCliente();
-	VentanaFacturasMes ventanaFacturasMes = new VentanaFacturasMes();
-	VentanaCrearFactura ventanaCrearFactura = new VentanaCrearFactura();
+	VentanaProductos ventanaProductos; 
+	VentanaPedidosFacturas ventanaPedidosFacturas;
+	VentanaMinimos ventanaMinimos;
+	VentanaIncrementarPrecio ventanaIncrementarPrecio;
+	VentanaBeneficios ventanaBeneficios;
+	VentanaValoracionExistencias ventanaValoracionExistencias;
+	VentanaNuevoPedido ventanaNuevoPedido;
+	VentanaConsultarPedidos ventanaConsultarPedidos;
+	VentanaModificarPedido ventanaModificarPedido;
+	VentanaEliminarPedido ventanaEliminarPedido;
+	VentanaFacturasCliente ventanaFacturasCliente;
+	VentanaFacturasMes ventanaFacturasMes;
+	VentanaCrearFactura ventanaCrearFactura;
 
-	
-	ProductoDao productoDao = new ProductoDao();
-	
-	
-	
-	public ArrayList<Productos> cargarProductos() {
-		// TODO Auto-generated method stub
-		ArrayList<Productos> list = null;
-		return list;
+	Logica logica;
+
+
+	ProductoDao productoDao;
+
+	//Setters ventanas e lóxica
+
+
+	public void setVentanaProductos(VentanaProductos ventanaProductos) {
+		this.ventanaProductos = ventanaProductos;
 	}
+
+	public void setVentanaPedidosFacturas(VentanaPedidosFacturas ventanaPedidosFacturas) {
+		this.ventanaPedidosFacturas = ventanaPedidosFacturas;
+	}
+
+	public void setVentanaMinimos(VentanaMinimos ventanaMinimos) {
+		this.ventanaMinimos = ventanaMinimos;
+	}
+
+	public void setVentanaIncrementarPrecio(VentanaIncrementarPrecio ventanaIncrementarPrecio) {
+		this.ventanaIncrementarPrecio = ventanaIncrementarPrecio;
+	}
+
+	public void setVentanaBeneficios(VentanaBeneficios ventanaBeneficios) {
+		this.ventanaBeneficios = ventanaBeneficios;
+	}
+
+	public void setVentanaValoracionExistencias(VentanaValoracionExistencias ventanaValoracionExistencias) {
+		this.ventanaValoracionExistencias = ventanaValoracionExistencias;
+	}
+
+	public void setVentanaNuevoPedido(VentanaNuevoPedido ventanaNuevoPedido) {
+		this.ventanaNuevoPedido = ventanaNuevoPedido;
+	}
+
+	public void setVentanaConsultarPedidos(VentanaConsultarPedidos ventanaConsultarPedidos) {
+		this.ventanaConsultarPedidos = ventanaConsultarPedidos;
+	}
+
+	public void setVentanaModificarPedido(VentanaModificarPedido ventanaModificarPedido) {
+		this.ventanaModificarPedido = ventanaModificarPedido;
+	}
+
+	public void setVentanaEliminarPedido(VentanaEliminarPedido ventanaEliminarPedido) {
+		this.ventanaEliminarPedido = ventanaEliminarPedido;
+	}
+
+	public void setVentanaFacturasCliente(VentanaFacturasCliente ventanaFacturasCliente) {
+		this.ventanaFacturasCliente = ventanaFacturasCliente;
+	}
+
+	public void setVentanaFacturasMes(VentanaFacturasMes ventanaFacturasMes) {
+		this.ventanaFacturasMes = ventanaFacturasMes;
+	}
+
+	public void setVentanaCrearFactura(VentanaCrearFactura ventanaCrearFactura) {
+		this.ventanaCrearFactura = ventanaCrearFactura;
+	}
+
+	public void setLogica(Logica logica) {
+		this.logica=logica;
+
+	}
+
 
 	public ArrayList<LineasPedido> cargarLineasPedido() {
 		// TODO Auto-generated method stub
@@ -66,12 +122,19 @@ public class Controlador {
 
 	}
 
+
+	public ArrayList<Productos> cargarProductos() {
+		// TODO Auto-generated method stub
+		ArrayList<Productos> list = null;
+		return list;
+	}
+
 	public ArrayList<Clientes> cargarClientes() {
 		// TODO Auto-generated method stub
 		ArrayList<Clientes> list = null;
 		return list;
 	}
-	
+
 	public ArrayList<AuxNuevoPedido> cargarPedido() {
 		// TODO Auto-generated method stub
 		return null;
@@ -83,7 +146,7 @@ public class Controlador {
 
 	}
 
-public void mostrarVentanaProductos() {
+	public void mostrarVentanaProductos() {
 		ventanaProductos.setVisible(true);
 
 	}
@@ -108,33 +171,33 @@ public void mostrarVentanaProductos() {
 
 	public void mostrarVentanaNuevoPedido() {
 		ventanaNuevoPedido.setVisible(true);
-		
+
 	}
 
 	public void mostrarVentanaModificarPedido() {
 		ventanaModificarPedido.setVisible(true);
-		
+
 	}
 
 	public void mostrarVentanaEliminarPedidos() {
-ventanaEliminarPedido.setVisible(true);
-		
+		ventanaEliminarPedido.setVisible(true);
+
 	}
 
 	public void mostrarVentanaConsultarPedidos() {
-	ventanaConsultarPedidos.setVisible(true);
-		
+		ventanaConsultarPedidos.setVisible(true);
+
 	}
 
 	public void mostrarVentanaCrearFactura() {
 		ventanaCrearFactura.setVisible(true);
-		
+
 	}
 
 	public void mostrarVentanaFacturaMes() {
 		ventanaFacturasMes.setVisible(true);
 	}
-	
+
 	public void mostrarVentanaFacturaCliente(){
 		ventanaFacturasCliente.setVisible(true);
 	}
@@ -149,7 +212,7 @@ ventanaEliminarPedido.setVisible(true);
 		return productoDao.cargarMinimos();
 	}
 
-	
+
 
 	public ArrayList<AuxTablaBeneficios> cargarBeneficio() {
 		// TODO Auto-generated method stub
@@ -161,8 +224,12 @@ ventanaEliminarPedido.setVisible(true);
 		return null;
 	}
 
-	
 
-	
-	
+
+
+
+
+
+
+
 }

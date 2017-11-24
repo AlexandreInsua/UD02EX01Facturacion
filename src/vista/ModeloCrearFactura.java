@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import controlador.Controlador;
-import modelo.vo.AuxCrearFactura;
-import modelo.vo.AuxFacturasMes;
 
 public class ModeloCrearFactura extends AbstractTableModel {
 	

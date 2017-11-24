@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import controlador.Controlador;
-import modelo.vo.AuxNuevoPedido;
 import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
 import modelo.vo.Productos;

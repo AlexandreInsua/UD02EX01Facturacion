@@ -17,6 +17,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 public class VentanaProductos extends JDialog {
+	
+Controlador controlador;
+	
+	public void setControlador(Controlador controlador){
+		this.controlador = controlador;
+	}
 
 	/**
 	 * Launch the application.
@@ -148,4 +154,6 @@ public class VentanaProductos extends JDialog {
 		lblNewLabel.setBounds(137, 11, 114, 14);
 		getContentPane().add(lblNewLabel);
 	}
+
+	
 }

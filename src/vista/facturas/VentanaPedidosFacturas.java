@@ -17,6 +17,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaPedidosFacturas extends JDialog {
+	
+Controlador controlador;
+	
+	public void setControlador(Controlador controlador){
+		this.controlador = controlador;
+	}
 
 	/**
 	 * Launch the application.
@@ -156,4 +162,6 @@ public class VentanaPedidosFacturas extends JDialog {
 		lblNewLabel.setBounds(157, 11, 134, 14);
 		getContentPane().add(lblNewLabel);
 	}
+
+	
 }

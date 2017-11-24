@@ -6,7 +6,6 @@ import javax.swing.table.AbstractTableModel;
 
 
 import controlador.Controlador;
-import modelo.vo.AuxMinimos;
 import modelo.vo.Productos;
 
 import modelo.vo.Productos;

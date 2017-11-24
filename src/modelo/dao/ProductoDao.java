@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import conexion.Conexion;
-import modelo.vo.AuxMinimos;
+import vista.AuxMinimos;
 
 public class ProductoDao {
 

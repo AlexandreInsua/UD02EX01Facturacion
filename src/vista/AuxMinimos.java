@@ -1,4 +1,4 @@
-package modelo.vo;
+package vista;
 
 public class AuxMinimos {
 	
