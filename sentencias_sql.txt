@@ -6,17 +6,6 @@
 /* Listado productos */ 
 SELECT * FROM productos
 
-/* Listado beneficios */
-SELECT 
-    productos.pdNombre, pdPrecioCompra, pdPrecioVenta, liCantidad, (pdPrecioVenta - pdPrecioCompra) * liCantidad AS 'Beneficio',
-    prNombre, prTelefono, prWeb
-FROM
-    ((productos
-    JOIN proveedores ON pdNifProveedor = prNif)
-    JOIN lineaspedido ON pdId = liIdProducto)
-        JOIN
-    pedidos ON liNumPedido = peNumPedido
-GROUP BY liIdProducto
 
 /* Valoración Existencias */ 
 	# lista
