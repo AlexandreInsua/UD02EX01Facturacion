@@ -1,11 +1,16 @@
 package vista;
 
 public class AuxCrearFactura {
+
+	// TODO TANTOS ATRIBUTOS COMO CAMPOS NO FORMULARIO ????
+	// IMPLICA TANTOS n-CAMPOS NA CONSULTA
 	
 	private int numPedido;
 	private String producto;
 	private float precioVenta;
 	private int cantidad;
+	
+ 
 	public AuxCrearFactura(int numPedido, String producto, float precioVenta, int cantidad) {
 		super();
 		this.numPedido = numPedido;

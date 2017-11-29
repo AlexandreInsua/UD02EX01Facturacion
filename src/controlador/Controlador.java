@@ -2,9 +2,11 @@ package controlador;
 
 import java.util.ArrayList;
 
+import modelo.dao.PedidoDao;
 import modelo.dao.ProductoDao;
 import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
+import modelo.vo.Pedidos;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
 import modeloLogica.Logica;
@@ -41,6 +43,8 @@ public class Controlador {
 	VentanaFacturasCliente ventanaFacturasCliente;
 	VentanaFacturasMes ventanaFacturasMes;
 	VentanaCrearFactura ventanaCrearFactura;
+	
+	PedidoDao pedidoDao;
 
 	Logica logica;
 
@@ -133,9 +137,8 @@ public class Controlador {
 		return list;
 	}
 
-	public ArrayList<AuxNuevoPedido> cargarPedido() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Pedidos> cargarPedido() {
+		return pedidoDao.cargarPedidos();
 	}
 
 
@@ -235,10 +238,13 @@ public class Controlador {
 		return productoDao.cargarBeneficios();
 	}
 
-	public ArrayList<AuxCrearFactura> cargarNuevaFactura() {
-		// TODO Auto-generated method stub
-		return null;
+/*	public ArrayList<AuxCrearFactura> cargarNuevaFactura() {
+		pedidoDao = new PedidoDao();
+		return pedidoDao.cargarNuevaFactura();
+	
 	}
+
+	*/
 
 
 

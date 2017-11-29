@@ -18,10 +18,13 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
+import vista.ComboPedidos;
 import vista.ModeloCrearFactura;
 import vista.ModeloFacturasMes;
 
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaCrearFactura extends JDialog {
 	private JTextField textField;
@@ -35,16 +38,24 @@ public class VentanaCrearFactura extends JDialog {
 	private JTextField textBaseImponible;
 	private JTextField textIva;
 	private JTextField textTotal;
+	
 	ModeloCrearFactura miModeloCrearFactura;
 	Controlador controlador;
+	ComboPedidos comboPedidos;
+	
+	
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
+	
+	public void setCompoPedidos(ComboPedidos comboPedidos){
+		this.comboPedidos = comboPedidos;
+	}
 /*
 	*//**
 	 * Launch the application.
-	 *//*
+	 */
 	public static void main(String[] args) {
 		try {
 			VentanaCrearFactura dialog = new VentanaCrearFactura();
@@ -55,9 +66,8 @@ public class VentanaCrearFactura extends JDialog {
 		}
 	}
 
-	*//**
-	 * Create the dialog.
-	 */
+	
+	
 	public VentanaCrearFactura() {
 		setTitle("El Chip Prodigioso");
 		setBounds(100, 100, 620, 424);
@@ -79,7 +89,7 @@ public class VentanaCrearFactura extends JDialog {
 				panel.add(panel_1, BorderLayout.SOUTH);
 				panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				{
-					JLabel lblNProducto = new JLabel("N\u00BA Producto");
+					JLabel lblNProducto = new JLabel("N\u00BA Pedido");
 					panel_1.add(lblNProducto);
 				}
 				{
@@ -250,16 +260,34 @@ public class VentanaCrearFactura extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new OkButtonActionListener());
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
-
+	
+	// 1º Crea unha clase privada
+private class OkButtonActionListener implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		// 1º Instancia modelo
+		miModeloCrearFactura = new ModeloCrearFactura();
+		// 2ª carga pedido
+		// 3º Codificar cargar pedido
+		// 4ª Instanciar comboPedidos
+		miModeloCrearFactura.cargarNuevaFactura();
+	}
+	
+}
 }

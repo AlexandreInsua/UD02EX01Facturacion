@@ -57,11 +57,11 @@ public class Conexion {
 	public void desconectar(){
 		conexion = null;
 	}
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 	Conexion conexion=new Conexion();
 	conexion.getConexion();
 	
-}*/
+}
 	}
 
 		
