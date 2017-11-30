@@ -12,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
+import modelo.dao.ProductoDao;
+
 import vista.ModeloValoracionExistencias;
 
 import javax.swing.border.TitledBorder;
@@ -93,6 +95,8 @@ public class VentanaValoracionExistencias extends JFrame {
 		textTotal.setEditable(false);
 		panel_1.add(textTotal);
 		textTotal.setColumns(10);
+		cargarTotal();
+	
 
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
@@ -132,8 +136,14 @@ public class VentanaValoracionExistencias extends JFrame {
 		gbc_btnNewButton_1.gridy = 0;
 		panel_2.add(btnNewButton_1, gbc_btnNewButton_1);
 	}
-
-	public JTextField getTextTotal() {
-		return textTotal;
+	
+	
+	public void cargarTotal()
+	{
+		textTotal.setText(miModeloTablaValoracionExistencias.cargarTotal() + " ");
 	}
-}
+		
+	}
+
+	
+	

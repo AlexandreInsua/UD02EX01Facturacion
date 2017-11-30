@@ -240,6 +240,10 @@ public class Controlador {
 		return null;
 	}
 
+	public float cargarTotal() {
+		return productoDao.cargarTotal();
+	}
+
 
 
 

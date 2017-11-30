@@ -19,6 +19,7 @@ public class ModeloValoracionExistencias extends AbstractTableModel {
 	private static final Object String = null;
 	ArrayList<String> nombresColumnas;
 	ArrayList<Productos> datos;
+	Float datos2;
 	
 
 
@@ -33,7 +34,9 @@ public class ModeloValoracionExistencias extends AbstractTableModel {
 
 		datos = new ArrayList<Productos>();
 		
+		
 		cargarExistecias();
+		cargarTotal();
 	}
 
 	public void cargarExistecias() {
@@ -75,6 +78,13 @@ public class ModeloValoracionExistencias extends AbstractTableModel {
 	@Override
 	public String getColumnName(int columna) {
 		return nombresColumnas.get(columna);
+	}
+	
+	//Calculo del total
+	public Float cargarTotal() {
+		Controlador controlador = new Controlador();
+		return datos2 = controlador.cargarTotal();
+		
 	}
 }
 
