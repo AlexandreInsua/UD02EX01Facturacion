@@ -199,4 +199,9 @@ public class ProductoDao {
 
 	} // fin cargaMinimos
 
+	public static ArrayList<Proveedor> cargarDepartamentos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

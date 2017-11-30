@@ -244,6 +244,12 @@ public class Controlador {
 		return productoDao.cargarTotal();
 	}
 
+	public ArrayList<Proveedor> cargarProveedor() {
+		return ProductoDao.cargarDepartamentos();
+	}
+
+	
+
 
 
 

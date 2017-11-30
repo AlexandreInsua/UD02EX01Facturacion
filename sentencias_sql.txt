@@ -2,6 +2,8 @@
 /* Incrementar prezo (procedemento) */ 
 	pendente
 
+/Listado proveedores*/
+SELECT prNombre FROM proveedores
 
 /* Listado productos */ 
 SELECT * FROM productos
