@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
+import modelo.vo.Proveedor;
+import vista.ComboIncrementar;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -21,18 +23,23 @@ import java.awt.event.ActionEvent;
 
 public class VentanaIncrementarPrecio extends JDialog {
 	Controlador controlador;
+	ComboIncrementar comboIncrementar;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
+	
+	public void setComoIncrementar(ComboIncrementar comboIncrementar) {
+		this.comboIncrementar = comboIncrementar;
+	}
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	private JTextField porcentaje;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			VentanaIncrementarPrecio dialog = new VentanaIncrementarPrecio();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -40,7 +47,7 @@ public class VentanaIncrementarPrecio extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
@@ -50,47 +57,28 @@ public class VentanaIncrementarPrecio extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[] { 0, 0, 0, 0 };
-		gbl_contentPanel.rowHeights = new int[] { 0, 0, 0, 0, 0 };
-		gbl_contentPanel.columnWeights = new double[] { 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		contentPanel.setLayout(gbl_contentPanel);
+		contentPanel.setLayout(null);
 		{
 			JLabel lblProveedor = new JLabel("Proveedor");
-			GridBagConstraints gbc_lblProveedor = new GridBagConstraints();
-			gbc_lblProveedor.anchor = GridBagConstraints.EAST;
-			gbc_lblProveedor.insets = new Insets(0, 0, 5, 5);
-			gbc_lblProveedor.gridx = 1;
-			gbc_lblProveedor.gridy = 1;
-			contentPanel.add(lblProveedor, gbc_lblProveedor);
+			lblProveedor.setBounds(58, 38, 50, 14);
+			contentPanel.add(lblProveedor);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			GridBagConstraints gbc_comboBox = new GridBagConstraints();
-			gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox.gridx = 2;
-			gbc_comboBox.gridy = 1;
-			contentPanel.add(comboBox, gbc_comboBox);
+			comboIncrementar = new ComboIncrementar();
+			//JComboBox comboBox = new JComboBox();
+			comboIncrementar.setBounds(113, 35, 316, 20);
+			contentPanel.add(comboIncrementar);
 		}
 		{
 			JLabel lblIncrementar = new JLabel("% Incrementar");
-			GridBagConstraints gbc_lblIncrementar = new GridBagConstraints();
-			gbc_lblIncrementar.anchor = GridBagConstraints.EAST;
-			gbc_lblIncrementar.insets = new Insets(0, 0, 0, 5);
-			gbc_lblIncrementar.gridx = 1;
-			gbc_lblIncrementar.gridy = 3;
-			contentPanel.add(lblIncrementar, gbc_lblIncrementar);
+			lblIncrementar.setBounds(35, 93, 73, 14);
+			contentPanel.add(lblIncrementar);
 		}
 		{
-			textField = new JTextField();
-			GridBagConstraints gbc_textField = new GridBagConstraints();
-			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField.gridx = 2;
-			gbc_textField.gridy = 3;
-			contentPanel.add(textField, gbc_textField);
-			textField.setColumns(10);
+			porcentaje = new JTextField();
+			porcentaje.setBounds(113, 90, 316, 20);
+			contentPanel.add(porcentaje);
+			porcentaje.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -109,7 +97,16 @@ public class VentanaIncrementarPrecio extends JDialog {
 				JButton btnOk = new JButton("OK");
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						
+						if(porcentaje.getText()!=null && !porcentaje.getText().isEmpty()){
+							float porcen = Float.parseFloat(porcentaje.getText());
+							Proveedor proveedor =  (Proveedor) comboIncrementar.getSelectedItem();
+							System.out.println(proveedor.getNombre());
+							System.out.println(porcen);
+							controlador = new Controlador();
+							controlador.incrementarPrecio(proveedor, porcen);
+						}
+						
 					}
 				});
 				btnOk.setActionCommand("OK");

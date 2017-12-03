@@ -1,10 +1,13 @@
 package controlador;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import modelo.dao.PedidosDao;
 import modelo.dao.ProductoDao;
 import modelo.vo.Clientes;
 import modelo.vo.LineasPedido;
+import modelo.vo.Pedidos;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
 import modeloLogica.Logica;
@@ -128,14 +131,11 @@ public class Controlador {
 	}
 
 	public ArrayList<Clientes> cargarClientes() {
-		// TODO Auto-generated method stub
-		ArrayList<Clientes> list = null;
-		return list;
+		return PedidosDao.cargarClientes();
 	}
 
 	public ArrayList<AuxNuevoPedido> cargarPedido() {
-		// TODO Auto-generated method stub
-		return null;
+		return PedidosDao.cargarPedido();
 	}
 
 
@@ -223,11 +223,11 @@ public class Controlador {
 		return productoDao.cargarMinimos();
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Controlador x = new Controlador();
 		System.out.println(x.cargarMinimos());
 		
-	}
+	}*/
 
 
 
@@ -245,8 +245,29 @@ public class Controlador {
 	}
 
 	public ArrayList<Proveedor> cargarProveedor() {
-		return ProductoDao.cargarDepartamentos();
+		return productoDao.cargarProveedor();
 	}
+
+	public void incrementarPrecio(Proveedor proveedor, float text) {
+		productoDao.incrementarPrecio(proveedor, text);
+	}
+
+	public ArrayList<Productos> cargarProductos() {
+		return PedidosDao.cargarProductos();
+	}
+
+	public String contarPedidos() {
+		return PedidosDao.contarPedidos();
+	}
+
+	public void agregarLineaPedido(AuxNuevoPedido datosLinea, LineasPedido nuevaLinea) throws SQLException {
+		PedidosDao.agregarLineaPedido(datosLinea, nuevaLinea);
+	}
+
+	public ArrayList<Pedidos> cargarId() {
+		return  PedidosDao.cargarId();
+	}
+
 
 	
 

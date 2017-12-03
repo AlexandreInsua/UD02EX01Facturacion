@@ -88,8 +88,11 @@ public class Proveedor {
 
 	@Override
 	public String toString() {
-		return "Proveedor [nif=" + nif + "]";
+		return nombre;
 	}
+	
+
+	
 	
 	
 

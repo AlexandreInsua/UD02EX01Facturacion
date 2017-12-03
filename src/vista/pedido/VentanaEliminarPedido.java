@@ -26,7 +26,8 @@ public class VentanaEliminarPedido extends JDialog {
 	ModeloNuevosPedidos miModeloNuevosPedidos;
 	Controlador controlador;
 	private JTextField txtDescuento;
-
+	private JTextField txtCliente;
+	ComboPedido comboPedido;
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
@@ -48,7 +49,7 @@ public class VentanaEliminarPedido extends JDialog {
 	 * Create the dialog.
 	 */
 	public VentanaEliminarPedido() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 603, 300);
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel panel = new JPanel();
@@ -67,8 +68,9 @@ public class VentanaEliminarPedido extends JDialog {
 					panel_1.add(lblNPedido);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					panel_1.add(comboBox);
+					
+					comboPedido = new ComboPedido();
+					 panel_1.add(comboPedido);
 				}
 				{
 					JLabel lblFecha = new JLabel("Fecha");
@@ -84,8 +86,9 @@ public class VentanaEliminarPedido extends JDialog {
 					panel_1.add(lblCliente);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					panel_1.add(comboBox);
+					txtCliente = new JTextField();
+					panel_1.add(txtCliente);
+					txtCliente.setColumns(10);
 				}
 				{
 					JLabel lblNewLabel = new JLabel("Descuento");

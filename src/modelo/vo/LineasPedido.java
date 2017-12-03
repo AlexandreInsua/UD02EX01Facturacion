@@ -1,6 +1,6 @@
 package modelo.vo;
 
-public class LineasPedido {
+public class LineasPedido  {
 
 	// Atributos
 	private int numPedido;

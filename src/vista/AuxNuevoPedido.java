@@ -8,14 +8,16 @@ public class AuxNuevoPedido {
 		private String producto;
 		private int cantidad;		
 		private float precioVenta;
+		private float importe;
 		
 		
-		public AuxNuevoPedido(short codigo, String producto, int cantidad, float precioVenta) {
+		public AuxNuevoPedido(short codigo, String producto, int cantidad, float precioVenta, float importe) {
 			super();
 			this.codigo = codigo;
 			this.producto = producto;
 			this.cantidad = cantidad;
 			this.precioVenta = precioVenta;
+			this.importe = importe;
 		}
 
 
@@ -65,11 +67,23 @@ public class AuxNuevoPedido {
 		public void setPrecioVenta(float precioVenta) {
 			this.precioVenta = precioVenta;
 		}
+		
+		public float getImporte() {
+			return importe;
+		}
+
+
+		public void setImporte(float importe) {
+			this.importe = importe;
+		}
 
 
 		
 		//To String
 		
+		
+
+
 		@Override
 		public String toString() {
 			return "AuxNuevoProducto [codigo=" + codigo + ", producto=" + producto + ", cantidad=" + cantidad

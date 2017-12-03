@@ -100,7 +100,7 @@ public class Clientes {
 
 	@Override
 	public String toString() {
-		return "Clientes [nif=" + nif + "]";
+		return nombre;
 	}
 
 	

@@ -20,25 +20,42 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
+import modelo.dao.PedidosDao;
+import modelo.vo.LineasPedido;
+import modelo.vo.Pedidos;
+import modelo.vo.Productos;
+import vista.AuxNuevoPedido;
+import vista.ComboIncrementar;
 import vista.ModeloNuevosPedidos;
 import vista.ModeloTablaBeneficios;
 
 public class VentanaNuevoPedido extends JDialog {
 	private JTable table;
-	private JTextField textNumproducto;
-	private JTextField textCliente;
+	private JTextField textNumPedido;
 	private JTextField textFecha;
-	private JTextField textCantidad;
+	private JTextField txtCantidad;
 	ModeloNuevosPedidos miModeloNuevosPedidos;
 	Controlador controlador;
+	ComboNuevoProducto comboNuevoProducto;
+	ComboClientes comboClientes;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
+
+	}
+
+	public void setComboNuevoProducto(ComboNuevoProducto comboNuevoProducto) {
+		this.comboNuevoProducto = comboNuevoProducto;
+	}
+
+	public void setComboClientes(ComboClientes comboClientes) {
+		this.comboClientes = comboClientes;
 	}
 
 	// /**
@@ -72,14 +89,16 @@ public class VentanaNuevoPedido extends JDialog {
 				JPanel panel_1 = new JPanel();
 				panel.add(panel_1, BorderLayout.SOUTH);
 				{
-					JLabel lblNProducto = new JLabel("N\u00BA producto");
+					JLabel lblNProducto = new JLabel("N\u00BA pedido");
 					panel_1.add(lblNProducto);
 				}
 				{
-					textNumproducto = new JTextField();
-					panel_1.add(textNumproducto);
-					textNumproducto.setEditable(false);
-					textNumproducto.setColumns(10);
+					textNumPedido = new JTextField();
+					panel_1.add(textNumPedido);
+					textNumPedido.setEditable(false);
+					textNumPedido.setColumns(10);
+					controlador = new Controlador();
+					textNumPedido.setText(controlador.contarPedidos());
 				}
 				{
 					JLabel lblFecha = new JLabel("Fecha");
@@ -95,9 +114,8 @@ public class VentanaNuevoPedido extends JDialog {
 					panel_1.add(lblCliente);
 				}
 				{
-					textCliente = new JTextField();
-					panel_1.add(textCliente);
-					textCliente.setColumns(10);
+					comboClientes = new ComboClientes();
+					panel_1.add(comboClientes);
 				}
 			}
 		}
@@ -116,27 +134,47 @@ public class VentanaNuevoPedido extends JDialog {
 			panel.setBorder(new TitledBorder(null, "Ventas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			getContentPane().add(panel, BorderLayout.SOUTH);
 			{
-				JLabel lblVentas = new JLabel("Ventas");
+				JLabel lblVentas = new JLabel("Productos");
 				panel.add(lblVentas);
 			}
 			{
-				JComboBox comboBox = new JComboBox();
-				panel.add(comboBox);
+				comboNuevoProducto = new ComboNuevoProducto();
+				panel.add(comboNuevoProducto);
 			}
 			{
 				JLabel lblCantidad = new JLabel("Cantidad");
 				panel.add(lblCantidad);
 			}
 			{
-				textCantidad = new JTextField();
-				panel.add(textCantidad);
-				textCantidad.setColumns(10);
+				txtCantidad = new JTextField();
+				panel.add(txtCantidad);
+				txtCantidad.setColumns(10);
+
 			}
 			{
 				JButton btnAnadir = new JButton("A\u00F1adir");
-				btnAnadir.setEnabled(false);
+				btnAnadir.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						short id = Short.parseShort(textNumPedido.getText());
+						Productos producto= (Productos)comboNuevoProducto.getSelectedItem();
+						String nombre = producto.getProducto();
+						float precioVenta = producto.getPrecioVenta();
+						float cantidad = precioVenta*Float.parseFloat(txtCantidad.getText());
+						 AuxNuevoPedido datosLinea=new AuxNuevoPedido(id,nombre,Integer.parseInt(txtCantidad.getText()),precioVenta,cantidad);
+						 
+						 LineasPedido nuevaLinea = new LineasPedido(id,producto.getCodigo(),(int)cantidad);
+						try {
+							controlador.agregarLineaPedido(datosLinea, nuevaLinea);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
 				panel.add(btnAnadir);
+				//controlador.crearPedidoNuevo();
 			}
+	
 		}
 	}
 

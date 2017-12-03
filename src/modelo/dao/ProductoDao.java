@@ -162,7 +162,7 @@ public class ProductoDao {
 	public static void main(String[] args) {
 		ProductoDao productodao = new ProductoDao();
 
-		System.out.println(productodao.cargarValoracion());
+		//System.out.print(productodao.incrementarPrecio(null,null));
 	}
 
 	public float cargarTotal() {
@@ -199,9 +199,117 @@ public class ProductoDao {
 
 	} // fin cargaMinimos
 
-	public static ArrayList<Proveedor> cargarDepartamentos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public ArrayList<Proveedor> cargarProveedor() {
+		// conexion
+				Conexion conexion = new Conexion();
 
+				// Perapramos a consulta de actualizacion
+				PreparedStatement ps = null;
+				ResultSet resultado = null;
+
+				Proveedor minimo = null;
+				ArrayList<Proveedor> lista = new ArrayList<Proveedor>();
+
+				// limpar dados
+				lista.clear();
+
+				// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+				String consulta = "SELECT prNombre FROM proveedores";
+
+				// Conecta e executa a sentenza
+				try {
+					ps = conexion.getConexion().prepareStatement(consulta);
+					resultado = ps.executeQuery();
+					while (resultado.next()) {
+						minimo = new Proveedor();
+						minimo.setNombre(resultado.getString("prNombre"));
+						lista.add(minimo);
+
+					}
+					ps.close();
+					resultado.close();
+					conexion.desconectar();
+
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, "Error, non se conectó");
+					System.out.println(e);
+				}
+				//System.out.println(lista);
+				return lista;
+
+			} // fin cargaProveedor
+
+	public void incrementarPrecio(Proveedor proveedor, float porcentaje) {
+		// conexion
+		Conexion conexion = new Conexion();
+
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
+
+		Productos minimo = null;
+		ArrayList<Productos> lista = new ArrayList<Productos>();
+
+		// limpar dados
+		lista.clear();
+
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = "SELECT * from Productos JOIN Proveedores ON pdNifProveedor=prNif WHERE proveedores.prNombre='" + proveedor.getNombre()+"'";
+						
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				minimo = new Productos();
+				minimo.setCodigo(resultado.getShort("pdId"));
+				minimo.setProducto(resultado.getString("pdNombre"));
+				minimo.setPrecioCompra(resultado.getFloat("pdPrecioCompra"));
+				minimo.setPrecioVenta(resultado.getFloat("pdPrecioVenta"));
+				minimo.setStock(resultado.getInt("pdStock"));
+				minimo.setProveedor(resultado.getString("pdNifProveedor"));
+				minimo.setTotal(resultado.getFloat("pdIva"));
+				lista.add(minimo);
+				System.out.println(lista);
+					
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		
+		conexion = new Conexion();
+		for (Productos producto : lista) {
+			float total = producto.getPrecioVenta() + producto.getPrecioVenta()*porcentaje/100;
+			producto.setPrecioVenta(total);
+			 
+			String consulta2 = "UPDATE Productos SET pdPrecioVenta = "+producto.getPrecioVenta()+" WHERE pdID = "+ producto.getCodigo();
+
+			// Conecta e executa a sentenza
+			try {
+				ps = conexion.getConexion().prepareStatement(consulta2);
+				ps.executeUpdate();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Error, non se conectó");
+				System.out.println(e);
+			}
+			
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			conexion.desconectar();
+			
+			
+			
+		}
+
+	} // fin cargaProveedor
+	
 }

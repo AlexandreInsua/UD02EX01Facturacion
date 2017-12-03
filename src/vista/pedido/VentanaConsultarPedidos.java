@@ -24,6 +24,8 @@ public class VentanaConsultarPedidos extends JDialog {
 	private JTable table;
 	ModeloNuevosPedidos miModeloNuevosPedidos;
 	Controlador controlador;
+	ComboPedido comboPedido;
+	private JTextField txtCliente;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -47,7 +49,7 @@ public class VentanaConsultarPedidos extends JDialog {
 	 * Create the dialog.
 	 */
 	public VentanaConsultarPedidos() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 578, 300);
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel panel = new JPanel();
@@ -65,8 +67,8 @@ public class VentanaConsultarPedidos extends JDialog {
 					panel_1.add(lblNewLabel);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					panel_1.add(comboBox);
+					comboPedido = new ComboPedido();
+					 panel_1.add(comboPedido);
 				}
 				{
 					JLabel lblNewLabel_1 = new JLabel("Fecha");
@@ -74,6 +76,7 @@ public class VentanaConsultarPedidos extends JDialog {
 				}
 				{
 					textField = new JTextField();
+					textField.setEditable(false);
 					textField.setText("");
 					panel_1.add(textField);
 					textField.setColumns(10);
@@ -83,8 +86,10 @@ public class VentanaConsultarPedidos extends JDialog {
 					panel_1.add(lblNewLabel_2);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					panel_1.add(comboBox);
+					txtCliente = new JTextField();
+					txtCliente.setEditable(false);
+					panel_1.add(txtCliente);
+					txtCliente.setColumns(10);
 				}
 			}
 		}

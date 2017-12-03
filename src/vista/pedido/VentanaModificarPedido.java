@@ -27,10 +27,17 @@ public class VentanaModificarPedido extends JDialog {
 	private JTextField textField_1;
 	ModeloNuevosPedidos miModeloNuevosPedidos;
 	Controlador controlador;
+	ComboNuevoProducto comboNuevoProducto;
+	ComboPedido comboPedido;
 	private JTextField txtDescuento;
+	private JTextField textField_2;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
+	}
+	
+	public void setComboNuevoProducto(ComboNuevoProducto comboNuevoProducto) {
+		this.comboNuevoProducto = comboNuevoProducto;
 	}
 
 	/**
@@ -50,7 +57,7 @@ public class VentanaModificarPedido extends JDialog {
 	 * Create the dialog.
 	 */
 	public VentanaModificarPedido() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 592, 300);
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel panel = new JPanel();
@@ -68,8 +75,8 @@ public class VentanaModificarPedido extends JDialog {
 					panel_1.add(lblNewLabel);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					panel_1.add(comboBox);
+					 comboPedido = new ComboPedido();
+					 panel_1.add(comboPedido);
 				}
 				{
 					JLabel lblFecha = new JLabel("Fecha");
@@ -85,8 +92,9 @@ public class VentanaModificarPedido extends JDialog {
 					panel_1.add(lblC);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					panel_1.add(comboBox);
+					textField_2 = new JTextField();
+					panel_1.add(textField_2);
+					textField_2.setColumns(10);
 				}
 				{
 					JLabel lblNewLabel_1 = new JLabel("Descuento");
@@ -112,8 +120,8 @@ public class VentanaModificarPedido extends JDialog {
 					panel_1.add(lblProducto);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					panel_1.add(comboBox);
+					 comboNuevoProducto = new ComboNuevoProducto();
+					 panel_1.add(comboNuevoProducto);
 				}
 				{
 					JLabel lblCantidad = new JLabel("Cantidad");

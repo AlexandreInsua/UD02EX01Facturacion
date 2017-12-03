@@ -15,7 +15,6 @@ public class ModeloNuevosPedidos extends AbstractTableModel {
 	ArrayList<String> nombresColumnas;
 	ArrayList<AuxNuevoPedido> datos;
 
-		String importe = "Importe";
 
 	public ModeloNuevosPedidos() {
 		nombresColumnas = new ArrayList<>();
@@ -28,8 +27,7 @@ public class ModeloNuevosPedidos extends AbstractTableModel {
 	
 		datos = new ArrayList<AuxNuevoPedido>();
 		
-	
-		// cargarPedido();
+		 cargarPedido();
 	}
 
 	public void cargarPedido() {
@@ -63,7 +61,7 @@ public class ModeloNuevosPedidos extends AbstractTableModel {
 		case 3:
 			return miNuevoProducto.getPrecioVenta();
 		case 4:
-			return importe;
+			return miNuevoProducto.getImporte();
 
 		}
 		return miNuevoProducto;

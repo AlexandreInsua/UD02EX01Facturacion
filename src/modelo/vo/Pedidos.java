@@ -60,4 +60,11 @@ public class Pedidos {
 		this.nifCliente = nifCliente;
 	}
 
+	@Override
+	public String toString() {
+		return numPedido + "";
+	}
+	
+	
+
 }
