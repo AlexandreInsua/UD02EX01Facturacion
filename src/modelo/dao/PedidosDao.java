@@ -14,6 +14,7 @@ import modelo.vo.LineasPedido;
 import modelo.vo.Pedidos;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
+import vista.AuxListadoPedidos;
 import vista.AuxMinimos;
 import vista.AuxNuevoPedido;
 
@@ -247,11 +248,61 @@ public class PedidosDao {
 
 	} // fin cargaId
 
-	
+	public static ArrayList<AuxListadoPedidos> listarPedidos(int codigo) {
+		// conexion
+		Conexion conexion = new Conexion();
+
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
+
+		AuxListadoPedidos minimo = null;
+		ArrayList<AuxListadoPedidos> lista = new ArrayList<AuxListadoPedidos>();
+
+		// limpar dados
+		lista.clear();
+		
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = " SELECT peFecha, clNombre, pdId, pdNombre, pdPrecioVenta, liCantidad,"
+			   + " (pdPrecioVenta * liCantidad) AS 'Importe'"
+			   + " FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid"
+			   + " where liNumPedido=" + codigo ;
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				minimo = new AuxListadoPedidos();
+				minimo.setFechaPedido(resultado.getDate("peFecha"));
+				minimo.setNombreCliente(resultado.getString("clNombre"));
+				minimo.setCodProducto(resultado.getShort("pdId"));
+				minimo.setProducto(resultado.getString("pdNombre"));
+				minimo.setPrecioVenta(resultado.getFloat("pdPrecioVenta"));
+				minimo.setCantidad(resultado.getInt("liCantidad"));
+				minimo.setImporte(resultado.getFloat("Importe"));
+				
+				lista.add(minimo);
+
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		// System.out.println(lista.get(3));
+		return lista;
+
+	} // fin 
+
 
 	
 
-	/*public static void main(String[] args) {
-		cargarClientes();
-	}*/
+	
+
+//	public static void main(String[] args) {
+		//listarPedidos(2);
+	//}
 }

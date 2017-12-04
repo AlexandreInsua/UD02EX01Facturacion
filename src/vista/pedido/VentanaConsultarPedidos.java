@@ -15,17 +15,26 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
+import modelo.dao.PedidosDao;
+import modelo.vo.Pedidos;
+import vista.AuxListadoPedidos;
 import vista.ModeloNuevosPedidos;
 
 import javax.swing.border.TitledBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.awt.event.ItemEvent;
 
 public class VentanaConsultarPedidos extends JDialog {
-	private JTextField textField;
+	private JTextField txtFecha;
 	private JTable table;
 	ModeloNuevosPedidos miModeloNuevosPedidos;
 	Controlador controlador;
 	ComboPedido comboPedido;
 	private JTextField txtCliente;
+	JScrollPane scrollPane;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -68,18 +77,36 @@ public class VentanaConsultarPedidos extends JDialog {
 				}
 				{
 					comboPedido = new ComboPedido();
+					comboPedido.addItemListener(new ItemListener() {
+						public void itemStateChanged(ItemEvent arg0) {
+							Pedidos comboSeleccionado = (Pedidos) comboPedido.getSelectedItem();
+							miModeloNuevosPedidos.cargarPedido(comboSeleccionado.getNumPedido());
+							table = new JTable(miModeloNuevosPedidos);
+							scrollPane.setViewportView(table);
+							ArrayList<AuxListadoPedidos> listado = controlador.listarPedidos(comboSeleccionado.getNumPedido());
+							String nombreCliente=listado.get(0).getNombreCliente();
+							txtCliente.setText(nombreCliente);
+							txtFecha.setText(listado.get(0).getFechaPedido()+"");
+							
+						}
+					});
+					
+					
 					 panel_1.add(comboPedido);
+					
 				}
 				{
 					JLabel lblNewLabel_1 = new JLabel("Fecha");
 					panel_1.add(lblNewLabel_1);
 				}
 				{
-					textField = new JTextField();
-					textField.setEditable(false);
-					textField.setText("");
-					panel_1.add(textField);
-					textField.setColumns(10);
+					txtFecha = new JTextField();
+					txtFecha.setEditable(false);
+					txtFecha.setText("");
+					panel_1.add(txtFecha);
+					txtFecha.setColumns(10);
+					
+					
 				}
 				{
 					JLabel lblNewLabel_2 = new JLabel("Cliente");
@@ -90,6 +117,7 @@ public class VentanaConsultarPedidos extends JDialog {
 					txtCliente.setEditable(false);
 					panel_1.add(txtCliente);
 					txtCliente.setColumns(10);
+					
 				}
 			}
 		}
@@ -98,12 +126,20 @@ public class VentanaConsultarPedidos extends JDialog {
 			getContentPane().add(panel, BorderLayout.CENTER);
 			panel.setLayout(new BorderLayout(0, 0));
 			{
-				JScrollPane scrollPane = new JScrollPane();
+				scrollPane = new JScrollPane();
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					miModeloNuevosPedidos = new ModeloNuevosPedidos();
+					Pedidos pedido = (Pedidos) comboPedido.getSelectedItem();
+					miModeloNuevosPedidos.cargarPedido(pedido.getNumPedido());
 					table = new JTable(miModeloNuevosPedidos);
 					scrollPane.setViewportView(table);
+					ArrayList<AuxListadoPedidos> listado = controlador.listarPedidos(pedido.getNumPedido());
+					String nombreCliente=listado.get(0).getNombreCliente();
+					txtCliente.setText(nombreCliente);
+					txtFecha.setText(listado.get(0).getFechaPedido()+"");
+					
+					
 				}
 			}
 		}

@@ -13,7 +13,7 @@ import modelo.vo.Proveedor;
 public class ModeloNuevosPedidos extends AbstractTableModel {
 	private static final Object String = null;
 	ArrayList<String> nombresColumnas;
-	ArrayList<AuxNuevoPedido> datos;
+	ArrayList<AuxListadoPedidos> datos;
 
 
 	public ModeloNuevosPedidos() {
@@ -25,15 +25,16 @@ public class ModeloNuevosPedidos extends AbstractTableModel {
 		nombresColumnas.add("Precio");
 		nombresColumnas.add("Importe");
 	
-		datos = new ArrayList<AuxNuevoPedido>();
+		datos = new ArrayList<AuxListadoPedidos>();
 		
-		 cargarPedido();
 	}
 
-	public void cargarPedido() {
+	public void cargarPedido(int codigo) {
 		Controlador controlador = new Controlador();
-		datos = controlador.cargarPedido();
+		datos = controlador.listarPedidos(codigo);
 	}
+	
+	
 
 	@Override
 	public int getColumnCount() {
@@ -48,12 +49,11 @@ public class ModeloNuevosPedidos extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int fila, int columna) {
 
-		AuxNuevoPedido miNuevoProducto = datos.get(fila);
-		
+		AuxListadoPedidos miNuevoProducto = datos.get(fila);
 
 		switch (columna) {
 		case 0:
-			return miNuevoProducto.getCodigo();
+			return miNuevoProducto.getCodProducto();
 		case 1:
 			return miNuevoProducto.getProducto();
 		case 2:

@@ -13,6 +13,7 @@ import modelo.vo.Proveedor;
 import modeloLogica.Logica;
 import vista.AuxCrearFactura;	
 import vista.AuxFacturasMes;
+import vista.AuxListadoPedidos;
 import vista.AuxMinimos;
 import vista.AuxNuevoPedido;
 import vista.AuxTablaBeneficios;
@@ -266,6 +267,20 @@ public class Controlador {
 
 	public ArrayList<Pedidos> cargarId() {
 		return  PedidosDao.cargarId();
+	}
+
+	public static ArrayList<AuxListadoPedidos> listarPedidos(int codigo) {
+		return PedidosDao.listarPedidos(codigo);
+	}
+
+	public static void eliminarPedido() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void eliminarLineaPedido() {
+		// TODO Auto-generated method stub
+		
 	}
 
 
