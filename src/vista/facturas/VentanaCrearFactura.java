@@ -37,6 +37,7 @@ public class VentanaCrearFactura extends JDialog {
 	private JTextField textTotal;
 	ModeloCrearFactura miModeloCrearFactura;
 	Controlador controlador;
+	private JTextField textCalle;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -118,6 +119,11 @@ public class VentanaCrearFactura extends JDialog {
 					textNombre = new JTextField();
 					panel_1.add(textNombre);
 					textNombre.setColumns(10);
+				}
+				{
+					textCalle = new JTextField();
+					panel_1.add(textCalle);
+					textCalle.setColumns(10);
 				}
 				{
 					textCodPostal = new JTextField();

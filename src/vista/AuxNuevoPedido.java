@@ -1,24 +1,40 @@
 package vista;
 
+import java.sql.Date;
+
 public class AuxNuevoPedido {
 	
 	
 	// Atributos
-		private short codigo;
+		private int codigoProd;
 		private String producto;
 		private int cantidad;		
 		private float precioVenta;
 		private float importe;
+		private Date fecha;
+		private String nombreCliente;
+		private double descuento;
+		private int codigoPedido;
+		private int codigoLinea;
 		
 		
-		public AuxNuevoPedido(short codigo, String producto, int cantidad, float precioVenta, float importe) {
+	
+
+		public AuxNuevoPedido(int codigoProd, String producto, int cantidad2, float precioVenta, float importe,
+				Date fecha, String nombreCliente, double descuento, int codigoPedido, int codigoLinea) {
 			super();
-			this.codigo = codigo;
+			this.codigoProd = codigoProd;
 			this.producto = producto;
-			this.cantidad = cantidad;
+			this.cantidad = cantidad2;
 			this.precioVenta = precioVenta;
 			this.importe = importe;
+			this.fecha = fecha;
+			this.nombreCliente = nombreCliente;
+			this.descuento = descuento;
+			this.codigoPedido = codigoPedido;
+			this.codigoLinea = codigoLinea;
 		}
+
 
 
 		public AuxNuevoPedido() {
@@ -29,13 +45,13 @@ public class AuxNuevoPedido {
 
 		
 		//Getters and setters
-		public short getCodigo() {
-			return codigo;
+		public int getCodigo() {
+			return codigoProd;
 		}
 
 
 		public void setCodigo(short codigo) {
-			this.codigo = codigo;
+			this.codigoProd = codigo;
 		}
 
 
@@ -78,15 +94,82 @@ public class AuxNuevoPedido {
 		}
 
 
-		
-		//To String
-		
-		
+
+		public int getCodigoProd() {
+			return codigoProd;
+		}
+
+
+
+		public void setCodigoProd(short codigoProd) {
+			this.codigoProd = codigoProd;
+		}
+
+
+
+		public Date getFecha() {
+			return fecha;
+		}
+
+
+
+		public void setFecha(Date fecha) {
+			this.fecha = fecha;
+		}
+
+
+
+		public String getNombreCliente() {
+			return nombreCliente;
+		}
+
+
+
+		public void setNombreCliente(String nombreCliente) {
+			this.nombreCliente = nombreCliente;
+		}
+
+
+
+		public double getDescuento() {
+			return descuento;
+		}
+
+
+
+		public void setDescuento(double descuento) {
+			this.descuento = descuento;
+		}
+
+
+
+		public int getCodigoPedido() {
+			return codigoPedido;
+		}
+
+
+
+		public void setCodigoPedido(int codigoPedido) {
+			this.codigoPedido = codigoPedido;
+		}
+
+
+
+		public int getCodigoLinea() {
+			return codigoLinea;
+		}
+
+
+
+		public void setCodigoLinea(int codigoLinea) {
+			this.codigoLinea = codigoLinea;
+		}
+
 
 
 		@Override
 		public String toString() {
-			return "AuxNuevoProducto [codigo=" + codigo + ", producto=" + producto + ", cantidad=" + cantidad
+			return "AuxNuevoProducto [codigo=" + codigoProd + ", producto=" + producto + ", cantidad=" + cantidad
 					+ ", precioVenta=" + precioVenta + "]";
 		}
 		

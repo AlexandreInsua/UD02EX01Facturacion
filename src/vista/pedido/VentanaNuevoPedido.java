@@ -20,7 +20,10 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
@@ -155,27 +158,46 @@ public class VentanaNuevoPedido extends JDialog {
 				JButton btnAnadir = new JButton("A\u00F1adir");
 				btnAnadir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						short id = Short.parseShort(textNumPedido.getText());
-						Productos producto= (Productos)comboNuevoProducto.getSelectedItem();
-						String nombre = producto.getProducto();
-						float precioVenta = producto.getPrecioVenta();
-						float cantidad = precioVenta*Float.parseFloat(txtCantidad.getText());
-						 AuxNuevoPedido datosLinea=new AuxNuevoPedido(id,nombre,Integer.parseInt(txtCantidad.getText()),precioVenta,cantidad);
-						 
-						 LineasPedido nuevaLinea = new LineasPedido(id,producto.getCodigo(),(int)cantidad);
-						try {
-							controlador.agregarLineaPedido(datosLinea, nuevaLinea);
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						
+						
+						int id = 2;
+						String descripcion=comboNuevoProducto.getSelectedItem() + "";
+						int cantidad = Integer.parseInt(txtCantidad.getText());
+						float precioVenta = 120.00f;
+						float importe = 120.00f;
+						Date fecha = ParseFecha(textFecha.getText()); 
+						String nombreCliente = comboClientes.getSelectedItem() + "";
+						double descuento = 3.00;
+						int codPedido = Integer.parseInt(PedidosDao.contarPedidos());
+						int codLinea = 11;
+						
+						AuxNuevoPedido datosLinea=new AuxNuevoPedido(id,descripcion,cantidad,precioVenta,importe,fecha,nombreCliente,descuento,codPedido,codLinea);
 					}
 				});
 				panel.add(btnAnadir);
 				//controlador.crearPedidoNuevo();
 			}
+			
+			 
 	
 		}
+		
 	}
+	public static Date ParseFecha(String fecha){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDate = null;
+        try {
+            fechaDate =cParseFecha( formato.parse(fecha));
+        } 
+        catch (ParseException ex) 
+        {
+            System.out.println(ex);
+        }
+        return fechaDate;
+        
+        }
+	public static java.sql.Date cParseFecha(java.util.Date date) {
+        return new java.sql.Date(date.getTime());
+        }
 
 }

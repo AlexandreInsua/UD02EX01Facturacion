@@ -261,8 +261,8 @@ public class Controlador {
 		return PedidosDao.contarPedidos();
 	}
 
-	public void agregarLineaPedido(AuxNuevoPedido datosLinea, LineasPedido nuevaLinea) throws SQLException {
-		PedidosDao.agregarLineaPedido(datosLinea, nuevaLinea);
+	public void agregarLineaPedido(AuxNuevoPedido datosLinea) throws SQLException {
+		PedidosDao.agregarLineaPedido(datosLinea);
 	}
 
 	public ArrayList<Pedidos> cargarId() {

@@ -60,47 +60,80 @@ public class PedidosDao {
 
 	} // fin cargaProveedor
 
-	public static  ArrayList<Clientes> cargarClientes(){
+	public static ArrayList<Clientes> cargarClientes() {
 		// conexion
-				Conexion conexion = new Conexion();
+		Conexion conexion = new Conexion();
 
-				// Perapramos a consulta de actualizacion
-				PreparedStatement ps = null;
-				ResultSet resultado = null;
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
 
-				Clientes minimo = null;
-				ArrayList<Clientes> lista = new ArrayList<Clientes>();
+		Clientes minimo = null;
+		ArrayList<Clientes> lista = new ArrayList<Clientes>();
 
-				// limpar dados
-				lista.clear();
+		// limpar dados
+		lista.clear();
 
-				// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-				String consulta = "SELECT clNombre FROM clientes";
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = "SELECT clNombre FROM clientes";
 
-				// Conecta e executa a sentenza
-				try {
-					ps = conexion.getConexion().prepareStatement(consulta);
-					resultado = ps.executeQuery();
-					while (resultado.next()) {
-						minimo = new Clientes();
-						minimo.setNombre(resultado.getString("clNombre"));
-						lista.add(minimo);
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				minimo = new Clientes();
+				minimo.setNombre(resultado.getString("clNombre"));
+				lista.add(minimo);
 
-					}
-					ps.close();
-					resultado.close();
-					conexion.desconectar();
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
 
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog(null, "Error, non se conectó");
-					System.out.println(e);
-				}
-				 //System.out.println(lista);
-				return lista;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		// System.out.println(lista);
+		return lista;
 
-			} // fin cargaClientes
-		
+	} // fin cargaClientes
+
+	public static String obtenerDniCliente(String nombre) {
+		// conexion
+		Conexion conexion = new Conexion();
+
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
+
+		String dni = null;
 	
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = "SELECT clNif FROM clientes Where clNombre =" + nombre;
+
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				dni=(resultado.getString("clNif"));
+				
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		// System.out.println(lista);
+		return dni;
+
+	} // fin cargaClientes
+
 	public static String contarPedidos() {
 		// conexion
 		Conexion conexion = new Conexion();
@@ -130,82 +163,85 @@ public class PedidosDao {
 			JOptionPane.showMessageDialog(null, "Error, non se conectó");
 			System.out.println(e);
 		}
-		 //System.out.println(ultimoPedido);
+		// System.out.println(ultimoPedido);
 		ultimoPedido++;
 		String ultimo = ultimoPedido + "";
 		return ultimo;
 
-	} // fin 
+	} // fin
 
 	public static ArrayList<AuxNuevoPedido> cargarPedido() {
 		// conexion
-				Conexion conexion = new Conexion();
+		Conexion conexion = new Conexion();
 
-				// Perapramos a consulta de actualizacion
-				PreparedStatement ps = null;
-				ResultSet resultado = null;
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
 
-				AuxNuevoPedido minimo = null;
-				ArrayList<AuxNuevoPedido> lista = new ArrayList<AuxNuevoPedido>();
+		AuxNuevoPedido minimo = null;
+		ArrayList<AuxNuevoPedido> lista = new ArrayList<AuxNuevoPedido>();
 
-				// limpar dados
-				lista.clear();
+		// limpar dados
+		lista.clear();
 
-				int numPedido = Integer.parseInt(contarPedidos());
-				
-				// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-				String consulta = "select liIdProducto, pdNombre, liCantidad, pdPrecioVenta, liCantidad*pdPrecioVenta as precio"
-				 				+" from lineaspedido inner join productos ON liIdProducto=pdId"
-				 				+" where liNumPedido="+numPedido;
-				// Conecta e executa a sentenza
-				try {
-					ps = conexion.getConexion().prepareStatement(consulta);
-					resultado = ps.executeQuery();
-					while (resultado.next()) {
-						minimo = new AuxNuevoPedido();
-						minimo.setCodigo(resultado.getShort("liIdProducto"));
-						minimo.setProducto(resultado.getString("pdNombre"));
-						minimo.setCantidad(resultado.getInt("liCantidad"));
-						minimo.setPrecioVenta(resultado.getFloat("pdPrecioVenta"));
-						minimo.setImporte(resultado.getFloat("precio"));
-						lista.add(minimo);
+		int numPedido = Integer.parseInt(contarPedidos());
 
-					}
-					ps.close();
-					resultado.close();
-					conexion.desconectar();
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = "select liIdProducto, pdNombre, liCantidad, pdPrecioVenta, liCantidad*pdPrecioVenta as precio"
+				+ " from lineaspedido inner join productos ON liIdProducto=pdId" + " where liNumPedido=" + numPedido;
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				minimo = new AuxNuevoPedido();
+				minimo.setCodigo(resultado.getShort("liIdProducto"));
+				minimo.setProducto(resultado.getString("pdNombre"));
+				minimo.setCantidad(resultado.getInt("liCantidad"));
+				minimo.setPrecioVenta(resultado.getFloat("pdPrecioVenta"));
+				minimo.setImporte(resultado.getFloat("precio"));
+				lista.add(minimo);
 
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog(null, "Error, non se conectó");
-					System.out.println(e);
-				}
-				// System.out.println(lista);
-				return lista;
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
 
-			} // fin 
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		// System.out.println(lista);
+		return lista;
 
-	public static void agregarLineaPedido(AuxNuevoPedido datosLinea, LineasPedido nuevaLinea) throws SQLException {
-		
+	} // fin
+
+	public static void agregarLineaPedido(AuxNuevoPedido datosLinea) throws SQLException {
+
 		Conexion conexion = new Conexion();
 		Connection conn = conexion.getConexion();
 		// Perapramos a consulta de actualizacion
 		PreparedStatement ps = null;
 		ResultSet resultado = null;
 
-		String consulta = "INSERT INTO lineaspedido (liNumPedido, liIdProducto, liCantidad)"
-				+" VALUES("+nuevaLinea.getNumPedido()+","+nuevaLinea.getIdProducto()+","+nuevaLinea.getCantidad()+")";
+		String consulta1 = "INSERT INTO pedidos (peNumPedido, peFecha, peNifCliente,peDescuento)" + " VALUES("
+				+ datosLinea.getCodigoPedido() + "," + datosLinea.getFecha() + "," + obtenerDniCliente(datosLinea.getNombreCliente()) + "," + datosLinea.getDescuento() +")";
+		String consulta2 = "INSERT INTO lineaspedido (liNumPedido, liIdProducto, liCantidad)" + " VALUES("
+				+ datosLinea.getCodigoPedido() + "," + datosLinea.getCodigoProd() + "," + datosLinea.getCantidad() + ")";
 
-			// Conecta e executa a sentenza
-			try {
-				conn.setAutoCommit(false);
-				ps = conn.prepareStatement(consulta);
-				ps.executeUpdate();
-			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(null, "Error, ao insertar datos");
-				System.out.println(e);
-				conn.rollback();
-			}
-		
+		// Conecta e executa a sentenza
+		try {
+			conn.setAutoCommit(false);
+			ps = conn.prepareStatement(consulta1);
+			ps.executeUpdate();
+			ps = conn.prepareStatement(consulta2);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, ao insertar datos");
+			System.out.println(e);
+			conn.rollback();
+		}
+
 	}
 
 	public static ArrayList<Pedidos> cargarId() {
@@ -243,7 +279,7 @@ public class PedidosDao {
 			JOptionPane.showMessageDialog(null, "Error, non se conectó");
 			System.out.println(e);
 		}
-		 //System.out.println(lista);
+		// System.out.println(lista);
 		return lista;
 
 	} // fin cargaId
@@ -261,12 +297,12 @@ public class PedidosDao {
 
 		// limpar dados
 		lista.clear();
-		
+
 		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
 		String consulta = " SELECT peFecha, clNombre, pdId, pdNombre, pdPrecioVenta, liCantidad,"
-			   + " (pdPrecioVenta * liCantidad) AS 'Importe'"
-			   + " FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid"
-			   + " where liNumPedido=" + codigo ;
+				+ " (pdPrecioVenta * liCantidad) AS 'Importe'"
+				+ " FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid"
+				+ " where liNumPedido=" + codigo;
 		// Conecta e executa a sentenza
 		try {
 			ps = conexion.getConexion().prepareStatement(consulta);
@@ -280,7 +316,7 @@ public class PedidosDao {
 				minimo.setPrecioVenta(resultado.getFloat("pdPrecioVenta"));
 				minimo.setCantidad(resultado.getInt("liCantidad"));
 				minimo.setImporte(resultado.getFloat("Importe"));
-				
+
 				lista.add(minimo);
 
 			}
@@ -295,14 +331,9 @@ public class PedidosDao {
 		// System.out.println(lista.get(3));
 		return lista;
 
-	} // fin 
+	} // fin
 
-
-	
-
-	
-
-//	public static void main(String[] args) {
-		//listarPedidos(2);
-	//}
+	// public static void main(String[] args) {
+	// listarPedidos(2);
+	// }
 }
