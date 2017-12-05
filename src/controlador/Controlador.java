@@ -273,13 +273,13 @@ public class Controlador {
 		return PedidosDao.listarPedidos(codigo);
 	}
 
-	public static void eliminarPedido() {
-		// TODO Auto-generated method stub
+	public static void eliminarPedido(int codigo) {
+		PedidosDao.eliminarPedido(codigo);
 		
 	}
 
-	public static void eliminarLineaPedido() {
-		// TODO Auto-generated method stub
+	public static void eliminarLineaPedido(int codigo, int linea) {
+		PedidosDao.eliminarLineaPedido(codigo,linea);
 		
 	}
 

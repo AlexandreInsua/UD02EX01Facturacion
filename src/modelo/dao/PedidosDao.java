@@ -336,4 +336,59 @@ public class PedidosDao {
 	// public static void main(String[] args) {
 	// listarPedidos(2);
 	// }
+
+
+public static void eliminarPedido(int codigo) {
+	Conexion conexion = new Conexion();
+	// Perapramos a consulta de actualizacion
+	PreparedStatement ps = null;
+
+	// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+
+	String consulta = " DELETE * FROM lineasPedido where liNumPedido=" + codigo;
+	String consulta2 = " DELETE * FROM pedidos where peNumPedido=" + codigo;
+	// Conecta e executa a sentenza
+	try {
+		ps = conexion.getConexion().prepareStatement(consulta);
+		ps.execute();
+		ps = conexion.getConexion().prepareStatement(consulta2);
+		ps.execute();
+
+		ps.close();
+
+		conexion.desconectar();
+
+	} catch (SQLException e) {
+		JOptionPane.showMessageDialog(null, "Error, non se conectó");
+		System.out.println(e);
+	}
+
 }
+
+public static void eliminarLineaPedido(int codigo, int linea) {
+	Conexion conexion = new Conexion();
+	// Perapramos a consulta de actualizacion
+	PreparedStatement ps = null;
+
+	// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+
+	String consulta = " DELETE * FROM lineasPedido where liNumPedido=" + codigo + " and liId=" + linea ;
+
+	// Conecta e executa a sentenza
+	try {
+		ps = conexion.getConexion().prepareStatement(consulta);
+		ps.execute();
+	
+
+		ps.close();
+
+		conexion.desconectar();
+
+	} catch (SQLException e) {
+		JOptionPane.showMessageDialog(null, "Error, non se conectó");
+		System.out.println(e);
+	}
+
+}
+}
+

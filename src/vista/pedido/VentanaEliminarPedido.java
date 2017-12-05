@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
 import modelo.dao.PedidosDao;
+import modelo.vo.LineasPedido;
 import modelo.vo.Pedidos;
 import vista.AuxListadoPedidos;
 import vista.ModeloNuevosPedidos;
@@ -26,6 +27,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.awt.event.ItemEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VentanaEliminarPedido extends JDialog {
 	private JTextField txtFecha;
@@ -143,18 +146,23 @@ public class VentanaEliminarPedido extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnEliminar = new JButton("Eliminar");
-				btnEliminar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				btnEliminar.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						Pedidos comboSeleccionado = (Pedidos) comboPedido.getSelectedItem();
+						LineasPedido comboSeleccionado2 = (LineasPedido) comboPedido.getSelectedItem();
 
-						if (table.getSelectedRow() == 0) {
-							Controlador.eliminarPedido();
+						if (table.getSelectedRow() == -1) {
+
+							Controlador.eliminarPedido(comboSeleccionado.getNumPedido());
+
 						} else {
-							Controlador.eliminarLineaPedido();
+
+
 						}
-
 					}
-
 				});
+
 				buttonPane.add(btnEliminar);
 			}
 			{
