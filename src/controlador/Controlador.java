@@ -294,7 +294,6 @@ public class Controlador {
 	}
 
 public ArrayList<AuxFacturasClientes> cargarFacturasMes(int mes) {
-		
 		return PedidosDao.cargarFacturasMes(mes);
 	}
 

@@ -9,23 +9,29 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
+import modelo.vo.Clientes;
+import modelo.vo.Pedidos;
 import vista.ModeloFacturasCliente;
 import vista.ModeloFacturasMes;
 import vista.pedido.ComboClientes;
+import vista.pedido.ComboPedido;
 
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class VentanaFacturasCliente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable tableFacturas;
-	ModeloFacturasCliente miModeloFacturasCliente;
+	ModeloFacturasCliente miModeloFacturasClientes;
 	Controlador controlador;
 	ComboClientes comboClientes;
+	JScrollPane scrollPane;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -65,16 +71,31 @@ public class VentanaFacturasCliente extends JDialog {
 			lblNewLabel.setBounds(21, 45, 46, 14);
 			contentPanel.add(lblNewLabel);
 		}
-		
-		comboClientes = new ComboClientes();
-		contentPanel.add(comboClientes);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 70, 414, 148);
 		contentPanel.add(scrollPane);
 		
-		miModeloFacturasCliente = new ModeloFacturasCliente();
-		tableFacturas = new JTable(miModeloFacturasCliente);
+		 comboClientes = new ComboClientes();
+		 comboClientes.addItemListener(new ItemListener() {
+		 	public void itemStateChanged(ItemEvent e) {
+		 		miModeloFacturasClientes = new ModeloFacturasCliente();
+				Clientes comboSeleccionado = (Clientes) comboClientes.getSelectedItem();
+				miModeloFacturasClientes.cargarFacturasClientes(comboSeleccionado.getNombre());
+				tableFacturas = new JTable(miModeloFacturasClientes);
+				scrollPane.setViewportView(tableFacturas);
+		 		
+		 	}
+		 });
+		 comboClientes.setBounds(77, 42, 146, 20);
+		 contentPanel.add(comboClientes);
+		
+	
+		
+		
+		miModeloFacturasClientes = new ModeloFacturasCliente();
+		Clientes comboSeleccionado = (Clientes) comboClientes.getSelectedItem();
+		miModeloFacturasClientes.cargarFacturasClientes(comboSeleccionado.getNombre());
+		tableFacturas = new JTable(miModeloFacturasClientes);
 		scrollPane.setViewportView(tableFacturas);
 		{
 			JPanel buttonPane = new JPanel();

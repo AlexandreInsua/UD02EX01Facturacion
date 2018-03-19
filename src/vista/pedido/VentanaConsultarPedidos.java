@@ -83,7 +83,6 @@ public class VentanaConsultarPedidos extends JDialog {
 							miModeloNuevosPedidos.cargarPedido(comboSeleccionado.getNumPedido());
 							table = new JTable(miModeloNuevosPedidos);
 							scrollPane.setViewportView(table);
-							System.out.println(comboSeleccionado.getNumPedido());
 							ArrayList<AuxListadoPedidos> listado = controlador.listarPedidos(comboSeleccionado.getNumPedido());
 							String nombreCliente=listado.get(0).getNombreCliente();
 							txtCliente.setText(nombreCliente);

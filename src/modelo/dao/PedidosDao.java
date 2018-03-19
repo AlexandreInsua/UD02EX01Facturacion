@@ -397,11 +397,8 @@ public class PedidosDao {
 		// Perapramos a consulta de actualizacion
 		PreparedStatement ps = null;
 		ResultSet resultado = null;
-		System.out.println(pedido.getFechaPedido());
 		java.util.Date fechaJAVA = ParseFecha(pedido.getFechaPedido());
-		System.out.println(fechaJAVA);
 		java.sql.Date fechaSQL = convertirJavaDateASqlDate(fechaJAVA);
-		System.out.println(fechaSQL);
 		String consulta1 = "INSERT INTO pedidos (peNumPedido, peFecha, peNifCliente,peDescuento)" + " VALUES("
 				+ pedido.getNumPedido() + ",'" + fechaSQL + "','" + pedido.getNifCliente() + "' ,"
 				+ pedido.getDescuento() + ")";
@@ -445,7 +442,7 @@ public class PedidosDao {
 	}
 
 	public static java.sql.Date convertirJavaDateASqlDate(java.util.Date date) {
-		System.out.println("resultado de transformacion:: " + date.getTime());
+	
 		return new java.sql.Date(date.getTime());
 	}
 
@@ -461,15 +458,15 @@ public class PedidosDao {
 		ArrayList<AuxFacturasClientes> lista = new ArrayList<AuxFacturasClientes>();
 
 		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-		String consulta = "SELECT peNumPedido, peFecha, sum(pdPrecioVenta)  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where clNombre='" + nombre + "' GROUP BY peNumPedido ";
+		String consulta = "SELECT peNumPedido, peFecha, sum(pdPrecioVenta) as pdPrecioVenta  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where clNombre='" + nombre + "' GROUP BY peNumPedido ";
 		// Conecta e executa a sentenza
 		try {
 			ps = conexion.getConexion().prepareStatement(consulta);
 			resultado = ps.executeQuery();
 			while (resultado.next()) {
 				facturas = new AuxFacturasClientes();
-				facturas.setCodPedido(resultado.getShort("pdId"));
-				facturas.setFecha(resultado.getDate("pdFecha"));
+				facturas.setCodPedido(resultado.getInt("peNumPedido"));
+				facturas.setFecha(resultado.getDate("peFecha"));
 				facturas.setCliente(nombre);
 				facturas.setTotalPedido(resultado.getDouble("pdPrecioVenta"));
 				facturas.setTotalIva(facturas.getTotalPedido()*0.21);
@@ -490,6 +487,8 @@ public class PedidosDao {
 	}
 	
 	public static ArrayList<AuxFacturasClientes> cargarFacturasMes (int mes) {
+		
+		System.out.println("Estoy en pedidos dao");
 		// conexion
 		Conexion conexion = new Conexion();
 
@@ -501,21 +500,23 @@ public class PedidosDao {
 		ArrayList<AuxFacturasClientes> lista = new ArrayList<AuxFacturasClientes>();
 
 		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-		String consulta = "SELECT peNumPedido, peFecha, clNombre, sum(pdPrecioVenta)  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where MONTH(peFecha)='" + mes + "' GROUP BY peNumPedido ";
+		String consulta = "SELECT peNumPedido, peFecha, clNombre, sum(pdPrecioVenta) as pdPrecioVenta  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where MONTH(peFecha)='" + mes + "' GROUP BY peNumPedido ";
 		// Conecta e executa a sentenza
 		try {
 			ps = conexion.getConexion().prepareStatement(consulta);
 			resultado = ps.executeQuery();
+		
 			while (resultado.next()) {
 				facturas = new AuxFacturasClientes();
-				facturas.setCodPedido(resultado.getShort("pdId"));
+				facturas.setCodPedido(resultado.getShort("peNumPedido"));
 				facturas.setCliente(resultado.getString("clNombre"));
-				facturas.setFecha(resultado.getDate("pdFecha"));
+				facturas.setFecha(resultado.getDate("peFecha"));
 				facturas.setTotalPedido(resultado.getDouble("pdPrecioVenta"));
 				facturas.setTotalIva(facturas.getTotalPedido()*0.21);
 				facturas.setTotal(facturas.getTotalPedido() + facturas.getTotalIva());
 				
 				lista.add(facturas);
+				
 
 			}
 			ps.close();

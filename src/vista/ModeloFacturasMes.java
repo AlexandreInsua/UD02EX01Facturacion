@@ -27,7 +27,7 @@ public class ModeloFacturasMes extends AbstractTableModel {
 		// cargarPedido();
 	}
 
-	public ArrayList<AuxFacturasClientes> cargarFacturasClientes(int mes) {
+	public ArrayList<AuxFacturasClientes> cargarFacturasMes(int mes) {
 		Controlador controlador = new Controlador();
 		return datos = controlador.cargarFacturasMes(mes);
 	}
