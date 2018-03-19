@@ -3,6 +3,7 @@ package vista.pedido;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -18,6 +19,7 @@ import controlador.Controlador;
 import modelo.dao.PedidosDao;
 import modelo.vo.LineasPedido;
 import modelo.vo.Pedidos;
+import modelo.vo.Productos;
 import vista.AuxListadoPedidos;
 import vista.ModeloNuevosPedidos;
 
@@ -33,10 +35,10 @@ import java.awt.event.MouseEvent;
 public class VentanaEliminarPedido extends JDialog {
 	private JTextField txtFecha;
 	private JTable table;
+	private JTextField txtCliente;
 	ModeloNuevosPedidos miModeloNuevosPedidos;
 	Controlador controlador;
 	ComboPedido comboPedido;
-	private JTextField txtCliente;
 	JScrollPane scrollPane;
 
 	public void setControlador(Controlador controlador) {
@@ -47,13 +49,13 @@ public class VentanaEliminarPedido extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	/*
-	 * public static void main(String[] args) { try { VentanaConsultarPedidos
-	 * dialog = new VentanaConsultarPedidos();
-	 * dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
-	 * 
-	 *//**
+	
+	/*  public static void main(String[] args) { try { VentanaConsultarPedidos dialog
+	 = new VentanaConsultarPedidos();
+	 dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 */
+	 /**
 		 * Create the dialog.
 		 */
 	public VentanaEliminarPedido() {
@@ -150,15 +152,15 @@ public class VentanaEliminarPedido extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						Pedidos comboSeleccionado = (Pedidos) comboPedido.getSelectedItem();
-						LineasPedido comboSeleccionado2 = (LineasPedido) comboPedido.getSelectedItem();
-
 						if (table.getSelectedRow() == -1) {
 
 							Controlador.eliminarPedido(comboSeleccionado.getNumPedido());
 
 						} else {
-
-
+					 int numLineaPedido = Integer.parseInt(table.getValueAt (table.getSelectedRow(), 0).toString());
+					
+						
+					controlador.eliminarLineaPedido(comboSeleccionado.getNumPedido(), numLineaPedido);	 System.out.println(numLineaPedido);
 						}
 					}
 				});
@@ -167,12 +169,22 @@ public class VentanaEliminarPedido extends JDialog {
 			}
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

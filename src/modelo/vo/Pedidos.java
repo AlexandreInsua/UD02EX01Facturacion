@@ -1,19 +1,21 @@
 package modelo.vo;
 
-import javax.xml.crypto.Data;
+
+
 
 public class Pedidos {
 
 	// Atributos
 	
 	private int numPedido;
-	private Data fechaPedido;
+	private String fechaPedido;
 	private double descuento;
 	private String nifCliente;
+	
 
 	// Constructores
 
-	public Pedidos(int numPedido, Data fechaPedido, double descuento, String nifCliente) {
+	public Pedidos(int numPedido, String fechaPedido, double descuento, String nifCliente) {
 		super();
 		this.numPedido = numPedido;
 		this.fechaPedido = fechaPedido;
@@ -36,11 +38,11 @@ public class Pedidos {
 		this.numPedido = numPedido;
 	}
 
-	public Data getFechaPedido() {
+	public String getFechaPedido() {
 		return fechaPedido;
 	}
 
-	public void setFechaPedido(Data fechaPedido) {
+	public void setFechaPedido(String fechaPedido) {
 		this.fechaPedido = fechaPedido;
 	}
 

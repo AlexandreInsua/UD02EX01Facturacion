@@ -3,7 +3,10 @@ package modelo.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.sql.Connection;
 
 import javax.swing.JOptionPane;
@@ -14,9 +17,9 @@ import modelo.vo.LineasPedido;
 import modelo.vo.Pedidos;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
+import vista.AuxFacturasClientes;
 import vista.AuxListadoPedidos;
 import vista.AuxMinimos;
-import vista.AuxNuevoPedido;
 
 public class PedidosDao {
 
@@ -109,17 +112,17 @@ public class PedidosDao {
 		ResultSet resultado = null;
 
 		String dni = null;
-	
+
 		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-		String consulta = "SELECT clNif FROM clientes Where clNombre =" + nombre;
+		String consulta = "SELECT clNif FROM clientes Where clNombre = '" + nombre + "'";
 
 		// Conecta e executa a sentenza
 		try {
 			ps = conexion.getConexion().prepareStatement(consulta);
 			resultado = ps.executeQuery();
 			while (resultado.next()) {
-				dni=(resultado.getString("clNif"));
-				
+				dni = (resultado.getString("clNif"));
+
 			}
 			ps.close();
 			resultado.close();
@@ -170,79 +173,7 @@ public class PedidosDao {
 
 	} // fin
 
-	public static ArrayList<AuxNuevoPedido> cargarPedido() {
-		// conexion
-		Conexion conexion = new Conexion();
-
-		// Perapramos a consulta de actualizacion
-		PreparedStatement ps = null;
-		ResultSet resultado = null;
-
-		AuxNuevoPedido minimo = null;
-		ArrayList<AuxNuevoPedido> lista = new ArrayList<AuxNuevoPedido>();
-
-		// limpar dados
-		lista.clear();
-
-		int numPedido = Integer.parseInt(contarPedidos());
-
-		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-		String consulta = "select liIdProducto, pdNombre, liCantidad, pdPrecioVenta, liCantidad*pdPrecioVenta as precio"
-				+ " from lineaspedido inner join productos ON liIdProducto=pdId" + " where liNumPedido=" + numPedido;
-		// Conecta e executa a sentenza
-		try {
-			ps = conexion.getConexion().prepareStatement(consulta);
-			resultado = ps.executeQuery();
-			while (resultado.next()) {
-				minimo = new AuxNuevoPedido();
-				minimo.setCodigo(resultado.getShort("liIdProducto"));
-				minimo.setProducto(resultado.getString("pdNombre"));
-				minimo.setCantidad(resultado.getInt("liCantidad"));
-				minimo.setPrecioVenta(resultado.getFloat("pdPrecioVenta"));
-				minimo.setImporte(resultado.getFloat("precio"));
-				lista.add(minimo);
-
-			}
-			ps.close();
-			resultado.close();
-			conexion.desconectar();
-
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error, non se conectó");
-			System.out.println(e);
-		}
-		// System.out.println(lista);
-		return lista;
-
-	} // fin
-
-	public static void agregarLineaPedido(AuxNuevoPedido datosLinea) throws SQLException {
-
-		Conexion conexion = new Conexion();
-		Connection conn = conexion.getConexion();
-		// Perapramos a consulta de actualizacion
-		PreparedStatement ps = null;
-		ResultSet resultado = null;
-
-		String consulta1 = "INSERT INTO pedidos (peNumPedido, peFecha, peNifCliente,peDescuento)" + " VALUES("
-				+ datosLinea.getCodigoPedido() + "," + datosLinea.getFecha() + "," + obtenerDniCliente(datosLinea.getNombreCliente()) + "," + datosLinea.getDescuento() +")";
-		String consulta2 = "INSERT INTO lineaspedido (liNumPedido, liIdProducto, liCantidad)" + " VALUES("
-				+ datosLinea.getCodigoPedido() + "," + datosLinea.getCodigoProd() + "," + datosLinea.getCantidad() + ")";
-
-		// Conecta e executa a sentenza
-		try {
-			conn.setAutoCommit(false);
-			ps = conn.prepareStatement(consulta1);
-			ps.executeUpdate();
-			ps = conn.prepareStatement(consulta2);
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Error, ao insertar datos");
-			System.out.println(e);
-			conn.rollback();
-		}
-
-	}
+	
 
 	public static ArrayList<Pedidos> cargarId() {
 		// conexion
@@ -299,7 +230,7 @@ public class PedidosDao {
 		lista.clear();
 
 		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-		String consulta = " SELECT peFecha, clNombre, pdId, pdNombre, pdPrecioVenta, liCantidad,"
+		String consulta = " SELECT liId, peFecha, clNombre, pdId, pdNombre, pdPrecioVenta, liCantidad,"
 				+ " (pdPrecioVenta * liCantidad) AS 'Importe'"
 				+ " FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid"
 				+ " where liNumPedido=" + codigo;
@@ -311,7 +242,7 @@ public class PedidosDao {
 				minimo = new AuxListadoPedidos();
 				minimo.setFechaPedido(resultado.getDate("peFecha"));
 				minimo.setNombreCliente(resultado.getString("clNombre"));
-				minimo.setCodProducto(resultado.getShort("pdId"));
+				minimo.setNumLinea(resultado.getShort("liId"));
 				minimo.setProducto(resultado.getString("pdNombre"));
 				minimo.setPrecioVenta(resultado.getFloat("pdPrecioVenta"));
 				minimo.setCantidad(resultado.getInt("liCantidad"));
@@ -337,58 +268,265 @@ public class PedidosDao {
 	// listarPedidos(2);
 	// }
 
+	public static int obtenerNumLinea(int codigo, String descripcion) {
+		// conexion
+		Conexion conexion = new Conexion();
 
-public static void eliminarPedido(int codigo) {
-	Conexion conexion = new Conexion();
-	// Perapramos a consulta de actualizacion
-	PreparedStatement ps = null;
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
 
-	// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		int id = 0;
 
-	String consulta = " DELETE * FROM lineasPedido where liNumPedido=" + codigo;
-	String consulta2 = " DELETE * FROM pedidos where peNumPedido=" + codigo;
-	// Conecta e executa a sentenza
-	try {
-		ps = conexion.getConexion().prepareStatement(consulta);
-		ps.execute();
-		ps = conexion.getConexion().prepareStatement(consulta2);
-		ps.execute();
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = "SELECT liId FROM lineasPedido JOIN productos ON pdId=liIdProducto WHERE pdNombre ="
+				+ descripcion + " and liNumPedido =" + codigo;
 
-		ps.close();
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				id = (resultado.getInt("liId"));
 
-		conexion.desconectar();
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
 
-	} catch (SQLException e) {
-		JOptionPane.showMessageDialog(null, "Error, non se conectó");
-		System.out.println(e);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		// System.out.println(lista);
+		return id;
+
+	} // fin cargaId
+
+	public static void eliminarPedido(int codigo) {
+		Conexion conexion = new Conexion();
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+
+		String consulta = " DELETE FROM lineasPedido where liNumPedido=" + codigo;
+		String consulta2 = " DELETE FROM pedidos where peNumPedido=" + codigo;
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			ps.execute();
+			ps = conexion.getConexion().prepareStatement(consulta2);
+			ps.execute();
+
+			ps.close();
+
+			conexion.desconectar();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+
 	}
 
-}
 
-public static void eliminarLineaPedido(int codigo, int linea) {
-	Conexion conexion = new Conexion();
-	// Perapramos a consulta de actualizacion
-	PreparedStatement ps = null;
+	public static void eliminarLineaPedido(int codigo, int numLineaPedido) {
+		Conexion conexion = new Conexion();
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
 
-	// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
 
-	String consulta = " DELETE * FROM lineasPedido where liNumPedido=" + codigo + " and liId=" + linea ;
+		String consulta = " DELETE FROM lineasPedido where liNumPedido=" + codigo + " and liId=" + numLineaPedido;
 
-	// Conecta e executa a sentenza
-	try {
-		ps = conexion.getConexion().prepareStatement(consulta);
-		ps.execute();
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			ps.execute();
+
+			ps.close();
+
+			conexion.desconectar();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+
+	}
+
+	public static Productos recuperarProducto(String descripcion) {
+		// conexion
+		Conexion conexion = new Conexion();
+
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
+
+		Productos producto = null;
+
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = "select pdId, pdPrecioVenta from productos where pdNombre='" + descripcion + "'";
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				producto = new Productos();
+				producto.setCodigo(resultado.getShort("pdId"));
+				producto.setPrecioVenta(resultado.getFloat("pdPrecioVenta"));
+
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		// System.out.println(lista);
+		return producto;
+	}
+
+	public static void introducirNuevoPedido(Pedidos pedido, ArrayList<LineasPedido> lineas) {
+
+		Conexion conexion = new Conexion();
+		Connection conn = conexion.getConexion();
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
+		System.out.println(pedido.getFechaPedido());
+		java.util.Date fechaJAVA = ParseFecha(pedido.getFechaPedido());
+		System.out.println(fechaJAVA);
+		java.sql.Date fechaSQL = convertirJavaDateASqlDate(fechaJAVA);
+		System.out.println(fechaSQL);
+		String consulta1 = "INSERT INTO pedidos (peNumPedido, peFecha, peNifCliente,peDescuento)" + " VALUES("
+				+ pedido.getNumPedido() + ",'" + fechaSQL + "','" + pedido.getNifCliente() + "' ,"
+				+ pedido.getDescuento() + ")";
+
+		// Conecta e executa a sentenza
+		try {
+			conn.setAutoCommit(false);
+			ps = conn.prepareStatement(consulta1);
+			ps.executeUpdate();
+			for (LineasPedido lineasPedido : lineas) {
+				String consulta2 = "INSERT INTO lineaspedido (liNumPedido, liIdProducto, liCantidad)" + " VALUES("
+						+ lineasPedido.getNumPedido() + "," + lineasPedido.getIdProducto() + ","
+						+ lineasPedido.getCantidad() + ")";
+				ps = conn.prepareStatement(consulta2);
+				ps.executeUpdate();
+			}
+			conn.commit();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, ao insertar datos");
+			System.out.println(e);
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	public static Date ParseFecha(String fecNac) {
+		try {
+			// convertir la fecha de un String a un tipo Date
+			SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yyyy");
+			Date fechaNac = (Date) formatoDelTexto.parse(fecNac);
+			return fechaNac;
+		} catch (ParseException pe) {
+			JOptionPane.showMessageDialog(null, "Error al introducir la fecha.", "Información",
+					JOptionPane.INFORMATION_MESSAGE);
+		}
+		return null;
+	}
+
+	public static java.sql.Date convertirJavaDateASqlDate(java.util.Date date) {
+		System.out.println("resultado de transformacion:: " + date.getTime());
+		return new java.sql.Date(date.getTime());
+	}
+
+	public static ArrayList<AuxFacturasClientes> cargarFacturasClientes(String nombre) {
+		// conexion
+		Conexion conexion = new Conexion();
+
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
+
+		AuxFacturasClientes facturas = null;
+		ArrayList<AuxFacturasClientes> lista = new ArrayList<AuxFacturasClientes>();
+
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = "SELECT peNumPedido, peFecha, sum(pdPrecioVenta)  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where clNombre='" + nombre + "' GROUP BY peNumPedido ";
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				facturas = new AuxFacturasClientes();
+				facturas.setCodPedido(resultado.getShort("pdId"));
+				facturas.setFecha(resultado.getDate("pdFecha"));
+				facturas.setCliente(nombre);
+				facturas.setTotalPedido(resultado.getDouble("pdPrecioVenta"));
+				facturas.setTotalIva(facturas.getTotalPedido()*0.21);
+				facturas.setTotal(facturas.getTotalPedido() + facturas.getTotalIva());
+
+				lista.add(facturas);
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		// System.out.println(lista);
+		return lista;
+	}
 	
+	public static ArrayList<AuxFacturasClientes> cargarFacturasMes (int mes) {
+		// conexion
+		Conexion conexion = new Conexion();
 
-		ps.close();
+		// Perapramos a consulta de actualizacion
+		PreparedStatement ps = null;
+		ResultSet resultado = null;
 
-		conexion.desconectar();
+		AuxFacturasClientes facturas = null;
+		ArrayList<AuxFacturasClientes> lista = new ArrayList<AuxFacturasClientes>();
 
-	} catch (SQLException e) {
-		JOptionPane.showMessageDialog(null, "Error, non se conectó");
-		System.out.println(e);
+		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
+		String consulta = "SELECT peNumPedido, peFecha, clNombre, sum(pdPrecioVenta)  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where MONTH(peFecha)='" + mes + "' GROUP BY peNumPedido ";
+		// Conecta e executa a sentenza
+		try {
+			ps = conexion.getConexion().prepareStatement(consulta);
+			resultado = ps.executeQuery();
+			while (resultado.next()) {
+				facturas = new AuxFacturasClientes();
+				facturas.setCodPedido(resultado.getShort("pdId"));
+				facturas.setCliente(resultado.getString("clNombre"));
+				facturas.setFecha(resultado.getDate("pdFecha"));
+				facturas.setTotalPedido(resultado.getDouble("pdPrecioVenta"));
+				facturas.setTotalIva(facturas.getTotalPedido()*0.21);
+				facturas.setTotal(facturas.getTotalPedido() + facturas.getTotalIva());
+				
+				lista.add(facturas);
+
+			}
+			ps.close();
+			resultado.close();
+			conexion.desconectar();
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error, non se conectó");
+			System.out.println(e);
+		}
+		// System.out.println(lista);
+		return lista;
 	}
-
 }
-}
-

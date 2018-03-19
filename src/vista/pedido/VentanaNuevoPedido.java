@@ -24,6 +24,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import javax.swing.table.DefaultTableModel;
@@ -33,20 +34,28 @@ import modelo.dao.PedidosDao;
 import modelo.vo.LineasPedido;
 import modelo.vo.Pedidos;
 import modelo.vo.Productos;
-import vista.AuxNuevoPedido;
 import vista.ComboIncrementar;
 import vista.ModeloNuevosPedidos;
 import vista.ModeloTablaBeneficios;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VentanaNuevoPedido extends JDialog {
 	private JTable table;
 	private JTextField textNumPedido;
 	private JTextField textFecha;
 	private JTextField txtCantidad;
-	ModeloNuevosPedidos miModeloNuevosPedidos;
+	DefaultTableModel miModeloNuevosPedidos;
 	Controlador controlador;
 	ComboNuevoProducto comboNuevoProducto;
 	ComboClientes comboClientes;
+	JScrollPane scrollPane;
+	boolean existePedido = false;
+	ArrayList<LineasPedido> lineas = new ArrayList<LineasPedido>();
+	Pedidos pedido;
+	Object[][] data = new Object[0][0];
+	Object[] fila = new Object[5];
+	static String[] datoss = { "Código", "Producto", "Cantidad", "Precio", "Importe" };
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -123,13 +132,14 @@ public class VentanaNuevoPedido extends JDialog {
 			}
 		}
 		{
-			JScrollPane scrollPane = new JScrollPane();
+			scrollPane = new JScrollPane();
 			scrollPane.setPreferredSize(new Dimension(20, 20));
 			getContentPane().add(scrollPane, BorderLayout.CENTER);
 			{
-				miModeloNuevosPedidos = new ModeloNuevosPedidos();
+				miModeloNuevosPedidos = new DefaultTableModel(data, datoss);
 				table = new JTable(miModeloNuevosPedidos);
 				scrollPane.setViewportView(table);
+
 			}
 		}
 		{
@@ -155,49 +165,60 @@ public class VentanaNuevoPedido extends JDialog {
 
 			}
 			{
-				JButton btnAnadir = new JButton("A\u00F1adir");
+				JButton btnAnadir = new JButton("A\u00F1adir linea");
 				btnAnadir.addActionListener(new ActionListener() {
+
 					public void actionPerformed(ActionEvent arg0) {
-						
-						
-						int id = 2;
-						String descripcion=comboNuevoProducto.getSelectedItem() + "";
-						int cantidad = Integer.parseInt(txtCantidad.getText());
-						float precioVenta = 120.00f;
-						float importe = 120.00f;
-						Date fecha = ParseFecha(textFecha.getText()); 
+						/** producto */
+						String descripcion = comboNuevoProducto.getSelectedItem() + "";
+						Productos producto = Controlador.recuperarProducto(descripcion);
+						int idProducto = producto.getCodigo();
+						float precioVenta = producto.getPrecioVenta();
+
+						/* datos vista */
+						float importe = (float) (precioVenta * 1.21);
+						String fecha = textFecha.getText();
 						String nombreCliente = comboClientes.getSelectedItem() + "";
-						double descuento = 3.00;
+						String nif = Controlador.RecuperarNif(nombreCliente);
+						int cantidad = Integer.parseInt(txtCantidad.getText());
+
+						/* Pedido */
 						int codPedido = Integer.parseInt(PedidosDao.contarPedidos());
-						int codLinea = 11;
-						
-						AuxNuevoPedido datosLinea=new AuxNuevoPedido(id,descripcion,cantidad,precioVenta,importe,fecha,nombreCliente,descuento,codPedido,codLinea);
+						double descuento = 0;
+
+						if (existePedido == false) {
+							pedido = new Pedidos(codPedido, fecha, descuento, nif);
+							existePedido = true;
+						}
+						LineasPedido linea = new LineasPedido(codPedido, idProducto, cantidad);
+						lineas.add(linea);
+						miModeloNuevosPedidos.addRow(new Object[]{idProducto,descripcion,cantidad,precioVenta,importe});
+						table = new JTable(miModeloNuevosPedidos);
+						scrollPane.setViewportView(table);
+
 					}
 				});
 				panel.add(btnAnadir);
-				//controlador.crearPedidoNuevo();
+				// controlador.crearPedidoNuevo();
 			}
-			
-			 
-	
+			{
+				JButton btnOk = new JButton("Guardar");
+				btnOk.addMouseListener(new MouseAdapter() {
+
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						existePedido = false;
+						Controlador.introducirNuevoPedido(pedido, lineas);
+						dispose();
+
+					}
+
+				});
+				panel.add(btnOk);
+			}
+
 		}
-		
+
 	}
-	public static Date ParseFecha(String fecha){
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = null;
-        try {
-            fechaDate =cParseFecha( formato.parse(fecha));
-        } 
-        catch (ParseException ex) 
-        {
-            System.out.println(ex);
-        }
-        return fechaDate;
-        
-        }
-	public static java.sql.Date cParseFecha(java.util.Date date) {
-        return new java.sql.Date(date.getTime());
-        }
 
 }

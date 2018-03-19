@@ -53,7 +53,7 @@ public class ModeloNuevosPedidos extends AbstractTableModel {
 
 		switch (columna) {
 		case 0:
-			return miNuevoProducto.getCodProducto();
+			return miNuevoProducto.getNumLinea();
 		case 1:
 			return miNuevoProducto.getProducto();
 		case 2:

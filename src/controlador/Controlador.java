@@ -11,11 +11,11 @@ import modelo.vo.Pedidos;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
 import modeloLogica.Logica;
-import vista.AuxCrearFactura;	
-import vista.AuxFacturasMes;
+import vista.AuxCrearFactura;
+import vista.AuxFacturasClientes;
+
 import vista.AuxListadoPedidos;
 import vista.AuxMinimos;
-import vista.AuxNuevoPedido;
 import vista.AuxTablaBeneficios;
 import vista.facturas.VentanaCrearFactura;
 import vista.facturas.VentanaFacturasCliente;
@@ -135,9 +135,7 @@ public class Controlador {
 		return PedidosDao.cargarClientes();
 	}
 
-	public ArrayList<AuxNuevoPedido> cargarPedido() {
-		return PedidosDao.cargarPedido();
-	}
+	
 
 
 	public void mostrarVentanaPedidosFacturas() {
@@ -214,11 +212,7 @@ public class Controlador {
 		ventanaFacturasCliente.setVisible(true);
 	}
 
-	public ArrayList<AuxFacturasMes> cargarFacturasMes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	public ArrayList<AuxMinimos> cargarMinimos() {
 		// TODO
 		return productoDao.cargarMinimos();
@@ -261,10 +255,6 @@ public class Controlador {
 		return PedidosDao.contarPedidos();
 	}
 
-	public void agregarLineaPedido(AuxNuevoPedido datosLinea) throws SQLException {
-		PedidosDao.agregarLineaPedido(datosLinea);
-	}
-
 	public ArrayList<Pedidos> cargarId() {
 		return  PedidosDao.cargarId();
 	}
@@ -278,10 +268,37 @@ public class Controlador {
 		
 	}
 
-	public static void eliminarLineaPedido(int codigo, int linea) {
-		PedidosDao.eliminarLineaPedido(codigo,linea);
+	public static void eliminarLineaPedido(int codigo, int numLineaPedido) {
+		PedidosDao.eliminarLineaPedido(codigo, numLineaPedido);
+
+	}
+
+	public static String RecuperarNif(String nombreCliente) {
+		
+		return PedidosDao.obtenerDniCliente(nombreCliente);
+	}
+
+	public static Productos recuperarProducto(String descripcion) {
+
+		return PedidosDao.recuperarProducto(descripcion);
+	}
+
+	public static void introducirNuevoPedido(Pedidos pedido, ArrayList<LineasPedido> lineas) {
+		PedidosDao.introducirNuevoPedido(pedido, lineas);
 		
 	}
+
+	public ArrayList<AuxFacturasClientes> cargarFacturasClientes(String nombre) {
+		
+		return PedidosDao.cargarFacturasClientes(nombre);
+	}
+
+public ArrayList<AuxFacturasClientes> cargarFacturasMes(int mes) {
+		
+		return PedidosDao.cargarFacturasMes(mes);
+	}
+
+	
 
 
 	

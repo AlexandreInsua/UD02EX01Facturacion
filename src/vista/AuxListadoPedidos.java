@@ -13,9 +13,10 @@ public class AuxListadoPedidos {
 	private int cantidad;
 	private float precioVenta;
 	private float importe;
+	private int numLinea;
 
 	public AuxListadoPedidos(int numPedido, Date fechaPedido, String nombreCliente, short codProducto, String producto,
-			int cantidad, float precioVenta, float importe) {
+			int cantidad, float precioVenta, float importe, int numLinea) {
 		super();
 		this.numPedido = numPedido;
 		this.fechaPedido = fechaPedido;
@@ -25,11 +26,22 @@ public class AuxListadoPedidos {
 		this.cantidad = cantidad;
 		this.precioVenta = precioVenta;
 		this.importe = importe;
+		this.numLinea = numLinea;
 	}
 
 	public AuxListadoPedidos() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+	public int getNumLinea() {
+		return numLinea;
+	}
+
+	public void setNumLinea(int numLinea) {
+		this.numLinea = numLinea;
 	}
 
 	public int getNumPedido() {

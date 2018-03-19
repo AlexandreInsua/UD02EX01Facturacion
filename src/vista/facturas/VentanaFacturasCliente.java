@@ -9,7 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controlador.Controlador;
+import vista.ModeloFacturasCliente;
 import vista.ModeloFacturasMes;
+import vista.pedido.ComboClientes;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -21,8 +23,9 @@ public class VentanaFacturasCliente extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable tableFacturas;
-	ModeloFacturasMes miModeloFacturasMes;
+	ModeloFacturasCliente miModeloFacturasCliente;
 	Controlador controlador;
+	ComboClientes comboClientes;
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -63,16 +66,15 @@ public class VentanaFacturasCliente extends JDialog {
 			contentPanel.add(lblNewLabel);
 		}
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(77, 42, 146, 20);
-		contentPanel.add(comboBox);
+		comboClientes = new ComboClientes();
+		contentPanel.add(comboClientes);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 70, 414, 148);
 		contentPanel.add(scrollPane);
 		
-		miModeloFacturasMes = new ModeloFacturasMes();
-		tableFacturas = new JTable(miModeloFacturasMes);
+		miModeloFacturasCliente = new ModeloFacturasCliente();
+		tableFacturas = new JTable(miModeloFacturasCliente);
 		scrollPane.setViewportView(tableFacturas);
 		{
 			JPanel buttonPane = new JPanel();

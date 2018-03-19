@@ -6,13 +6,13 @@ import javax.swing.table.AbstractTableModel;
 
 import controlador.Controlador;
 
-public class ModeloFacturasMes extends AbstractTableModel {
+public class ModeloFacturasCliente extends AbstractTableModel {
 	private static final Object String = null;
 	ArrayList<String> nombresColumnas;
 	ArrayList<AuxFacturasClientes> datos;
 
 
-	public ModeloFacturasMes() {
+	public ModeloFacturasCliente() {
 		nombresColumnas = new ArrayList<>();
 
 		nombresColumnas.add("Nº Pedido");
@@ -27,9 +27,9 @@ public class ModeloFacturasMes extends AbstractTableModel {
 		// cargarPedido();
 	}
 
-	public ArrayList<AuxFacturasClientes> cargarFacturasClientes(int mes) {
+	public ArrayList<AuxFacturasClientes> cargarFacturasClientes(String nombre) {
 		Controlador controlador = new Controlador();
-		return datos = controlador.cargarFacturasMes(mes);
+		return datos = controlador.cargarFacturasClientes(nombre);
 	}
 
 	@Override
