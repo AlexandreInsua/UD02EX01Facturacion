@@ -153,6 +153,8 @@ public class VentanaNuevoPedido extends JDialog {
 				btnAnadir.addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent arg0) {
+						int cantidad = 0;
+						
 						/** producto */
 						String descripcion = comboNuevoProducto.getSelectedItem() + "";
 						Productos producto = Controlador.recuperarProducto(descripcion);
@@ -161,11 +163,19 @@ public class VentanaNuevoPedido extends JDialog {
 
 						/* datos vista */
 						float importe = (float) (precioVenta * 1.21);
-						String fecha = textFecha.getText();
+						
+						
+						String fecha = controlador.verificarFecha(textFecha.getText());
+						
+						
 						String nombreCliente = comboClientes.getSelectedItem() + "";
 						String nif = Controlador.RecuperarNif(nombreCliente);
-						int cantidad = Integer.parseInt(txtCantidad.getText());
-
+						try {
+						cantidad = Integer.parseInt(txtCantidad.getText());
+						} catch (NumberFormatException nfe){
+							controlador = new Controlador();
+							controlador.verificarCantidadLineaPedido();
+						}
 						/* Pedido */
 						int codPedido = Integer.parseInt(PedidosDao.contarPedidos());
 						double descuento = 0;

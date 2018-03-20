@@ -307,4 +307,19 @@ public class Controlador {
 		return PedidosDao.cargarSubtotalesPedidosFactura(numPedido);
 	}
 
+	public void verificarPorcentajeDeIncremento() {
+	logica.verificarPorcentajeDeIncremento();
+		
+	}
+
+	public void verificarCantidadLineaPedido() {
+		logica.verificarCantidadLineaPedido();
+		
+	}
+
+	public String verificarFecha(String fecha) {
+		
+		return logica.verificarFecha(fecha);
+	}
+
 }

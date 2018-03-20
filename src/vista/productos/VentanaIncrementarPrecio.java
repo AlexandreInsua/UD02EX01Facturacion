@@ -94,12 +94,18 @@ public class VentanaIncrementarPrecio extends JDialog {
 				JButton btnOk = new JButton("OK");
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-
+						float porcen = 0;
 						if (porcentaje.getText() != null && !porcentaje.getText().isEmpty()) {
-							float porcen = Float.parseFloat(porcentaje.getText());
+						
+							try{
+							porcen = Float.parseFloat(porcentaje.getText());
+							} catch (NumberFormatException nfe){
+								controlador = new Controlador();
+								controlador.verificarPorcentajeDeIncremento();
+							}
+													
 							Proveedor proveedor = (Proveedor) comboIncrementar.getSelectedItem();
 							System.out.println(proveedor.getNombre());
-							System.out.println(porcen);
 							controlador = new Controlador();
 							controlador.incrementarPrecio(proveedor, porcen);
 						}
