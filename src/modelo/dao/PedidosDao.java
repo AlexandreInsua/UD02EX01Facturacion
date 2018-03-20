@@ -17,11 +17,17 @@ import modelo.vo.LineasPedido;
 import modelo.vo.Pedidos;
 import modelo.vo.Productos;
 import modelo.vo.Proveedor;
+import utilidades.ConvertirFechas;
+import vista.AuxCrearFactura;
 import vista.AuxFacturasClientes;
 import vista.AuxListadoPedidos;
 import vista.AuxMinimos;
+import vista.DatosPedidoFacturaCliente;
+import vista.DatosPedidoFacturaTotal;
 
 public class PedidosDao {
+	private static Conexion conexion = null;
+	ArrayList<AuxCrearFactura> lineasPedido = null;
 
 	public static ArrayList<Productos> cargarProductos() {
 		// conexion
@@ -529,5 +535,137 @@ public class PedidosDao {
 		}
 		// System.out.println(lista);
 		return lista;
+	}
+
+	public static ArrayList<AuxCrearFactura> cargarNuevaFactura(int numPedido) {
+		conexion = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet r = null;
+
+		String consulta = "SELECT liNumPedido, liId, pdNombre, liCantidad, pdPrecioVenta, liCantidad*pdPrecioVenta AS 'Importe' "
+				+ "FROM lineaspedido JOIN productos ON liIdProducto = pdId WHERE liNumPedido = ?";
+
+		 ArrayList<AuxCrearFactura> lineasPedido = new ArrayList<AuxCrearFactura>();
+		lineasPedido.clear();
+
+		try {
+			ps = (PreparedStatement) conexion.getConexion().prepareStatement(consulta);
+			ps.setInt(1, numPedido);
+			r = ps.executeQuery();
+
+			while (r.next()) {
+				AuxCrearFactura l = new AuxCrearFactura();
+				l.setNumLinea(r.getInt("liId"));
+				l.setProducto(r.getString("pdNombre"));
+				l.setPrecioVenta(r.getFloat("pdPrecioVenta"));
+				l.setCantidad(r.getInt("liCantidad"));
+				l.setImporte(r.getFloat("Importe"));
+				lineasPedido.add(l);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		conexion.desconectar();
+		return lineasPedido;
+	}
+	
+	public static ArrayList<Pedidos> cargarPedidos() {
+		conexion = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet r = null;
+		ArrayList<Pedidos>pedidos = new ArrayList<Pedidos>();
+		pedidos.clear();
+
+		String consulta = "SELECT peNumPedido, peFecha, peNifCliente, peDescuento FROM Pedidos";
+
+		try {
+			ps = (PreparedStatement) conexion.getConexion().prepareStatement(consulta);
+			r = ps.executeQuery();
+
+			while (r.next()) {
+				Pedidos p = new Pedidos();
+				p.setNumPedido(r.getInt("peNumPedido"));
+				p.setFechaPedido(ConvertirFechas.convertirDateString(r.getDate("peFecha")));
+				p.setNifCliente(r.getString("peNifCliente"));
+				p.setDescuento(r.getDouble("peDescuento"));
+				pedidos.add(p);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return pedidos;
+	}
+
+
+
+	static public DatosPedidoFacturaCliente cargarDatosPedidosFactura(int numPedido) {
+
+		conexion = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet r = null;
+
+		String consulta = "SELECT peNumPedido, peFecha, peDescuento, clNombre, clCalle, clCodPostal, clCiudad FROM pedidos INNER JOIN clientes ON peNifCliente = clNif WHERE peNumpedido = ?";
+
+		DatosPedidoFacturaCliente datosPedidoFacturaCliente = null;
+		try {
+			ps = (PreparedStatement) conexion.getConexion().prepareStatement(consulta);
+			ps.setInt(1, numPedido);
+			r = ps.executeQuery();
+
+			while (r.next()) {
+				datosPedidoFacturaCliente = new DatosPedidoFacturaCliente();
+
+				datosPedidoFacturaCliente.setFecha(ConvertirFechas.convertirDateString(r.getDate("peFecha")));
+				datosPedidoFacturaCliente.setDescuento(String.valueOf(r.getDouble("peDescuento")));
+				datosPedidoFacturaCliente.setNombreCliente(r.getString("clNombre"));
+				datosPedidoFacturaCliente.setCalleCliente(r.getString("clCalle"));
+				datosPedidoFacturaCliente.setCodPostalCliente(String.valueOf(r.getInt("clCodPostal")));
+				datosPedidoFacturaCliente.setCiudadCliente(r.getString("clCiudad"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return datosPedidoFacturaCliente;
+	}
+
+	static public DatosPedidoFacturaTotal cargarSubtotalesPedidosFactura(int numPedido) {
+		conexion = new Conexion();
+		PreparedStatement ps = null;
+		ResultSet r = null;
+
+		DatosPedidoFacturaTotal total = new DatosPedidoFacturaTotal();
+
+		String consulta = "SELECT peNumPedido, SUM(liCantidad * pdPrecioVenta) AS 'Subtotal', "
+				+ "IFNULL(SUM(liCantidad * pdPrecioVenta) * (peDescuento / 100),0) AS 'Descuento', "
+				+ "SUM(liCantidad * pdPrecioVenta) - (IFNULL(SUM(liCantidad * pdPrecioVenta) * (peDescuento / 100),0)) AS 'Base imponible', "
+				+ "(SUM(liCantidad * pdPrecioVenta) - (IFNULL(SUM(liCantidad * pdPrecioVenta) * (peDescuento / 100),0))) * 0.21 AS 'IVA', "
+				+ "(SUM(liCantidad * pdPrecioVenta) - (IFNULL(SUM(liCantidad * pdPrecioVenta) * (peDescuento / 100),0))) * 0.21 + "
+				+ "(SUM(liCantidad * pdPrecioVenta) - (IFNULL(SUM(liCantidad * pdPrecioVenta) * (peDescuento / 100),0))) AS 'Total' "
+				+ "FROM  (lineaspedido JOIN productos ON liIdProducto = pdId) JOIN pedidos ON liNumPedido = peNumPedido "
+				+ "WHERE liNumPedido = ?";
+
+		try {
+			ps = (PreparedStatement) conexion.getConexion().prepareStatement(consulta);
+			ps.setInt(1, numPedido);
+			r = ps.executeQuery();
+			while (r.next()) {
+				total.setSubtotal(r.getDouble("Subtotal"));
+				total.setDescuento(r.getDouble("Descuento"));
+				total.setBaseImponible(r.getDouble("Base imponible"));
+				total.setIva(r.getDouble("IVA"));
+				total.setTotal(r.getDouble("Total"));
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return total;
 	}
 }

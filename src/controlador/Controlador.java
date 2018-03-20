@@ -17,6 +17,8 @@ import vista.AuxFacturasClientes;
 import vista.AuxListadoPedidos;
 import vista.AuxMinimos;
 import vista.AuxTablaBeneficios;
+import vista.DatosPedidoFacturaCliente;
+import vista.DatosPedidoFacturaTotal;
 import vista.facturas.VentanaCrearFactura;
 import vista.facturas.VentanaFacturasCliente;
 import vista.facturas.VentanaFacturasMes;
@@ -296,6 +298,23 @@ public class Controlador {
 public ArrayList<AuxFacturasClientes> cargarFacturasMes(int mes) {
 		return PedidosDao.cargarFacturasMes(mes);
 	}
+
+public ArrayList<AuxCrearFactura> cargarNuevaFactura(Pedidos pedido) {
+	return PedidosDao.cargarNuevaFactura(pedido.getNumPedido());
+	
+}
+
+public ArrayList<Pedidos> cargarPedidos() {
+	return PedidosDao.cargarPedidos();
+}
+
+public DatosPedidoFacturaCliente cargarDatosPedidosFactura(int numPedido) {
+return PedidosDao.cargarDatosPedidosFactura(numPedido);
+}
+
+public DatosPedidoFacturaTotal cargarSubtotalsePedidosFactura(int numPedido) {
+	return PedidosDao.cargarSubtotalesPedidosFactura(numPedido);
+}
 
 	
 

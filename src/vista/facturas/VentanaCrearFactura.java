@@ -18,26 +18,51 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
+import modelo.vo.Pedidos;
+import vista.ComboPedidos;
+import vista.DatosPedidoFacturaCliente;
+import vista.DatosPedidoFacturaTotal;
 import vista.ModeloCrearFactura;
 import vista.ModeloFacturasMes;
 
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaCrearFactura extends JDialog {
-	private JTextField textField;
-	private JTextField textField_1;
+	
 	private JTable table;
+	private JTextField txtFecha;
+		private JTextField textDescuentoCliente;
+	
 	private JTextField textNombre;
 	private JTextField textCodPostal;
+	private JTextField textCalle;
 	private JTextField textCiudad;
+	
 	private JTextField textSubTotal;
-	private JTextField textDescuento;
-	private JTextField textBaseImponible;
+		private JTextField textBaseImponible;
 	private JTextField textIva;
 	private JTextField textTotal;
-	ModeloCrearFactura miModeloCrearFactura;
-	Controlador controlador;
-	private JTextField textCalle;
+	private JTextField textDescuento;
+	
+	JScrollPane scrollPane ;
+	
+	JButton okButton;
+	
+	ModeloCrearFactura miModeloCrearFactura = new ModeloCrearFactura();
+	 
+	ComboPedidos comboPedidos = new ComboPedidos();
+	
+	Controlador controlador = new Controlador();
+	
+	DatosPedidoFacturaCliente datosCliente;
+	
+	DatosPedidoFacturaTotal totales;
+	
+	
 
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
@@ -45,7 +70,7 @@ public class VentanaCrearFactura extends JDialog {
 /*
 	*//**
 	 * Launch the application.
-	 *//*
+	 */
 	public static void main(String[] args) {
 		try {
 			VentanaCrearFactura dialog = new VentanaCrearFactura();
@@ -56,7 +81,7 @@ public class VentanaCrearFactura extends JDialog {
 		}
 	}
 
-	*//**
+	/**
 	 * Create the dialog.
 	 */
 	public VentanaCrearFactura() {
@@ -80,27 +105,29 @@ public class VentanaCrearFactura extends JDialog {
 				panel.add(panel_1, BorderLayout.SOUTH);
 				panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				{
-					JLabel lblNProducto = new JLabel("N\u00BA Producto");
+					JLabel lblNProducto = new JLabel("N\u00BA Pedido");
 					panel_1.add(lblNProducto);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
-					panel_1.add(comboBox);
+				
+					comboPedidos.addItemListener(new ComboPedidosItemListener());
+					
+					panel_1.add(comboPedidos);
 				}
 				{
-					textField = new JTextField();
-					panel_1.add(textField);
-					textField.setColumns(10);
+					txtFecha = new JTextField();
+					panel_1.add(txtFecha);
+					txtFecha.setColumns(10);
 				}
 				{
 					JLabel lblDto = new JLabel("% dto.");
 					panel_1.add(lblDto);
 				}
 				{
-					textField_1 = new JTextField();
-					textField_1.setEditable(false);
-					panel_1.add(textField_1);
-					textField_1.setColumns(10);
+					textDescuentoCliente = new JTextField();
+					textDescuentoCliente.setEditable(false);
+					panel_1.add(textDescuentoCliente);
+					textDescuentoCliente.setColumns(10);
 				}
 			}
 		}
@@ -137,12 +164,16 @@ public class VentanaCrearFactura extends JDialog {
 				}
 			}
 			{
-				JScrollPane scrollPane = new JScrollPane();
+				scrollPane = new JScrollPane();
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					miModeloCrearFactura = new ModeloCrearFactura();
 					table = new JTable(miModeloCrearFactura);
+					Pedidos pedido = (Pedidos) comboPedidos.getSelectedItem();
+					miModeloCrearFactura.cargarNuevaFactura(pedido);
 					scrollPane.setViewportView(table);
+				
+										
 				}
 			}
 			{
@@ -249,23 +280,90 @@ public class VentanaCrearFactura extends JDialog {
 					textTotal.setColumns(10);
 				}
 			}
+			
+			Pedidos pedido = (Pedidos) comboPedidos.getSelectedItem();
+			
+			datosCliente = controlador.cargarDatosPedidosFactura(pedido.getNumPedido());
+
+			txtFecha.setText(datosCliente.getFecha());
+			textDescuentoCliente.setText(datosCliente.getDescuento());
+			textNombre.setText(datosCliente.getNombreCliente());
+			textCalle.setText(datosCliente.getCalleCliente());
+			textCodPostal.setText(datosCliente.getCodPostalCliente());
+			textCiudad.setText(datosCliente.getCiudadCliente());
+			
+
+			totales = controlador.cargarSubtotalsePedidosFactura(pedido.getNumPedido());
+				
+			textSubTotal.setText(totales.getSubtotal()+"");
+			textDescuento.setText(totales.getDescuento()+"");
+			textBaseImponible.setText(totales.getBaseImponible()+"");
+			textIva.setText(totales.getIva()+"");
+			textTotal.setText(totales.getTotal()+"");
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				okButton = new JButton("OK");
+				okButton.addActionListener(new OkButtonActionListener());
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
 		}
 	}
+	
+	private class OkButtonActionListener implements ActionListener{
 
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		miModeloCrearFactura = new ModeloCrearFactura();
+		table = new JTable(miModeloCrearFactura);
+		miModeloCrearFactura.cargarNuevaFactura((Pedidos) comboPedidos.getSelectedItem());
+		scrollPane.setViewportView(table);
+		
+		Pedidos pedido = (Pedidos) comboPedidos.getSelectedItem();
+		
+		datosCliente = controlador.cargarDatosPedidosFactura(pedido.getNumPedido());
+
+		txtFecha.setText(datosCliente.getFecha());
+		textDescuentoCliente.setText(datosCliente.getDescuento());
+		textNombre.setText(datosCliente.getNombreCliente());
+		textCalle.setText(datosCliente.getCalleCliente());
+		textCodPostal.setText(datosCliente.getCodPostalCliente());
+		textCiudad.setText(datosCliente.getCiudadCliente());
+		
+		
+		totales = controlador.cargarSubtotalsePedidosFactura(pedido.getNumPedido());
+			
+		textSubTotal.setText(totales.getSubtotal()+"");
+		textDescuento.setText(totales.getDescuento()+"");
+		textBaseImponible.setText(totales.getBaseImponible()+"");
+		textIva.setText(totales.getIva()+"");
+		textTotal.setText(totales.getTotal()+"");
+		
+		
+		}
+		
+	}
+	private class ComboPedidosItemListener implements ItemListener{
+		public void itemStateChanged(ItemEvent arg0) {
+			
+			
+			okButton.doClick();	
+		}
+	}
+	
 }

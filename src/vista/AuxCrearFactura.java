@@ -2,26 +2,28 @@ package vista;
 
 public class AuxCrearFactura {
 	
-	private int numPedido;
+	private int numLinea;
 	private String producto;
 	private float precioVenta;
 	private int cantidad;
-	public AuxCrearFactura(int numPedido, String producto, float precioVenta, int cantidad) {
+	private float importe; 
+	public AuxCrearFactura(int numPedido, String producto, float precioVenta, int cantidad, float importe) {
 		super();
-		this.numPedido = numPedido;
+		this.numLinea = numPedido;
 		this.producto = producto;
 		this.precioVenta = precioVenta;
 		this.cantidad = cantidad;
+		this.importe = importe;
 	}
 	public AuxCrearFactura() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public int getNumPedido() {
-		return numPedido;
+	public int getNumLinea() {
+		return numLinea;
 	}
-	public void setNumPedido(int numPedido) {
-		this.numPedido = numPedido;
+	public void setNumLinea(int numPedido) {
+		this.numLinea = numPedido;
 	}
 	public String getProducto() {
 		return producto;
@@ -41,9 +43,18 @@ public class AuxCrearFactura {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+	
+	public float getImporte(){
+		return this.importe;
+	}
+	
+	public void setImporte(float importe){
+		this.importe =importe;
+	}
+	
 	@Override
 	public String toString() {
-		return "AuxCrearFactura [numPedido=" + numPedido + ", producto=" + producto + ", precioVenta=" + precioVenta
+		return "AuxCrearFactura [numPedido=" + numLinea + ", producto=" + producto + ", precioVenta=" + precioVenta
 				+ ", cantidad=" + cantidad + "]";
 	}
 	

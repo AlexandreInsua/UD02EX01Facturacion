@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import controlador.Controlador;
+import modelo.vo.Pedidos;
 
 public class ModeloCrearFactura extends AbstractTableModel {
 	
@@ -33,6 +34,11 @@ public class ModeloCrearFactura extends AbstractTableModel {
 		Controlador controlador = new Controlador();
 		datos = controlador.cargarNuevaFactura();
 	}
+	
+	public void cargarNuevaFactura(Pedidos pedido){
+		Controlador controlador = new Controlador();
+		datos = controlador.cargarNuevaFactura(pedido);
+	}
 
 	@Override
 	public int getColumnCount() {
@@ -51,7 +57,7 @@ public class ModeloCrearFactura extends AbstractTableModel {
 
 		switch (columna) {
 		case 0:
-			return miCrearFactura.getNumPedido();
+			return miCrearFactura.getNumLinea();
 		case 1:
 			return miCrearFactura.getProducto();
 		case 2:
@@ -59,7 +65,7 @@ public class ModeloCrearFactura extends AbstractTableModel {
 		case 3:
 			return miCrearFactura.getPrecioVenta();
 		case 4:
-			return importe;
+			return miCrearFactura.getImporte();
 		
 
 		}
