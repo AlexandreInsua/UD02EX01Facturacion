@@ -28,7 +28,7 @@ public class VentanaIncrementarPrecio extends JDialog {
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
-	
+
 	public void setComoIncrementar(ComboIncrementar comboIncrementar) {
 		this.comboIncrementar = comboIncrementar;
 	}
@@ -39,15 +39,12 @@ public class VentanaIncrementarPrecio extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		try {
-			VentanaIncrementarPrecio dialog = new VentanaIncrementarPrecio();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
+	/*
+	 * public static void main(String[] args) { try { VentanaIncrementarPrecio
+	 * dialog = new VentanaIncrementarPrecio();
+	 * dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 */
 
 	/**
 	 * Create the dialog.
@@ -65,7 +62,7 @@ public class VentanaIncrementarPrecio extends JDialog {
 		}
 		{
 			comboIncrementar = new ComboIncrementar();
-			//JComboBox comboBox = new JComboBox();
+			// JComboBox comboBox = new JComboBox();
 			comboIncrementar.setBounds(113, 35, 316, 20);
 			contentPanel.add(comboIncrementar);
 		}
@@ -97,16 +94,16 @@ public class VentanaIncrementarPrecio extends JDialog {
 				JButton btnOk = new JButton("OK");
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						if(porcentaje.getText()!=null && !porcentaje.getText().isEmpty()){
+
+						if (porcentaje.getText() != null && !porcentaje.getText().isEmpty()) {
 							float porcen = Float.parseFloat(porcentaje.getText());
-							Proveedor proveedor =  (Proveedor) comboIncrementar.getSelectedItem();
+							Proveedor proveedor = (Proveedor) comboIncrementar.getSelectedItem();
 							System.out.println(proveedor.getNombre());
 							System.out.println(porcen);
 							controlador = new Controlador();
 							controlador.incrementarPrecio(proveedor, porcen);
 						}
-						
+
 					}
 				});
 				btnOk.setActionCommand("OK");

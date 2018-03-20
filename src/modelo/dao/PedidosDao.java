@@ -179,8 +179,6 @@ public class PedidosDao {
 
 	} // fin
 
-	
-
 	public static ArrayList<Pedidos> cargarId() {
 		// conexion
 		Conexion conexion = new Conexion();
@@ -336,7 +334,6 @@ public class PedidosDao {
 
 	}
 
-
 	public static void eliminarLineaPedido(int codigo, int numLineaPedido) {
 		Conexion conexion = new Conexion();
 		// Perapramos a consulta de actualizacion
@@ -448,7 +445,7 @@ public class PedidosDao {
 	}
 
 	public static java.sql.Date convertirJavaDateASqlDate(java.util.Date date) {
-	
+
 		return new java.sql.Date(date.getTime());
 	}
 
@@ -464,7 +461,8 @@ public class PedidosDao {
 		ArrayList<AuxFacturasClientes> lista = new ArrayList<AuxFacturasClientes>();
 
 		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-		String consulta = "SELECT peNumPedido, peFecha, sum(pdPrecioVenta) as pdPrecioVenta  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where clNombre='" + nombre + "' GROUP BY peNumPedido ";
+		String consulta = "SELECT peNumPedido, peFecha, sum(pdPrecioVenta) as pdPrecioVenta  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where clNombre='"
+				+ nombre + "' GROUP BY peNumPedido ";
 		// Conecta e executa a sentenza
 		try {
 			ps = conexion.getConexion().prepareStatement(consulta);
@@ -475,7 +473,7 @@ public class PedidosDao {
 				facturas.setFecha(resultado.getDate("peFecha"));
 				facturas.setCliente(nombre);
 				facturas.setTotalPedido(resultado.getDouble("pdPrecioVenta"));
-				facturas.setTotalIva(facturas.getTotalPedido()*0.21);
+				facturas.setTotalIva(facturas.getTotalPedido() * 0.21);
 				facturas.setTotal(facturas.getTotalPedido() + facturas.getTotalIva());
 
 				lista.add(facturas);
@@ -491,9 +489,9 @@ public class PedidosDao {
 		// System.out.println(lista);
 		return lista;
 	}
-	
-	public static ArrayList<AuxFacturasClientes> cargarFacturasMes (int mes) {
-		
+
+	public static ArrayList<AuxFacturasClientes> cargarFacturasMes(int mes) {
+
 		System.out.println("Estoy en pedidos dao");
 		// conexion
 		Conexion conexion = new Conexion();
@@ -506,23 +504,23 @@ public class PedidosDao {
 		ArrayList<AuxFacturasClientes> lista = new ArrayList<AuxFacturasClientes>();
 
 		// Consulta - A SENTENZA NON LEVA PUNTO E COMA
-		String consulta = "SELECT peNumPedido, peFecha, clNombre, sum(pdPrecioVenta) as pdPrecioVenta  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where MONTH(peFecha)='" + mes + "' GROUP BY peNumPedido ";
+		String consulta = "SELECT peNumPedido, peFecha, clNombre, sum(pdPrecioVenta) as pdPrecioVenta  FROM ((pedidos JOIN clientes ON peNifCliente = clNif) JOIN lineaspedido ON peNumPedido = liNumPedido) JOIN productos ON liIdProducto = pdid  where MONTH(peFecha)='"
+				+ mes + "' GROUP BY peNumPedido ";
 		// Conecta e executa a sentenza
 		try {
 			ps = conexion.getConexion().prepareStatement(consulta);
 			resultado = ps.executeQuery();
-		
+
 			while (resultado.next()) {
 				facturas = new AuxFacturasClientes();
 				facturas.setCodPedido(resultado.getShort("peNumPedido"));
 				facturas.setCliente(resultado.getString("clNombre"));
 				facturas.setFecha(resultado.getDate("peFecha"));
 				facturas.setTotalPedido(resultado.getDouble("pdPrecioVenta"));
-				facturas.setTotalIva(facturas.getTotalPedido()*0.21);
+				facturas.setTotalIva(facturas.getTotalPedido() * 0.21);
 				facturas.setTotal(facturas.getTotalPedido() + facturas.getTotalIva());
-				
+
 				lista.add(facturas);
-				
 
 			}
 			ps.close();
@@ -545,7 +543,7 @@ public class PedidosDao {
 		String consulta = "SELECT liNumPedido, liId, pdNombre, liCantidad, pdPrecioVenta, liCantidad*pdPrecioVenta AS 'Importe' "
 				+ "FROM lineaspedido JOIN productos ON liIdProducto = pdId WHERE liNumPedido = ?";
 
-		 ArrayList<AuxCrearFactura> lineasPedido = new ArrayList<AuxCrearFactura>();
+		ArrayList<AuxCrearFactura> lineasPedido = new ArrayList<AuxCrearFactura>();
 		lineasPedido.clear();
 
 		try {
@@ -570,12 +568,12 @@ public class PedidosDao {
 		conexion.desconectar();
 		return lineasPedido;
 	}
-	
+
 	public static ArrayList<Pedidos> cargarPedidos() {
 		conexion = new Conexion();
 		PreparedStatement ps = null;
 		ResultSet r = null;
-		ArrayList<Pedidos>pedidos = new ArrayList<Pedidos>();
+		ArrayList<Pedidos> pedidos = new ArrayList<Pedidos>();
 		pedidos.clear();
 
 		String consulta = "SELECT peNumPedido, peFecha, peNifCliente, peDescuento FROM Pedidos";
@@ -599,8 +597,6 @@ public class PedidosDao {
 
 		return pedidos;
 	}
-
-
 
 	static public DatosPedidoFacturaCliente cargarDatosPedidosFactura(int numPedido) {
 

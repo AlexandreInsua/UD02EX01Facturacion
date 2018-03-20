@@ -70,7 +70,7 @@ public class VentanaCrearFactura extends JDialog {
 /*
 	*//**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		try {
 			VentanaCrearFactura dialog = new VentanaCrearFactura();
@@ -81,8 +81,7 @@ public class VentanaCrearFactura extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
+		 * Create the dialog.
 	 */
 	public VentanaCrearFactura() {
 		setTitle("El Chip Prodigioso");

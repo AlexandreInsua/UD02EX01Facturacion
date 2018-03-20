@@ -17,10 +17,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaPedidosFacturas extends JDialog {
-	
-Controlador controlador;
-	
-	public void setControlador(Controlador controlador){
+
+	Controlador controlador;
+
+	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
 
@@ -148,7 +148,7 @@ Controlador controlador;
 			panel.add(btnFacturaMes);
 
 			JButton btnFacturasCliente = new JButton("FacturasCliente");
-			btnFacturasCliente.addActionListener(new ActionListener(){
+			btnFacturasCliente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Controlador controlador = new Controlador();
 					controlador.mostrarVentanaFacturaCliente();
@@ -163,5 +163,4 @@ Controlador controlador;
 		getContentPane().add(lblNewLabel);
 	}
 
-	
 }

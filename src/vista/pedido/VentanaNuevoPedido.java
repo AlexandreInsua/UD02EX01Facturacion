@@ -1,32 +1,21 @@
 package vista.pedido;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
-import java.awt.Insets;
-import java.awt.GridLayout;
-import javax.swing.border.TitledBorder;
-import javax.swing.JComboBox;
-import javax.swing.UIManager;
-import java.awt.Color;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.Controlador;
@@ -34,11 +23,6 @@ import modelo.dao.PedidosDao;
 import modelo.vo.LineasPedido;
 import modelo.vo.Pedidos;
 import modelo.vo.Productos;
-import vista.ComboIncrementar;
-import vista.ModeloNuevosPedidos;
-import vista.ModeloTablaBeneficios;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class VentanaNuevoPedido extends JDialog {
 	private JTable table;

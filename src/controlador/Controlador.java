@@ -34,7 +34,7 @@ import vista.productos.VentanaProductos;
 import vista.productos.VentanaValoracionExistencias;
 
 public class Controlador {
-	VentanaProductos ventanaProductos; 
+	VentanaProductos ventanaProductos;
 	VentanaPedidosFacturas ventanaPedidosFacturas;
 	VentanaMinimos ventanaMinimos;
 	VentanaIncrementarPrecio ventanaIncrementarPrecio;
@@ -50,11 +50,9 @@ public class Controlador {
 
 	Logica logica;
 
-
 	ProductoDao productoDao = new ProductoDao();
 
-	//Setters ventanas e lóxica
-
+	// Setters ventanas e lóxica
 
 	public void setVentanaProductos(VentanaProductos ventanaProductos) {
 		this.ventanaProductos = ventanaProductos;
@@ -109,10 +107,9 @@ public class Controlador {
 	}
 
 	public void setLogica(Logica logica) {
-		this.logica=logica;
+		this.logica = logica;
 
 	}
-
 
 	public ArrayList<LineasPedido> cargarLineasPedido() {
 		// TODO Auto-generated method stub
@@ -128,7 +125,6 @@ public class Controlador {
 
 	}
 
-
 	public ArrayList<Productos> cargarValoracion() {
 		return productoDao.cargarValoracion();
 	}
@@ -136,9 +132,6 @@ public class Controlador {
 	public ArrayList<Clientes> cargarClientes() {
 		return PedidosDao.cargarClientes();
 	}
-
-	
-
 
 	public void mostrarVentanaPedidosFacturas() {
 		ventanaPedidosFacturas = new VentanaPedidosFacturas();
@@ -209,24 +202,22 @@ public class Controlador {
 		ventanaFacturasMes.setVisible(true);
 	}
 
-	public void mostrarVentanaFacturaCliente(){
+	public void mostrarVentanaFacturaCliente() {
 		ventanaFacturasCliente = new VentanaFacturasCliente();
 		ventanaFacturasCliente.setVisible(true);
 	}
 
-	
 	public ArrayList<AuxMinimos> cargarMinimos() {
 		// TODO
 		return productoDao.cargarMinimos();
 	}
-	
-	/*public static void main(String[] args) {
-		Controlador x = new Controlador();
-		System.out.println(x.cargarMinimos());
-		
-	}*/
 
-
+	/*
+	 * public static void main(String[] args) { Controlador x = new
+	 * Controlador(); System.out.println(x.cargarMinimos());
+	 * 
+	 * }
+	 */
 
 	public ArrayList<AuxTablaBeneficios> cargarBeneficio() {
 		return productoDao.cargarBeneficios();
@@ -258,7 +249,7 @@ public class Controlador {
 	}
 
 	public ArrayList<Pedidos> cargarId() {
-		return  PedidosDao.cargarId();
+		return PedidosDao.cargarId();
 	}
 
 	public static ArrayList<AuxListadoPedidos> listarPedidos(int codigo) {
@@ -267,7 +258,7 @@ public class Controlador {
 
 	public static void eliminarPedido(int codigo) {
 		PedidosDao.eliminarPedido(codigo);
-		
+
 	}
 
 	public static void eliminarLineaPedido(int codigo, int numLineaPedido) {
@@ -276,7 +267,7 @@ public class Controlador {
 	}
 
 	public static String RecuperarNif(String nombreCliente) {
-		
+
 		return PedidosDao.obtenerDniCliente(nombreCliente);
 	}
 
@@ -287,46 +278,33 @@ public class Controlador {
 
 	public static void introducirNuevoPedido(Pedidos pedido, ArrayList<LineasPedido> lineas) {
 		PedidosDao.introducirNuevoPedido(pedido, lineas);
-		
+
 	}
 
 	public ArrayList<AuxFacturasClientes> cargarFacturasClientes(String nombre) {
-		
+
 		return PedidosDao.cargarFacturasClientes(nombre);
 	}
 
-public ArrayList<AuxFacturasClientes> cargarFacturasMes(int mes) {
+	public ArrayList<AuxFacturasClientes> cargarFacturasMes(int mes) {
 		return PedidosDao.cargarFacturasMes(mes);
 	}
 
-public ArrayList<AuxCrearFactura> cargarNuevaFactura(Pedidos pedido) {
-	return PedidosDao.cargarNuevaFactura(pedido.getNumPedido());
-	
-}
+	public ArrayList<AuxCrearFactura> cargarNuevaFactura(Pedidos pedido) {
+		return PedidosDao.cargarNuevaFactura(pedido.getNumPedido());
 
-public ArrayList<Pedidos> cargarPedidos() {
-	return PedidosDao.cargarPedidos();
-}
+	}
 
-public DatosPedidoFacturaCliente cargarDatosPedidosFactura(int numPedido) {
-return PedidosDao.cargarDatosPedidosFactura(numPedido);
-}
+	public ArrayList<Pedidos> cargarPedidos() {
+		return PedidosDao.cargarPedidos();
+	}
 
-public DatosPedidoFacturaTotal cargarSubtotalsePedidosFactura(int numPedido) {
-	return PedidosDao.cargarSubtotalesPedidosFactura(numPedido);
-}
+	public DatosPedidoFacturaCliente cargarDatosPedidosFactura(int numPedido) {
+		return PedidosDao.cargarDatosPedidosFactura(numPedido);
+	}
 
-	
-
-
-	
-
-
-
-
-
-
-
-
+	public DatosPedidoFacturaTotal cargarSubtotalsePedidosFactura(int numPedido) {
+		return PedidosDao.cargarSubtotalesPedidosFactura(numPedido);
+	}
 
 }

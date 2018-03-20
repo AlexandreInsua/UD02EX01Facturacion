@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 
 import controlador.Controlador;
-import modelo.vo.Clientes;
 import modelo.vo.Pedidos;
-import modelo.vo.Productos;
 
 public class ComboPedido extends JComboBox<Pedidos> {
 	ArrayList<Pedidos> pedido = null;

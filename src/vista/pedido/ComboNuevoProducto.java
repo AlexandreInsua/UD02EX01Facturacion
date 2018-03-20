@@ -6,7 +6,6 @@ import javax.swing.JComboBox;
 
 import controlador.Controlador;
 import modelo.vo.Productos;
-import modelo.vo.Proveedor;
 
 public class ComboNuevoProducto extends JComboBox<Productos> {
 

@@ -21,6 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaFacturasMes extends JDialog {
 
@@ -84,34 +86,44 @@ public class VentanaFacturasMes extends JDialog {
 		comboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				miModeloFacturasMes = new ModeloFacturasMes();
-				int comboSeleccionado = (int) comboBox.getSelectedIndex()+1;
+				int comboSeleccionado = (int) comboBox.getSelectedIndex() + 1;
 				miModeloFacturasMes.cargarFacturasMes(comboSeleccionado);
 				tableFactura = new JTable(miModeloFacturasMes);
 				scrollPane.setViewportView(tableFactura);
-		 		
+
 			}
 		});
 		comboBox.setBounds(75, 46, 174, 20);
 		contentPanel.add(comboBox);
-		
+
 		miModeloFacturasMes = new ModeloFacturasMes();
-		int comboSeleccionado = (int) comboBox.getSelectedIndex()+1;
+		int comboSeleccionado = (int) comboBox.getSelectedIndex() + 1;
 		miModeloFacturasMes.cargarFacturasMes(comboSeleccionado);
 		tableFactura = new JTable(miModeloFacturasMes);
 		scrollPane.setViewportView(tableFactura);
-	
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

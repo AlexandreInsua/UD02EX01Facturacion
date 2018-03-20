@@ -27,25 +27,22 @@ public class VentanaBeneficios extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable tableBeneficios;
 	ModeloTablaBeneficios miModeloTablaBeneficios;
-	
+
 	Controlador controlador;
-	
-	public void setControlador(Controlador controlador){
+
+	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
 
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		try {
-			VentanaBeneficios dialog = new VentanaBeneficios();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
+	/*
+	 * public static void main(String[] args) { try { VentanaBeneficios dialog =
+	 * new VentanaBeneficios();
+	 * dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 */
 
 	/**
 	 * Create the dialog.
@@ -61,12 +58,12 @@ public class VentanaBeneficios extends JDialog {
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBounds(12, 48, 649, 147);
 			contentPanel.add(scrollPane);
-			
+
 			miModeloTablaBeneficios = new ModeloTablaBeneficios();
 			tableBeneficios = new JTable(miModeloTablaBeneficios);
 			scrollPane.setViewportView(tableBeneficios);
 		}
-		
+
 		JLabel lblNewLabel = new JLabel("Listado Resultados en las Ventas");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel.setBounds(74, 23, 239, 14);

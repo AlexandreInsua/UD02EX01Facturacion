@@ -2,30 +2,24 @@ package vista.pedido;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextField;
 
 import controlador.Controlador;
-import modelo.dao.PedidosDao;
 import modelo.vo.Pedidos;
 import vista.AuxListadoPedidos;
 import vista.ModeloNuevosPedidos;
-
-import javax.swing.border.TitledBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.awt.event.ItemEvent;
 
 public class VentanaConsultarPedidos extends JDialog {
 	private JTextField txtFecha;
@@ -39,24 +33,20 @@ public class VentanaConsultarPedidos extends JDialog {
 	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
-	//Prueba
+	// Prueba
 
 	/**
 	 * Launch the application.
-	 *//*
-	public static void main(String[] args) {
-		try {
-			VentanaConsultarPedidos dialog = new VentanaConsultarPedidos();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	*//**
-	 * Create the dialog.
 	 */
+	/*
+	 * public static void main(String[] args) { try { VentanaConsultarPedidos
+	 * dialog = new VentanaConsultarPedidos();
+	 * dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 * 
+	 *//**
+		 * Create the dialog.
+		 */
 	public VentanaConsultarPedidos() {
 		setBounds(100, 100, 578, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -83,17 +73,17 @@ public class VentanaConsultarPedidos extends JDialog {
 							miModeloNuevosPedidos.cargarPedido(comboSeleccionado.getNumPedido());
 							table = new JTable(miModeloNuevosPedidos);
 							scrollPane.setViewportView(table);
-							ArrayList<AuxListadoPedidos> listado = controlador.listarPedidos(comboSeleccionado.getNumPedido());
-							String nombreCliente=listado.get(0).getNombreCliente();
+							ArrayList<AuxListadoPedidos> listado = controlador
+									.listarPedidos(comboSeleccionado.getNumPedido());
+							String nombreCliente = listado.get(0).getNombreCliente();
 							txtCliente.setText(nombreCliente);
-							txtFecha.setText(listado.get(0).getFechaPedido()+"");
-							
+							txtFecha.setText(listado.get(0).getFechaPedido() + "");
+
 						}
 					});
-					
-					
-					 panel_1.add(comboPedido);
-					
+
+					panel_1.add(comboPedido);
+
 				}
 				{
 					JLabel lblNewLabel_1 = new JLabel("Fecha");
@@ -105,8 +95,7 @@ public class VentanaConsultarPedidos extends JDialog {
 					txtFecha.setText("");
 					panel_1.add(txtFecha);
 					txtFecha.setColumns(10);
-					
-					
+
 				}
 				{
 					JLabel lblNewLabel_2 = new JLabel("Cliente");
@@ -117,7 +106,7 @@ public class VentanaConsultarPedidos extends JDialog {
 					txtCliente.setEditable(false);
 					panel_1.add(txtCliente);
 					txtCliente.setColumns(10);
-					
+
 				}
 			}
 		}
@@ -135,11 +124,10 @@ public class VentanaConsultarPedidos extends JDialog {
 					table = new JTable(miModeloNuevosPedidos);
 					scrollPane.setViewportView(table);
 					ArrayList<AuxListadoPedidos> listado = controlador.listarPedidos(pedido.getNumPedido());
-					String nombreCliente=listado.get(0).getNombreCliente();
+					String nombreCliente = listado.get(0).getNombreCliente();
 					txtCliente.setText(nombreCliente);
-					txtFecha.setText(listado.get(0).getFechaPedido()+"");
-					
-					
+					txtFecha.setText(listado.get(0).getFechaPedido() + "");
+
 				}
 			}
 		}
@@ -149,12 +137,22 @@ public class VentanaConsultarPedidos extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

@@ -11,7 +11,6 @@ public class ModeloFacturasMes extends AbstractTableModel {
 	ArrayList<String> nombresColumnas;
 	ArrayList<AuxFacturasClientes> datos;
 
-
 	public ModeloFacturasMes() {
 		nombresColumnas = new ArrayList<>();
 

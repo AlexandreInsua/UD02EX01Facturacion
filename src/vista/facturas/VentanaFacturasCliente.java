@@ -37,23 +37,18 @@ public class VentanaFacturasCliente extends JDialog {
 		this.controlador = controlador;
 	}
 
-
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		try {
-			VentanaFacturasCliente dialog = new VentanaFacturasCliente();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	*//**
-	 * Create the dialog.
-	 */
+	/*
+	 * public static void main(String[] args) { try { VentanaFacturasCliente
+	 * dialog = new VentanaFacturasCliente();
+	 * dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 * 
+	 *//**
+		 * Create the dialog.
+		 */
 	public VentanaFacturasCliente() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
@@ -74,24 +69,21 @@ public class VentanaFacturasCliente extends JDialog {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 70, 414, 148);
 		contentPanel.add(scrollPane);
-		
-		 comboClientes = new ComboClientes();
-		 comboClientes.addItemListener(new ItemListener() {
-		 	public void itemStateChanged(ItemEvent e) {
-		 		miModeloFacturasClientes = new ModeloFacturasCliente();
+
+		comboClientes = new ComboClientes();
+		comboClientes.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				miModeloFacturasClientes = new ModeloFacturasCliente();
 				Clientes comboSeleccionado = (Clientes) comboClientes.getSelectedItem();
 				miModeloFacturasClientes.cargarFacturasClientes(comboSeleccionado.getNombre());
 				tableFacturas = new JTable(miModeloFacturasClientes);
 				scrollPane.setViewportView(tableFacturas);
-		 		
-		 	}
-		 });
-		 comboClientes.setBounds(77, 42, 146, 20);
-		 contentPanel.add(comboClientes);
-		
-	
-		
-		
+
+			}
+		});
+		comboClientes.setBounds(77, 42, 146, 20);
+		contentPanel.add(comboClientes);
+
 		miModeloFacturasClientes = new ModeloFacturasCliente();
 		Clientes comboSeleccionado = (Clientes) comboClientes.getSelectedItem();
 		miModeloFacturasClientes.cargarFacturasClientes(comboSeleccionado.getNombre());

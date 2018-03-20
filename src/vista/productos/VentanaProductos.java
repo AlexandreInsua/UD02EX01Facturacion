@@ -17,27 +17,21 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 public class VentanaProductos extends JDialog {
-	
-Controlador controlador;
-	
-	public void setControlador(Controlador controlador){
+
+	Controlador controlador;
+
+	public void setControlador(Controlador controlador) {
 		this.controlador = controlador;
 	}
 
 	/**
 	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			VentanaProductos dialog = new VentanaProductos();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
+	 * 
+	 * public static void main(String[] args) { try { VentanaProductos dialog =
+	 * new VentanaProductos();
+	 * dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 * 
 	 * Create the dialog.
 	 */
 	public VentanaProductos() {
@@ -156,5 +150,4 @@ Controlador controlador;
 		getContentPane().add(lblNewLabel);
 	}
 
-	
 }
